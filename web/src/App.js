@@ -4,7 +4,7 @@ function App() {
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
-    fetch("/members").then(
+    fetch("/test").then(
       res => res.json()
     ).then(
       data => {
