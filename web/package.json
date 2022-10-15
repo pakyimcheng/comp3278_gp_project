@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server-dev": "concurrently \"npm start\" \"cross-env FLASK_APP=../../backend/app.py flask run --port=5001\"",
+    "start:server-dev": "concurrently \"npm start\" \"cross-env FLASK_APP=../flask/app.py flask run --port=5001\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
