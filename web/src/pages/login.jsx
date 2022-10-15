@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { FaceRecognition, Login as LoginIcon } from "mdi-material-ui"
+import { TextField, Button } from "@mui/material"
 
 const Login = () => {
 	const canvasRef = useRef();
@@ -73,10 +75,289 @@ const Login = () => {
 			<header>
 				<h1>Image classifier</h1>
 			</header>
-			<main>
-				<video ref={videoRef} onCanPlay={() => playCameraStream()} id="video" />
-				<canvas ref={canvasRef} hidden></canvas>
-				<p>Currently seeing: {result}</p>
+			<main
+				style={{
+					display: "flex",
+					flexDirection: "row",
+					alignItems: "flex-start",
+					padding: "32px 48px",
+					gap: "32px",
+					
+					position: "relative",
+					
+					background: "#FFFFFF",
+				}}
+			>
+				<div 
+					style={{
+						width: "100%",
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "flex-start",
+						padding: "32px 48px",
+						gap: "32px",
+						borderRadius: "68px 32px",
+						backgroundImage: "linear-gradient(rgba(255,255,255,0.38), rgba(255,255,255,0.38)), url(login_Background.jpg)",
+						backgroundPosition: 'center',
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat'
+					}}
+				>
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "row",
+							justifyContent: "center",
+							alignItems: "center",
+							gap: "32px",
+							width: "100%",
+						}}
+					>
+						<img
+							alt=""
+							src="logo.png"
+							height={"80px"}
+							style={{
+								border: "2px solid #1F0202",
+								filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
+								borderRadius: "16px",
+							}}
+						/>
+
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "row",
+								alignItems: "flex-start",
+								padding: "24px",
+								gap: "16px",
+
+								background: "#E3FCBF",
+								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+								borderRadius: "36px 16px 64px 36px",
+							}}
+						>
+							<div
+								style={{
+									width: "100%",
+									display: "flex",
+									flexDirection: "row",
+									alignItems: "flex-start",
+									padding: "12px",
+									background: "linear-gradient(91.24deg, rgba(20, 195, 142, 0.8) 0%, rgba(56, 229, 77, 0.8) 100%)",
+									borderRadius: "16px",
+								}}
+							>
+								<span
+									style={{
+										fontStyle: "normal",
+										fontWeight: "600",
+										fontSize: "42px",
+										display: "flex",
+										alignItems: "center",
+										textAlign: "center",
+										color: "#FFFFFF",
+									}}
+								>
+									Intelligence Course Management System
+								</span>	
+							</div>
+						</div>
+					</div>
+
+					<div
+						style={{
+							width: "100%",
+							display: "flex",
+							flexDirection: "row",
+							alignItems: "flex-start",
+							padding: "0px",
+							gap: "32px",
+							position: "relative",
+						}}
+					>
+						<div
+							style={{
+								width: "42%",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "flex-start",
+								alignSelf: "stretch",
+								padding: "32px",
+								gap: "16px",
+
+								background: "linear-gradient(180deg, #E3FCBF 0%, rgba(227, 252, 191, 0.6) 100%)",
+								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+								borderRadius: "32px 16px 16px 16px",
+							}}
+						>
+							<div
+								style={{
+									width: "100%",
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									alignItems: "center",
+									padding: "0px",
+									gap: "8px",
+								}}
+							>
+								<FaceRecognition
+									style={{
+										fontSize: 42,
+										color: "#425F57",
+									}}
+								/>
+								<span
+									style={{
+										fontWeight: "600",
+										fontSize: "36px",
+										lineHeight: "36px",
+										textAlign: "center",
+										color: "#425F57",
+										textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+									}}
+								>
+									Facial Authentication
+								</span>
+							</div>
+							<video 
+								style={{
+									objectFit: "fill",
+									width: "100%",
+									height: "100%",
+									borderRadius: "16px",
+								}}
+								ref={videoRef} onCanPlay={() => playCameraStream()} id="video" 
+							/>
+							<canvas ref={canvasRef} hidden></canvas>
+						</div>
+
+						<div
+							style={{
+								width: "58%",
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "center",
+								alignItems: "center",
+								alignSelf: "stretch",
+								padding: "48px 96px",
+								gap: "48px",
+
+								background: "linear-gradient(180deg, #E3FCBF 0%, rgba(227, 252, 191, 0.6) 100%)",
+								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+								borderRadius: "16px 16px 32px 16px",
+							}}
+						>
+							<div
+								style={{
+									width: "100%",
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									alignItems: "center",
+									gap: "8px",
+								}}
+							>
+								<LoginIcon
+									style={{
+										fontSize: 42,
+										color: "#425F57",
+									}}
+								/>
+								<span
+									style={{
+										fontWeight: "700",
+										fontSize: "48px",
+										lineHeight: "48px",
+										textAlign: "center",
+										color: "#425F57",
+										textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+
+									}}
+								>
+									Log In
+								</span>
+							</div>
+
+							<div
+								style={{
+									width: "100%",
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "flex-start",
+									padding: "0px",
+									gap: "10px",
+								}}
+							>
+								<span
+									style={{
+										fontWeight: "600",
+										fontSize: "26px",
+										lineHeight: "26px",
+										color: "#425F57",
+									}}
+								>
+									Email Address
+								</span>
+								<TextField
+									placeholder="Email Address"
+									fullWidth
+									style={{
+										backgroundColor: "#FFF",
+									}}
+								/>
+							</div>
+							<div
+								style={{
+									width: "100%",
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "flex-start",
+									padding: "0px",
+									gap: "10px",
+								}}
+							>
+								<span
+									style={{
+										fontWeight: "600",
+										fontSize: "26px",
+										lineHeight: "26px",
+										color: "#425F57",
+									}}
+								>
+									Password
+								</span>
+								<TextField
+									placeholder="Password"
+									fullWidth
+									style={{
+										backgroundColor: "#FFF",
+									}}
+								/>
+							</div>
+							<Button 
+								variant="contained"
+								style={{
+									padding: "8px 16px",
+									backgroundColor: "#14C38E",
+									boxShadow: "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)",
+									borderRadius: "4px",
+								}}
+							>
+								<span
+									style={{
+										fontSize: "26px",
+									}}
+								>
+									Confirm
+								</span>
+							</Button>
+							
+						</div>
+					</div>
+
+				</div>
 			</main>
 		</>
 	);
