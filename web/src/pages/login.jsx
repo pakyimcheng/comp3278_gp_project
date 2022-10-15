@@ -263,7 +263,7 @@ const Login = () => {
 							>
 								<LoginIcon
 									style={{
-										fontSize: 42,
+										fontSize: 82,
 										color: "#425F57",
 									}}
 								/>
