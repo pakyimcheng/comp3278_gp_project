@@ -126,6 +126,7 @@ const Login = () => {
 
 						<div
 							style={{
+								width: "100%",
 								display: "flex",
 								flexDirection: "row",
 								alignItems: "flex-start",
@@ -143,6 +144,7 @@ const Login = () => {
 									display: "flex",
 									flexDirection: "row",
 									alignItems: "flex-start",
+									justifyContent: "center",
 									padding: "12px",
 									background: "linear-gradient(91.24deg, rgba(20, 195, 142, 0.8) 0%, rgba(56, 229, 77, 0.8) 100%)",
 									borderRadius: "16px",
