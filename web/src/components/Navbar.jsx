@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import { ButtonBase } from "@mui/material";
+import { Timetable, HumanMaleBoard, Account, Logout, Login } from "mdi-material-ui";
 
 // create a react functional component
 function Navbar({ login }) {
@@ -27,20 +29,27 @@ function Navbar({ login }) {
 					padding: "0px",
 					gap: "97px",
 					height: "68px",
-					background: "#E3FCBF",
+					background: "linear-gradient(90.13deg, #E3FCBF 0%, #8BF5E2 100%)",
 					width: "100%",
 				}}
 			>
-				<Link to="/">
-					<img
-						alt=""
-						src="logo.png"
-						height={"68px"}
-						style={{
-							borderRadius: "0px 16px 16px 0px",
-						}}
-					/>
-				</Link>
+				<ButtonBase
+					style={{
+						borderRadius: "0px 16px 16px 0px",
+						boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+					}}
+				>
+					<Link to="/">
+						<img
+							alt=""
+							src="logo.png"
+							height={"68px"}
+							style={{
+								borderRadius: "0px 16px 16px 0px",
+							}}
+						/>
+					</Link>
+				</ButtonBase>
 
 				<div
 					style={{
@@ -54,137 +63,127 @@ function Navbar({ login }) {
 					}}
 				>
 					{/* Timetable Icon */}
-					<div
+					<ButtonBase
 						style={{
 							display: "flex",
 							flexDirection: "row",
 							justifyContent: "center",
 							alignItems: "flex-start",
 							padding: "2px 55px",
-							gap: "10px",
 
 							backgroundColor: "#fff",
 							border: "3px solid #14c38e",
+							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 							borderRadius: "32px",
 						}}
 					>
 						<Link to="/TimeTable">
-							<img
-								alt=""
-								src="timetable.png"
-								height={"64px"}
+						    <Timetable
 								style={{
-									borderRadius: "0px 16px 16px 0px",
+									color: "#000000",
+									fontSize: 64,
 								}}
 							/>
 						</Link>
-					</div>
+					</ButtonBase>
 
 					{/* Class Icon */}
-					<div
+					<ButtonBase
 						style={{
 							display: "flex",
 							flexDirection: "row",
 							justifyContent: "center",
 							alignItems: "flex-start",
 							padding: "2px 55px",
-							gap: "10px",
 
 							backgroundColor: "#fff",
 							border: "3px solid #14c38e",
+							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 							borderRadius: "32px",
 						}}
 					>
 						<Link to="/class">
-							<img
-								alt=""
-								src="class.png"
-								height={"64px"}
+							<HumanMaleBoard
 								style={{
-									borderRadius: "0px 16px 16px 0px",
+									color: "#000000",
+									fontSize: 64,
 								}}
 							/>
 						</Link>
-					</div>
+					</ButtonBase>
 
 					{/* Login Record Icon */}
-					<div
+					<ButtonBase
 						style={{
 							display: "flex",
 							flexDirection: "row",
 							justifyContent: "center",
 							alignItems: "flex-start",
 							padding: "2px 55px",
-							gap: "10px",
 
 							backgroundColor: "#fff",
 							border: "3px solid #14c38e",
+							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 							borderRadius: "32px",
 						}}
 					>
 						<Link to="/records">
-							<img
-								alt=""
-								src="account.png"
-								height={"64px"}
+							<Account
 								style={{
-									borderRadius: "0px 16px 16px 0px",
+									color: "#000000",
+									fontSize: 64,
 								}}
 							/>
 						</Link>
-					</div>
+					</ButtonBase>
 
 					{/* Logout Icon */}
 					{login ? (
-						<div
+						<ButtonBase
 							style={{
 								display: "flex",
 								flexDirection: "row",
 								justifyContent: "center",
 								alignItems: "flex-start",
 								padding: "2px 55px",
-								gap: "10px",
-
+	
 								backgroundColor: "#fff",
 								border: "3px solid #14c38e",
+								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 								borderRadius: "32px",
 							}}
 						>
-							<img
-								alt=""
-								src="Logout.png"
-								height={"64px"}
+							<Logout
 								style={{
-									borderRadius: "0px 16px 16px 0px",
+									color: "#000000",
+									fontSize: 64,
 								}}
 							/>
-						</div>
+						</ButtonBase>
 					) : (
-						<div
+						<ButtonBase
 							style={{
 								display: "flex",
 								flexDirection: "row",
 								justifyContent: "center",
 								alignItems: "flex-start",
 								padding: "2px 55px",
-								gap: "10px",
-
+	
 								backgroundColor: "#fff",
 								border: "3px solid #14c38e",
+								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 								borderRadius: "32px",
 							}}
 						>
 							<Link to="/login">
-								<img
-									alt=""
-									src="Logout.png"
-									height={"64px"}
+								<Login
 									style={{
-										borderRadius: "0px 16px 16px 0px",
+										color: "#000000",
+										fontSize: 64,
 									}}
 								/>
 							</Link>
-						</div>
+						</ButtonBase>
 					)}
 				</div>
 			</div>
