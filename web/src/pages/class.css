@@ -1,0 +1,340 @@
+.course-info-detailed-,
+.course-info-detailed- * {
+  box-sizing: border-box;
+}
+.course-info-detailed- {
+  background: #ffffff;
+  padding: 32px 48px 32px 48px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+}
+.frame-17 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 250, 231, 1) 0%,
+    rgba(255, 250, 231, 0.5) 100%
+  );
+  border-radius: 32px;
+  padding: 32px 48px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.frame-1 {
+  background: linear-gradient(
+    91.05deg,
+    rgba(20, 195, 142, 1) 0%,
+    rgba(227, 252, 191, 1) 100%
+  );
+  border-radius: 32px 16px 16px 16px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 169px;
+  position: relative;
+}
+.frame-12 {
+  background: #14c38e;
+  border-radius: 32px 32px 32px 16px;
+  border: solid #278853;
+  border-width: 3px;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 137px;
+  position: relative;
+}
+.class-name {
+  color: #ffffff;
+  text-align: center;
+  font: 600 38px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.email {
+  background: #38e54d;
+  border-radius: 32px;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.cursor-default-click-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.zoom-links {
+  color: #ffffff;
+  text-align: center;
+  font: 600 32px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-15 {
+  background: #38e54d;
+  border-radius: 32px;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.email-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.send-email {
+  color: #ffffff;
+  text-align: center;
+  font: 600 32px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-20 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-26 {
+  background: #b8f1b0;
+  border-radius: 16px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.course-message {
+  color: #425f57;
+  text-align: center;
+  font: 400 28px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-2 {
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-19 {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-262 {
+  background: #7af7ff;
+  border-radius: 32px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-29 {
+  background: #bde6f1;
+  border-radius: 16px;
+  padding: 16px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.course-instructor {
+  color: #000000;
+  text-align: center;
+  font: 600 28px "Inter";
+  position: relative;
+  align-self: stretch;
+}
+.course-instructor-list {
+  color: #000000;
+  text-align: left;
+  font: 400 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  height: 84.25px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.frame-30 {
+  background: #bde6f1;
+  border-radius: 16px;
+  padding: 16px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.teaching-assistants {
+  text-align: center;
+  font: 600 28px "Inter";
+  position: relative;
+  align-self: stretch;
+}
+.teaching-assistants-span {
+  color: #000000;
+  font: 600 28px "Inter";
+}
+.teaching-assistants-span2 {
+  color: #ffffff;
+  font: 600 28px "Inter";
+}
+.teaching-assistants-span3 {
+  color: #000000;
+  font: 600 28px "Inter";
+}
+.frame-202 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+.teaching-assistant-list {
+  color: #000000;
+  text-align: left;
+  font: 400 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.frame-192 {
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 588px;
+  position: relative;
+}
+.frame-27 {
+  background: #e3fcbf;
+  border-radius: 16px;
+  padding: 32px 32px 32px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.lecture-tut-course-assessment {
+  color: #425f57;
+  text-align: left;
+  font: 400 28px "Inter";
+  position: relative;
+  flex: 1;
+}
+.time-title {
+  color: #425f57;
+  font: 600 28px "Inter";
+  font-weight: "bold";
+}
+.lecture-list {
+  color: #425f57;
+  font: 400 28px "Inter";
+}
+.frame-263 {
+  background: #e3fcbf;
+  border-radius: 16px;
+  padding: 32px 32px 32px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.other-course-materials- {
+  color: #425f57;
+  text-align: left;
+  font: 600 28px "Inter";
+  position: relative;
+}
