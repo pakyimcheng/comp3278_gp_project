@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaceRecognition, Login as LoginIcon } from "mdi-material-ui";
-import { TextField, Button } from "@mui/material";
+import { FaceRecognition, Login as LoginIcon, CloseCircle } from "mdi-material-ui";
+import { TextField, Button, Dialog, DialogTitle, IconButton } from "@mui/material";
 
 const Login = () => {
 	const canvasRef = useRef();
@@ -8,6 +8,15 @@ const Login = () => {
 	const videoRef = useRef();
 
 	const [result, setResult] = useState("");
+	const [modalOpen, setModalOpen] = useState(false);
+
+	const handleModalClose = () => {
+		setModalOpen(false);
+	};
+
+	const handleModalOpen = () => {
+		setModalOpen(true);
+	};
 
 	useEffect(() => {
 		async function getCameraStream() {
@@ -37,8 +46,7 @@ const Login = () => {
 					body: formData,
 				});
 
-				console.log(response);
-
+				
 				if (response.status === 200) {
 					const text = await response.text();
 					setResult(text);
@@ -49,6 +57,12 @@ const Login = () => {
 		}, 1000);
 		return () => clearInterval(interval);
 	}, []);
+
+//	useEffect(()=>{
+//		if (!modalOpen && result > 0.9){
+//			setModalOpen(true);
+//		}
+//	}, [result, setModalOpen, modalOpen])
 
 	const playCameraStream = () => {
 		if (videoRef.current) {
@@ -72,6 +86,76 @@ const Login = () => {
 
 	return (
 		<>
+			<Dialog
+				open={modalOpen}
+				onClose={()=>handleModalClose()}
+			>
+				<IconButton
+					onClick={()=>handleModalClose()}
+					size="large"
+					style={{
+						position: "absolute",
+					}}
+				>
+					<CloseCircle
+						style={{
+							color: "red",
+							fontSize: "32px",
+						}}
+					/>
+				</IconButton>
+				<div
+					style = {{
+						display: "flex",
+						flexDirection: "column",
+						padding: "64px",
+						gap: 16,
+						width: "25vw",
+					}}
+				>
+					<DialogTitle
+						style = {{
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							fontWeight: "bold",
+							fontSize: 42,
+							lineHeight: "42px",
+							color: "#425F57",
+						}}
+					>
+						Login
+					</DialogTitle>
+					<div
+						style={{
+							width: "100%",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "flex-start",
+							padding: "0px",
+							gap: "10px",
+						}}
+					>
+						<span
+							style={{
+								fontWeight: "600",
+								fontSize: "22px",
+								lineHeight: "22px",
+								color: "#425F57",
+							}}
+						>
+							Password
+						</span>
+						<TextField
+							placeholder="Password"
+							fullWidth
+							style={{
+								backgroundColor: "#FFF",
+							}}
+						/>
+					</div>
+				</div>
+			</Dialog>
 			<header>
 				<h1>Image classifier</h1>
 			</header>
@@ -238,6 +322,19 @@ const Login = () => {
 								onCanPlay={() => playCameraStream()}
 								id="video"
 							/>
+							<Button
+								variant="contained"
+								onClick={()=>handleModalOpen()}
+								style={{
+									padding: "8px 16px",
+									backgroundColor: "#14C38E",
+									boxShadow:
+										"0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)",
+									borderRadius: "4px",
+								}}
+							>
+								verify
+							</Button>
 							<canvas ref={canvasRef} hidden></canvas>
 						</div>
 
