@@ -1,6 +1,7 @@
 import React from "react";
 import "./class.css";
 import { CursorDefaultClick, Email } from "mdi-material-ui";
+import { ButtonBase } from "@mui/material";
 
 function Class() {
 	return (
@@ -12,7 +13,24 @@ function Class() {
 							COMP3278 Introduction to Database Management Systems
 						</div>
 					</div>
-					<div className="email">
+					<ButtonBase 
+						className="email"
+						sx={{
+							backgroundColor: "#38e54d",
+							borderRadius: "32px",
+							padding: "12px",
+							display: "flex",
+							flexDirection: "column",
+							gap: "0px",
+							alignItems: "center",
+							justifyContent: "center",
+							maxWidth: "16%",
+							alignSelf: "stretch",
+							flexShrink: 0,
+							position: "relative",
+							boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+						}}
+					>
 						<CursorDefaultClick
 							style={{
 								width: "32px",
@@ -22,8 +40,25 @@ function Class() {
 							}}
 						/>
 						<div className="zoom-links">Zoom Link(s)</div>
-					</div>
-					<div className="email">
+					</ButtonBase>
+					<ButtonBase 
+						className="email"
+						sx={{
+							backgroundColor: "#38e54d",
+							borderRadius: "32px",
+							padding: "12px",
+							display: "flex",
+							flexDirection: "column",
+							gap: "0px",
+							alignItems: "center",
+							justifyContent: "center",
+							maxWidth: "16%",
+							alignSelf: "stretch",
+							flexShrink: 0,
+							position: "relative",
+							boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+						}}
+					>
 						<Email
 							style={{
 								width: "32px",
@@ -33,7 +68,7 @@ function Class() {
 							}}
 						/>
 						<div className="send-email">Send Email</div>
-					</div>
+					</ButtonBase>
 				</div>
 				<div className="frame-20">
 					<div className="frame-26">
