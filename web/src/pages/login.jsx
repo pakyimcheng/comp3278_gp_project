@@ -1,6 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaceRecognition, Login as LoginIcon, CloseCircle } from "mdi-material-ui";
-import { TextField, Button, Dialog, DialogTitle, IconButton } from "@mui/material";
+import {
+	FaceRecognition,
+	Login as LoginIcon,
+	CloseCircle,
+} from "mdi-material-ui";
+import {
+	TextField,
+	Button,
+	Dialog,
+	DialogTitle,
+	IconButton,
+} from "@mui/material";
 
 const Login = () => {
 	const canvasRef = useRef();
@@ -9,6 +19,7 @@ const Login = () => {
 
 	const [result, setResult] = useState("");
 	const [modalOpen, setModalOpen] = useState(false);
+	const [verify, setVerify] = useState(false);
 
 	const handleModalClose = () => {
 		setModalOpen(false);
@@ -35,34 +46,35 @@ const Login = () => {
 
 	useEffect(() => {
 		const interval = setInterval(async () => {
-			captureImageFromCamera();
+			if (verify === true) {
+				captureImageFromCamera();
 
-			if (imageRef.current) {
-				const formData = new FormData();
-				formData.append("image", imageRef.current);
+				if (imageRef.current) {
+					const formData = new FormData();
+					formData.append("image", imageRef.current);
 
-				const response = await fetch("http://127.0.0.1:5001/classify", {
-					method: "POST",
-					body: formData,
-				});
+					const response = await fetch("http://127.0.0.1:5001/classify", {
+						method: "POST",
+						body: formData,
+					});
 
-				
-				if (response.status === 200) {
-					const text = await response.text();
-					setResult(text);
-				} else {
-					setResult("Error from API.");
+					if (response.status === 200) {
+						const text = await response.text();
+						setResult(text);
+					} else {
+						setResult("Error from API.");
+					}
 				}
 			}
 		}, 1000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [verify]);
 
-//	useEffect(()=>{
-//		if (!modalOpen && result > 0.9){
-//			setModalOpen(true);
-//		}
-//	}, [result, setModalOpen, modalOpen])
+	// useEffect(() => {
+	// 	if (!modalOpen && result > 0.9) {
+	// 		setModalOpen(true);
+	// 	}
+	// }, [result, setModalOpen, modalOpen]);
 
 	const playCameraStream = () => {
 		if (videoRef.current) {
@@ -86,12 +98,9 @@ const Login = () => {
 
 	return (
 		<>
-			<Dialog
-				open={modalOpen}
-				onClose={()=>handleModalClose()}
-			>
+			<Dialog open={modalOpen} onClose={() => handleModalClose()}>
 				<IconButton
-					onClick={()=>handleModalClose()}
+					onClick={() => handleModalClose()}
 					size="large"
 					style={{
 						position: "absolute",
@@ -105,7 +114,7 @@ const Login = () => {
 					/>
 				</IconButton>
 				<div
-					style = {{
+					style={{
 						display: "flex",
 						flexDirection: "column",
 						padding: "64px",
@@ -114,7 +123,7 @@ const Login = () => {
 					}}
 				>
 					<DialogTitle
-						style = {{
+						style={{
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
@@ -307,8 +316,10 @@ const Login = () => {
 										textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 									}}
 								>
-									Facial Authentication
+									Facial Authentication{"\n"}
 									{result}
+									{"\n"}
+									{String(verify)}
 								</span>
 							</div>
 							<video
@@ -324,7 +335,7 @@ const Login = () => {
 							/>
 							<Button
 								variant="contained"
-								onClick={()=>handleModalOpen()}
+								onClick={() => setVerify((prev) => !prev)}
 								style={{
 									padding: "8px 16px",
 									backgroundColor: "#14C38E",
