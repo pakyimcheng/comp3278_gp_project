@@ -27,7 +27,8 @@ def classify():
         # result = classifyImage(file)
         result = get_prediction(file)
 
-        result = json.dumps(str(result))
+        # result = json.dumps(str(result))
+        # print(result)
 
         return result
 

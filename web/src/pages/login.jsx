@@ -18,6 +18,7 @@ const Login = () => {
 	const videoRef = useRef();
 
 	const [result, setResult] = useState("");
+	const [confidence, setConfidence] = useState(0);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [verify, setVerify] = useState(false);
 
@@ -60,7 +61,12 @@ const Login = () => {
 
 					if (response.status === 200) {
 						const text = await response.text();
-						setResult(text);
+						setResult(
+							JSON.parse(text.substring(0, text.length - 1)).class_name
+						);
+						setConfidence(
+							JSON.parse(text.substring(0, text.length - 1)).confidence_score
+						);
 					} else {
 						setResult("Error from API.");
 					}
@@ -70,11 +76,16 @@ const Login = () => {
 		return () => clearInterval(interval);
 	}, [verify]);
 
-	// useEffect(() => {
-	// 	if (!modalOpen && result > 0.9) {
-	// 		setModalOpen(true);
-	// 	}
-	// }, [result, setModalOpen, modalOpen]);
+	useEffect(() => {
+		if (!modalOpen && confidence >= 0.8) {
+			setModalOpen(true);
+			setVerify(false);
+		}
+		if (modalOpen) {
+			setModalOpen(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [result, confidence, setModalOpen]);
 
 	const playCameraStream = () => {
 		if (videoRef.current) {
@@ -133,7 +144,7 @@ const Login = () => {
 							color: "#425F57",
 						}}
 					>
-						Login
+						Login, {result}
 					</DialogTitle>
 					<div
 						style={{
@@ -318,6 +329,8 @@ const Login = () => {
 								>
 									Facial Authentication{"\n"}
 									{result}
+									{"\n"}
+									{confidence}
 									{"\n"}
 									{String(verify)}
 								</span>
