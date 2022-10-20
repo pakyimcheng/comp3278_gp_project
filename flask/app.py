@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from classifier import get_prediction
 import json
+import datetime
 
 from dotenv import load_dotenv
 
@@ -41,8 +42,23 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/student/<studentID>", methods=["POST"])
-def student(studentID):
+@app.route("/createLoginInfo", methods=["POST"])
+def create_login_info():
+    studentID = request.args.get("studentID")
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(now, studentID)
+    # update the current_login_time in the student table
+    cursor.execute(
+        "UPDATE student SET current_login_time=%s WHERE studentID=%s",
+        (now, studentID),
+    )
+    cnx.commit()
+    return "Success"
+
+
+@app.route("/student", methods=["POST"])
+def student():
+    studentID = request.args.get("studentID")
     cursor.execute(
         "SELECT studentID, name, email_address FROM student WHERE studentID = %s",
         (studentID,),
