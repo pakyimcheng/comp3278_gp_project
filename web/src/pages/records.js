@@ -1,14 +1,20 @@
 /* Code generated with AutoHTML for Figma */
 import "./records.css";
+import { Avatar, ButtonBase } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function records({ ...props }) {
 	return (
 		<div className="login-record">
 			<div className="login-record-frame">
 				<div className="login-record-info">
-					<div className="avatar">
-						<div className="screencap-2022-10-13-at-23-19-1"></div>
-					</div>
+					<Avatar 
+						sx={{
+							backgroundColor: "#d1f5ff",
+							width: "216px",
+							height: "216px",
+						}}
+					/>
 					<div className="user-name-box">
 						<div className="user-name">User Name</div>
 						<div className="mark">Mark</div>
@@ -51,7 +57,7 @@ function records({ ...props }) {
 							<div className="time">Time</div>
 						</div>
 						<div className="login-duration-text-box">
-							<div className="login-duration">Login Duration</div>
+							<div className="records_login-duration">Login Duration</div>
 						</div>
 						<div className="ip-address-text-box">
 							<div className="ip-address">IP Address</div>

@@ -3,18 +3,16 @@
   box-sizing: border-box;
 }
 .login-record {
-  background: #ffffff;
   padding: 32px 48px 32px 48px;
   display: flex;
   flex-direction: row;
   gap: 32px;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 1440px;
-  height: 1024px;
   position: relative;
 }
 .login-record-frame {
+  width: 100%;
   background: linear-gradient(
     116.23deg,
     rgba(255, 202, 139, 1) 0%,
@@ -23,43 +21,25 @@
   border-radius: 32px;
   display: flex;
   flex-direction: row;
-  gap: 0px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex: 1;
   position: relative;
 }
 .login-record-info {
-  border-radius: 32px 0px 0px 32px;
+  width: 26.5%;
+  border-radius: 32px;
   padding: 32px 32px 32px 32px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 336px;
-  height: 960px;
   position: relative;
-}
-.avatar {
-  background: #d1f5ff;
-  border-radius: 126px;
-  flex-shrink: 0;
-  width: 216px;
-  height: 216px;
-  position: relative;
-  overflow: hidden;
-}
-.screencap-2022-10-13-at-23-19-1 {
-  width: 224.73px;
-  height: 216px;
-  position: absolute;
-  left: -4px;
-  top: -1px;
 }
 .user-name-box {
-  background: var(--style, #f7f6dc);
+  width: 100%;
+  background: #f7f6dc;
   border-radius: 32px;
   padding: 8px 16px 8px 16px;
   display: flex;
@@ -67,20 +47,14 @@
   gap: 8px;
   align-items: center;
   justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
   position: relative;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(-1, 1);
 }
 .user-name {
   color: #000000;
   text-align: center;
-  font: 700 32px "Inter";
+  font-weight: 700;
+  font-size: 32px;
   position: relative;
-  width: 240px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(-1, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,11 +62,9 @@
 .mark {
   color: #222222;
   text-align: center;
-  font: 400 24px "Inter";
+  font-weight: 400;
+  font-size: 24px;
   position: relative;
-  width: 240px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(-1, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,15 +169,14 @@
   justify-content: center;
 }
 .all-login-records-frame {
-  background: var(---7fb77e, #7fb77e);
+  width: 100%;
+  background: #7fb77e;
   border-radius: 64px 32px 32px 64px;
   display: flex;
   flex-direction: column;
-  gap: 0px;
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
-  flex: 1;
   position: relative;
 }
 .login-description {
@@ -236,6 +207,7 @@
   justify-content: center;
 }
 .login-records-top {
+  width: 100%;
   background: #f7f6dc;
   padding: 16px 96px 16px 96px;
   display: flex;
@@ -244,7 +216,6 @@
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  flex-shrink: 0;
   position: relative;
 }
 .number-text-box {
@@ -263,9 +234,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 72px;
-  height: 48px;
   position: relative;
+  align-self: stretch;
 }
 .no- {
   color: #000000;
@@ -273,7 +243,7 @@
   font: 700 28px "Inter";
   position: relative;
   align-self: stretch;
-  flex: 1;
+  width: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,12 +260,12 @@
   padding: 6px 0px 6px 0px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex: 1;
-  height: 48px;
   position: relative;
+  align-self: stretch;
+  width: 100%;
+
 }
 .time {
   color: #000000;
@@ -317,16 +287,16 @@
   border-radius: 8px;
   border: solid #14c38e;
   border-width: 1px;
+  padding: 6px 0px 6px 0px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex: 1;
-  height: 48px;
   position: relative;
+  align-self: stretch;
+  width: 100%;
 }
-.login-duration {
+.records_login-duration {
   color: #000000;
   text-align: center;
   font: 700 28px "Inter";
@@ -348,12 +318,12 @@
   border-width: 1px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: flex-start;
   justify-content: flex-start;
-  flex: 1;
-  height: 48px;
   position: relative;
+  align-self: stretch;
+  width: 100%;
+
 }
 .ip-address {
   color: #000000;
@@ -373,7 +343,7 @@
     rgba(207, 252, 186, 1) 100%
   );
   border-radius: 0px 0px 32px 64px;
-  padding: 0px 64px 0px 64px;
+  padding: 0px 64px 32px 64px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -395,8 +365,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
   position: relative;
 }
 .listnumber {
@@ -408,8 +376,6 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  flex-shrink: 0;
   width: 72px;
   position: relative;
 }
