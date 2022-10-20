@@ -1,32 +1,33 @@
+/* Code generated with AutoHTML for Figma */
 import "./records.css";
 
 function records({ ...props }) {
 	return (
-		<div className="check-login-record">
-			<div className="frame-20">
-				<div className="frame-4">
-					<div className="frame-6">
+		<div className="login-record">
+			<div className="login-record-frame">
+				<div className="login-record-info">
+					<div className="avatar">
 						<div className="screencap-2022-10-13-at-23-19-1"></div>
 					</div>
-					<div className="frame-8">
+					<div className="user-name-box">
 						<div className="user-name">User Name</div>
 						<div className="mark">Mark</div>
 					</div>
-					<div className="frame-40">
+					<div className="current-ip-box">
 						<div className="current-ip">Current IP</div>
 						<div className="xxx-xxx-xxx-xxx">XXX.XXX.XXX.XXX</div>
 					</div>
-					<div className="frame-41">
+					<div className="current-os-box">
 						<div className="current-os">Current OS</div>
 						<div className="mac-win">Mac/Win</div>
 					</div>
-					<div className="frame-42">
+					<div className="current-browser-box">
 						<div className="current-browser">Current Browser</div>
 						<div className="chrome-xx-xx">Chrome XX.XX</div>
 					</div>
 				</div>
-				<div className="frame-202">
-					<div className="frame-34">
+				<div className="all-login-records-frame">
+					<div className="login-description">
 						<svg
 							className="history-1"
 							width="87"
@@ -42,102 +43,102 @@ function records({ ...props }) {
 						</svg>
 						<div className="all-login-records">All Login Records</div>
 					</div>
-					<div className="frame-9">
-						<div className="frame-25">
+					<div className="login-records-top">
+						<div className="number-text-box">
 							<div className="no-">No.</div>
 						</div>
-						<div className="frame-22">
+						<div className="time-text-box">
 							<div className="time">Time</div>
 						</div>
-						<div className="frame-23">
+						<div className="login-duration-text-box">
 							<div className="login-duration">Login Duration</div>
 						</div>
-						<div className="frame-24">
+						<div className="ip-address-text-box">
 							<div className="ip-address">IP Address</div>
 						</div>
 					</div>
-					<div className="frame-5">
-						<div className="frame-35">
-							<div className="frame-222">
+					<div className="login-records-list">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_1-">1.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>
-						<div className="frame-36">
-							<div className="frame-222">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_2-">2.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>
-						<div className="frame-37">
-							<div className="frame-222">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_3-">3.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>
-						<div className="frame-38">
-							<div className="frame-222">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_4-">4.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>
-						<div className="frame-39">
-							<div className="frame-222">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_5-">5.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>
-						<div className="frame-402">
-							<div className="frame-222">
+						<div className="recorditem">
+							<div className="listnumber">
 								<div className="_6-">6.</div>
 							</div>
-							<div className="frame-252">
+							<div className="listtime">
 								<div className="-time-">&lt;time&gt;</div>
 							</div>
-							<div className="frame-232">
+							<div className="listduration">
 								<div className="-stayed-for-">&lt;stayed for&gt;</div>
 							</div>
-							<div className="frame-242">
+							<div className="listip">
 								<div className="-ip-">&lt;IP&gt;</div>
 							</div>
 						</div>

@@ -1,8 +1,8 @@
-.check-login-record,
-.check-login-record * {
+.login-record,
+.login-record * {
   box-sizing: border-box;
 }
-.check-login-record {
+.login-record {
   background: #ffffff;
   padding: 32px 48px 32px 48px;
   display: flex;
@@ -14,7 +14,7 @@
   height: 1024px;
   position: relative;
 }
-.frame-20 {
+.login-record-frame {
   background: linear-gradient(
     116.23deg,
     rgba(255, 202, 139, 1) 0%,
@@ -29,7 +29,7 @@
   flex: 1;
   position: relative;
 }
-.frame-4 {
+.login-record-info {
   border-radius: 32px 0px 0px 32px;
   padding: 32px 32px 32px 32px;
   display: flex;
@@ -42,7 +42,7 @@
   height: 960px;
   position: relative;
 }
-.frame-6 {
+.avatar {
   background: #d1f5ff;
   border-radius: 126px;
   flex-shrink: 0;
@@ -58,7 +58,7 @@
   left: -4px;
   top: -1px;
 }
-.frame-8 {
+.user-name-box {
   background: var(--style, #f7f6dc);
   border-radius: 32px;
   padding: 8px 16px 8px 16px;
@@ -97,7 +97,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-40 {
+.current-ip-box {
   background: #ffffff;
   border-radius: 32px;
   padding: 8px 16px 8px 16px;
@@ -130,7 +130,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-41 {
+.current-os-box {
   background: #ffffff;
   border-radius: 32px;
   padding: 8px 16px 8px 16px;
@@ -163,7 +163,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-42 {
+.current-browser-box {
   background: #ffffff;
   border-radius: 32px;
   padding: 8px 16px 8px 16px;
@@ -196,7 +196,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-202 {
+.all-login-records-frame {
   background: var(---7fb77e, #7fb77e);
   border-radius: 64px 32px 32px 64px;
   display: flex;
@@ -208,7 +208,7 @@
   flex: 1;
   position: relative;
 }
-.frame-34 {
+.login-description {
   background: #77ca76;
   border-radius: 64px 32px 0px 0px;
   padding: 32px 64px 32px 64px;
@@ -235,7 +235,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-9 {
+.login-records-top {
   background: #f7f6dc;
   padding: 16px 96px 16px 96px;
   display: flex;
@@ -247,7 +247,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.frame-25 {
+.number-text-box {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
@@ -278,7 +278,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-22 {
+.time-text-box {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
@@ -308,7 +308,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-23 {
+.login-duration-text-box {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
@@ -337,7 +337,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-24 {
+.ip-address-text-box {
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
@@ -366,7 +366,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-5 {
+.login-records-list {
   background: linear-gradient(
     180deg,
     rgba(247, 246, 220, 1) 0%,
@@ -383,7 +383,7 @@
   flex: 1;
   position: relative;
 }
-.frame-35 {
+.recorditem {
   background: #cce9cc;
   border-radius: 16px;
   border: solid var(---7fb77e, #7fb77e);
@@ -399,7 +399,7 @@
   height: 80px;
   position: relative;
 }
-.frame-222 {
+.listnumber {
   background: var(--style, #b1d7b4);
   border-radius: 8px;
   padding: 6px 0px 6px 0px;
@@ -422,7 +422,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-252 {
+.listtime {
   background: var(--style, #b1d7b4);
   border-radius: 8px;
   padding: 6px 0px 6px 0px;
@@ -444,7 +444,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-232 {
+.listduration {
   background: var(--style, #b1d7b4);
   border-radius: 8px;
   display: flex;
@@ -465,7 +465,7 @@
   align-items: center;
   justify-content: center;
 }
-.frame-242 {
+.listip {
   background: var(--style, #b1d7b4);
   border-radius: 8px;
   display: flex;
@@ -486,22 +486,6 @@
   align-items: center;
   justify-content: center;
 }
-.frame-36 {
-  background: #cce9cc;
-  border-radius: 16px;
-  border: solid var(---7fb77e, #7fb77e);
-  border-width: 2px;
-  padding: 16px 32px 16px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
-  position: relative;
-}
 ._2- {
   color: #000000;
   text-align: center;
@@ -510,22 +494,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.frame-37 {
-  background: #cce9cc;
-  border-radius: 16px;
-  border: solid var(---7fb77e, #7fb77e);
-  border-width: 2px;
-  padding: 16px 32px 16px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
-  position: relative;
 }
 ._3- {
   color: #000000;
@@ -536,22 +504,6 @@
   align-items: center;
   justify-content: center;
 }
-.frame-38 {
-  background: #cce9cc;
-  border-radius: 16px;
-  border: solid var(---7fb77e, #7fb77e);
-  border-width: 2px;
-  padding: 16px 32px 16px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
-  position: relative;
-}
 ._4- {
   color: #000000;
   text-align: center;
@@ -561,22 +513,6 @@
   align-items: center;
   justify-content: center;
 }
-.frame-39 {
-  background: #cce9cc;
-  border-radius: 16px;
-  border: solid var(---7fb77e, #7fb77e);
-  border-width: 2px;
-  padding: 16px 32px 16px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
-  position: relative;
-}
 ._5- {
   color: #000000;
   text-align: center;
@@ -585,22 +521,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.frame-402 {
-  background: #cce9cc;
-  border-radius: 16px;
-  border: solid var(---7fb77e, #7fb77e);
-  border-width: 2px;
-  padding: 16px 32px 16px 32px;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 80px;
-  position: relative;
 }
 ._6- {
   color: #000000;

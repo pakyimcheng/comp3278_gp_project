@@ -1,22 +1,23 @@
+/* Code generated with AutoHTML for Figma */
 import "./home.css";
 
 function home({ ...props }) {
 	return (
-		<div className="landing--main-">
-			<div className="frame-20">
-				<div className="frame-4">
-					<div className="frame-6">
+		<div className="landing">
+			<div className="landing-page-frame">
+				<div className="landing-info-frame">
+					<div className="avatar">
 						<div className="screencap-2022-10-13-at-23-19-1"></div>
 					</div>
-					<div className="frame-8">
+					<div className="welcome-user">
 						<div className="welcome-back-">Welcome back!</div>
 						<div className="mark">Mark</div>
 					</div>
-					<div className="frame-7">
+					<div className="record-button">
 						<div className="login-records">Login Records</div>
 					</div>
-					<div className="frame-10">
-						<div className="frame-202">
+					<div className="notification">
+						<div className="notification-icon-text">
 							<svg
 								className="bell-1"
 								width="32"
@@ -30,7 +31,7 @@ function home({ ...props }) {
 									fill="black"
 								/>
 							</svg>
-							<div className="notification">Notification</div>
+							<div className="notification2">Notification</div>
 						</div>
 						<div className="-notif-date---notif-----">
 							&lt;Notif date&gt;
@@ -40,8 +41,8 @@ function home({ ...props }) {
 							...
 						</div>
 					</div>
-					<div className="frame-11">
-						<div className="frame-203">
+					<div className="login-duration">
+						<div className="duration">
 							<svg
 								className="clock-time-five-1"
 								width="32"
@@ -60,8 +61,8 @@ function home({ ...props }) {
 						<div className="login-time--69-420">Login time: 69:420</div>
 					</div>
 				</div>
-				<div className="frame-204">
-					<div className="frame-62">
+				<div className="landing-feature-frame">
+					<div className="feature-message">
 						<div className="welcome-to-icms">WELCOME to ICMS</div>
 						<div className="welcome-to-our-system--mark--this-system-provide-the-best-experience-in-organising-and-monitoring-your-courses--you-can-select-the-features-below-">
 							Welcome to our system, Mark!
@@ -70,8 +71,8 @@ function home({ ...props }) {
 							monitoring your courses. You can select the features below.
 						</div>
 					</div>
-					<div className="frame-5">
-						<div className="frame-72">
+					<div className="landing-options">
+						<div className="timetable-button">
 							<svg
 								className="timetable-2"
 								width="64"
@@ -87,7 +88,7 @@ function home({ ...props }) {
 							</svg>
 							<div className="timetable">Timetable</div>
 						</div>
-						<div className="frame-82">
+						<div className="course-button">
 							<svg
 								className="exclamation-thick-1"
 								width="64"
