@@ -13,6 +13,39 @@
 
 The model is a bit rough but still performs better than opencv default one.
 
+
+## MYSQL setup
+
+Assume XAMPP is installed in your computer.
+
+1. Install the following packages
+
+    * mysql-connector-python
+    * python-dotenv
+
+    (Take conda as example)
+    ```
+    conda install -c anaconda mysql-connector-python
+    pip install python-dotenv
+    ```
+
+2. create _.env_ file under folder /flask/
+
+    Type the following. (The YOUR_PASSWORD can be found in the following steps.)
+
+    ```
+    MYSQL_PASSWORD='YOUR_PASSWORD'
+    ```
+
+3. Launch XAMPP. Go to phpMyAdmin.
+    On the top launch bar, click 'User accounts'. Search for the column with 'User name' = 'root' and 'Host name' = 'localhost'. Look at the password column, if the Password column said 'No', then leave the YOUR_PASSWORD empty. Otherwise, copy the value to YOUR_PASSWORD.
+
+    Then save the _.env_ file.
+
+4. Create a database namely 'project'. Import the .sql file in discord to 'project' database.
+
+
+
 ### Setup
 1. Create a virtual environment (using either conda/ venv) with python=3.9 
     (as tensorflow only upports python 3.6 to 3.9)
