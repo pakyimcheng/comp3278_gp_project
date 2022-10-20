@@ -1,0 +1,613 @@
+.check-login-record,
+.check-login-record * {
+  box-sizing: border-box;
+}
+.check-login-record {
+  background: #ffffff;
+  padding: 32px 48px 32px 48px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 1440px;
+  height: 1024px;
+  position: relative;
+}
+.frame-20 {
+  background: linear-gradient(
+    116.23deg,
+    rgba(255, 202, 139, 1) 0%,
+    rgba(250, 255, 221, 1) 100%
+  );
+  border-radius: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+}
+.frame-4 {
+  border-radius: 32px 0px 0px 32px;
+  padding: 32px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 336px;
+  height: 960px;
+  position: relative;
+}
+.frame-6 {
+  background: #d1f5ff;
+  border-radius: 126px;
+  flex-shrink: 0;
+  width: 216px;
+  height: 216px;
+  position: relative;
+  overflow: hidden;
+}
+.screencap-2022-10-13-at-23-19-1 {
+  width: 224.73px;
+  height: 216px;
+  position: absolute;
+  left: -4px;
+  top: -1px;
+}
+.frame-8 {
+  background: var(--style, #f7f6dc);
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.user-name {
+  color: #000000;
+  text-align: center;
+  font: 700 32px "Inter";
+  position: relative;
+  width: 240px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mark {
+  color: #222222;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  width: 240px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-40 {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.current-ip {
+  color: #000000;
+  text-align: center;
+  font: 700 32px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.xxx-xxx-xxx-xxx {
+  color: #222222;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-41 {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.current-os {
+  color: #000000;
+  text-align: center;
+  font: 700 32px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mac-win {
+  color: #222222;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-42 {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.current-browser {
+  color: #000000;
+  text-align: center;
+  font: 700 28px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chrome-xx-xx {
+  color: #222222;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-202 {
+  background: var(---7fb77e, #7fb77e);
+  border-radius: 64px 32px 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.frame-34 {
+  background: #77ca76;
+  border-radius: 64px 32px 0px 0px;
+  padding: 32px 64px 32px 64px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.history-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.all-login-records {
+  color: #ffffff;
+  text-align: center;
+  font: 600 68px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-9 {
+  background: #f7f6dc;
+  padding: 16px 96px 16px 96px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-25 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(209, 250, 190, 1) 100%
+  );
+  border-radius: 8px;
+  border: solid #14c38e;
+  border-width: 1px;
+  padding: 6px 0px 6px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 72px;
+  height: 48px;
+  position: relative;
+}
+.no- {
+  color: #000000;
+  text-align: center;
+  font: 700 28px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-22 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(209, 250, 190, 1) 100%
+  );
+  border-radius: 8px;
+  border: solid #14c38e;
+  border-width: 1px;
+  padding: 6px 0px 6px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 48px;
+  position: relative;
+}
+.time {
+  color: #000000;
+  text-align: center;
+  font: 700 28px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-23 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(209, 250, 190, 1) 100%
+  );
+  border-radius: 8px;
+  border: solid #14c38e;
+  border-width: 1px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 48px;
+  position: relative;
+}
+.login-duration {
+  color: #000000;
+  text-align: center;
+  font: 700 28px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-24 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(209, 250, 190, 1) 100%
+  );
+  border-radius: 8px;
+  border: solid #14c38e;
+  border-width: 1px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  height: 48px;
+  position: relative;
+}
+.ip-address {
+  color: #000000;
+  text-align: center;
+  font: 700 28px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-5 {
+  background: linear-gradient(
+    180deg,
+    rgba(247, 246, 220, 1) 0%,
+    rgba(207, 252, 186, 1) 100%
+  );
+  border-radius: 0px 0px 32px 64px;
+  padding: 0px 64px 0px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.frame-35 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+.frame-222 {
+  background: var(--style, #b1d7b4);
+  border-radius: 8px;
+  padding: 6px 0px 6px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  width: 72px;
+  position: relative;
+}
+._1- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-252 {
+  background: var(--style, #b1d7b4);
+  border-radius: 8px;
+  padding: 6px 0px 6px 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.-time- {
+  color: #000000;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-232 {
+  background: var(--style, #b1d7b4);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.-stayed-for- {
+  color: #000000;
+  text-align: center;
+  font: 400 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-242 {
+  background: var(--style, #b1d7b4);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.-ip- {
+  color: #000000;
+  text-align: center;
+  font: 400 26px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-36 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+._2- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-37 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+._3- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-38 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+._4- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-39 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+._5- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-402 {
+  background: #cce9cc;
+  border-radius: 16px;
+  border: solid var(---7fb77e, #7fb77e);
+  border-width: 2px;
+  padding: 16px 32px 16px 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 80px;
+  position: relative;
+}
+._6- {
+  color: #000000;
+  text-align: center;
+  font: 500 24px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

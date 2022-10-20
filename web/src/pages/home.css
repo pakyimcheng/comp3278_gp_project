@@ -1,0 +1,333 @@
+.landing--main-,
+.landing--main- * {
+  box-sizing: border-box;
+}
+.landing--main- {
+  background: #ffffff;
+  padding: 32px 48px 32px 48px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 1440px;
+  position: relative;
+}
+.frame-20 {
+  background: linear-gradient(
+    117.03deg,
+    rgba(177, 215, 180, 1) 0%,
+    rgba(188, 255, 231, 1) 100%
+  );
+  border-radius: 32px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.frame-4 {
+  border-radius: 32px;
+  padding: 32px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 336px;
+  height: 960px;
+  position: relative;
+}
+.frame-6 {
+  background: #d1f5ff;
+  border-radius: 126px;
+  flex-shrink: 0;
+  width: 216px;
+  height: 216px;
+  position: relative;
+  overflow: hidden;
+}
+.screencap-2022-10-13-at-23-19-1 {
+  width: 224.73px;
+  height: 216px;
+  position: absolute;
+  left: -4px;
+  top: -1px;
+}
+.frame-8 {
+  background: var(--style, #f7f6dc);
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+}
+.welcome-back- {
+  color: #000000;
+  text-align: center;
+  font: 500 32px "Inter";
+  position: relative;
+  align-self: stretch;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mark {
+  color: #000000;
+  text-align: center;
+  font: 700 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(-1, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-7 {
+  background: #d1f5ff;
+  border-radius: 32px;
+  border: solid #1484c3;
+  border-width: 5px;
+  padding: 16px 16px 16px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.login-records {
+  color: #000000;
+  text-align: center;
+  font: 700 32px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-10 {
+  background: #f7f6dc;
+  border-radius: 32px;
+  padding: 8px 18px 8px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex: 1;
+  position: relative;
+}
+.frame-202 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.bell-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.notification {
+  color: #000000;
+  text-align: center;
+  font: 700 32px "Inter";
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.-notif-date---notif----- {
+  color: #000000;
+  text-align: left;
+  font: 400 24px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+}
+.frame-11 {
+  background: #f7f6dc;
+  border-radius: 32px;
+  padding: 8px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 82px;
+  position: relative;
+}
+.frame-203 {
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 210px;
+  position: relative;
+}
+.clock-time-five-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+._00-00 {
+  color: #000000;
+  text-align: right;
+  font: 700 32px "Inter";
+  position: relative;
+  flex: 1;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.login-time--69-420 {
+  color: #000000;
+  text-align: center;
+  font: 400 20px "Inter";
+  position: relative;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.frame-204 {
+  background: #14c38e;
+  border-radius: 64px 32px 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.frame-62 {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 195, 142, 1) 0%,
+    rgba(20, 195, 142, 0) 100%
+  );
+  border-radius: 64px 32px 32px 0px;
+  padding: 32px 64px 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.welcome-to-icms {
+  color: #ffffff;
+  text-align: left;
+  font: 600 68px "Inter";
+  position: relative;
+}
+.welcome-to-our-system--mark--this-system-provide-the-best-experience-in-organising-and-monitoring-your-courses--you-can-select-the-features-below- {
+  color: #ffffff;
+  text-align: center;
+  font: 400 28px "Inter";
+  position: relative;
+  align-self: stretch;
+}
+.frame-5 {
+  background: linear-gradient(
+    136.94deg,
+    rgba(227, 252, 191, 1) 0%,
+    rgba(140, 255, 152, 1) 100%
+  );
+  border-radius: 0px 0px 32px 64px;
+  padding: 32px 64px 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+  width: 1008px;
+  position: relative;
+}
+.frame-72 {
+  background: #ecffea;
+  border-radius: 16px;
+  border: solid #14c38e;
+  border-width: 5px;
+  padding: 48px 96px 48px 96px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.timetable-2 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.timetable {
+  color: #000000;
+  text-align: center;
+  font: 400 48px "Inter";
+  position: relative;
+}
+.frame-82 {
+  background: #ecffea;
+  border-radius: 16px;
+  border: solid #14c38e;
+  border-width: 5px;
+  padding: 48px 96px 48px 96px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.exclamation-thick-1 {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+.upcoming-courses {
+  color: #000000;
+  text-align: center;
+  font: 400 48px "Inter";
+  position: relative;
+}
