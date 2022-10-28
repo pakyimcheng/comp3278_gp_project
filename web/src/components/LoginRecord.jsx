@@ -10,19 +10,18 @@ function LoginRecord(props) {
 	return (
 		<div
 			style={{
-				flexDirection: "row",
-				display: "flex",
-				alignItems: "flex-start",
-				padding: "16px 32px",
-				gap: "32px",
-
-				width: "880px",
-				height: "80px",
-
-				background: "#CCE9CC",
-
-				border: "2px solid #7FB77E",
+				background: "#cce9cc",
 				borderRadius: "16px",
+				border: "solid #7fb77e",
+				borderWidth: "2px",
+				padding: "16px 32px 16px 32px",
+				display: "flex",
+				flexDirection: "row",
+				gap: "32px",
+				alignItems: "flex-start",
+				justifyContent: "flex-start",
+				alignSelf: "stretch",
+				position: "relative",
 			}}
 		>
 			{/* Record Number */}
@@ -59,17 +58,17 @@ function LoginRecord(props) {
 			{/* Time */}
 			<div
 				style={{
+					background: "#b1d7b4",
+					borderRadius: "8px",
+					padding: "6px 0px 6px 0px",
 					display: "flex",
 					flexDirection: "row",
-					justifyContent: "center",
-					alignItems: "center",
-					padding: "6px 0px",
-					width: "216px",
 					gap: "10px",
-
-					height: "48px",
-					background: "#B1D7B4",
-					borderRadius: "8px",
+					alignItems: "center",
+					justifyContent: "center",
+					alignSelf: "stretch",
+					flex: "1",
+					position: "relative",
 				}}
 			>
 				<div
@@ -90,17 +89,17 @@ function LoginRecord(props) {
 			{/* Login Duration */}
 			<div
 				style={{
+					background: "#b1d7b4",
+					borderRadius: "8px",
+					padding: "6px 0px 6px 0px",
 					display: "flex",
 					flexDirection: "row",
-					justifyContent: "center",
-					alignItems: "center",
-					padding: "0px",
-					width: "216px",
 					gap: "10px",
-
-					height: "48px",
-					background: "#B1D7B4",
-					borderRadius: "8px",
+					alignItems: "center",
+					justifyContent: "center",
+					alignSelf: "stretch",
+					flex: "1",
+					position: "relative",
 				}}
 			>
 				<div
@@ -121,17 +120,17 @@ function LoginRecord(props) {
 			{/* IPAddress */}
 			<div
 				style={{
+					background: "#b1d7b4",
+					borderRadius: "8px",
+					padding: "6px 0px 6px 0px",
 					display: "flex",
 					flexDirection: "row",
-					justifyContent: "center",
-					alignItems: "center",
-					padding: "0px",
-					width: "216px",
 					gap: "10px",
-
-					height: "48px",
-					background: "#B1D7B4",
-					borderRadius: "8px",
+					alignItems: "center",
+					justifyContent: "center",
+					alignSelf: "stretch",
+					flex: "1",
+					position: "relative",
 				}}
 			>
 				<div

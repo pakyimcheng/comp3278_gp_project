@@ -98,97 +98,13 @@ function Records({ props }) {
 							<div className="ip-address">IP Address</div>
 						</div>
 					</div>
-					<LoginRecord
-						IPAddress={"127.0.0.1"}
-						time={"2022-10-28 10:00:00"}
-						duration={"1m"}
-						number={1}
-					></LoginRecord>
 					<div className="login-records-list">
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_1-">1.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_2-">2.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_3-">3.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_4-">4.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_5-">5.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
-						<div className="recorditem">
-							<div className="listnumber">
-								<div className="_6-">6.</div>
-							</div>
-							<div className="listtime">
-								<div className="-time-">&lt;time&gt;</div>
-							</div>
-							<div className="listduration">
-								<div className="-stayed-for-">&lt;stayed for&gt;</div>
-							</div>
-							<div className="listip">
-								<div className="-ip-">&lt;IP&gt;</div>
-							</div>
-						</div>
+						<LoginRecord
+							IPAddress={"127.0.0.1"}
+							time={"2022-10-28 10:00:00"}
+							duration={"1m"}
+							number={1}
+						/>
 					</div>
 				</div>
 			</div>
