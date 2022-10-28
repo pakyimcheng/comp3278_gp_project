@@ -305,6 +305,40 @@ def get_tutorial():
 
     return result
 
+@app.route("/getAssignment", methods=["POST"])
+def get_assignment():
+    courseID = request.args.get("courseID")
+
+    cursor.execute(
+        """
+        SELECT courseID, deadline, name, weighting, asm_id, link
+        FROM `assignment`
+        WHERE courseID = %s
+        """,
+        (courseID,),
+    )
+
+    rows = cursor.fetchall()
+
+    if rows:
+        r = rows[0]
+
+        result = {
+            "status": True,
+            "courseID": r[0],
+            "deadline": r[1],
+            "name": r[2],
+            "weighting": r[3],
+            "asm_id": r[4],
+            "link": r[5]
+        }
+    else:
+        result = {
+            "status": False
+        }
+
+    return result
+
 @app.route("/test")
 def members():
     return {"test": ["1", "2", "3"]}
