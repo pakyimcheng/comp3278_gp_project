@@ -2,14 +2,19 @@
 import "./home.css";
 import { Avatar, ButtonBase } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Timetable, ExclamationThick, Bell, ClockTimeFive } from "mdi-material-ui";
+import {
+	Timetable,
+	ExclamationThick,
+	Bell,
+	ClockTimeFive,
+} from "mdi-material-ui";
 
 function home({ ...props }) {
 	return (
 		<div className="landing">
 			<div className="landing-page-frame">
 				<div className="landing-info-frame">
-					<Avatar 
+					<Avatar
 						sx={{
 							backgroundColor: "#d1f5ff",
 							width: "216px",
@@ -18,10 +23,10 @@ function home({ ...props }) {
 					/>
 					<div className="welcome-user">
 						<div className="welcome-back-">Welcome back!</div>
-						<div className="home_user-name">Mark</div>
+						<div className="home_user-name">{props.name}</div>
 					</div>
-					
-					<ButtonBase 
+
+					<ButtonBase
 						className="record-button"
 						sx={{
 							background: "#d1f5ff",
@@ -39,10 +44,7 @@ function home({ ...props }) {
 							boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 						}}
 					>
-						<Link 
-							to="/records"
-							style={{ textDecoration: 'none' }}
-						>
+						<Link to="/records" style={{ textDecoration: "none" }}>
 							<div className="login-records">Login Records</div>
 						</Link>
 					</ButtonBase>
@@ -80,14 +82,14 @@ function home({ ...props }) {
 					<div className="feature-message">
 						<div className="welcome-to-icms">WELCOME to ICMS</div>
 						<div className="welcome-to-our-system--mark--this-system-provide-the-best-experience-in-organising-and-monitoring-your-courses--you-can-select-the-features-below-">
-							Welcome to our system, Mark!
+							Welcome to our system, {props.name}!
 							<br />
 							This system provide the best experience in organising and
 							monitoring your courses. You can select the features below.
 						</div>
 					</div>
 					<div className="landing-options">
-						<ButtonBase 
+						<ButtonBase
 							className="timetable-button"
 							sx={{
 								background: "#ecffea",
@@ -105,10 +107,10 @@ function home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							<Link 
+							<Link
 								to="/timetable"
-								style={{ 
-									textDecoration: 'none',
+								style={{
+									textDecoration: "none",
 									display: "flex",
 									flexDirection: "row",
 									gap: "18px",
@@ -125,7 +127,7 @@ function home({ ...props }) {
 								<div className="timetable">Timetable</div>
 							</Link>
 						</ButtonBase>
-						<ButtonBase 
+						<ButtonBase
 							className="course-button"
 							sx={{
 								background: "#ecffea",
@@ -143,10 +145,10 @@ function home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							<Link 
+							<Link
 								to="/class"
-								style={{ 
-									textDecoration: 'none',
+								style={{
+									textDecoration: "none",
 									display: "flex",
 									flexDirection: "row",
 									gap: "18px",

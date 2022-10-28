@@ -6,7 +6,7 @@ import LoginRecord from "../components/LoginRecord";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Records({ props }) {
+function Records({ ...props }) {
 	const [IP, setIP] = useState("");
 
 	const getData = async () => {
@@ -52,7 +52,7 @@ function Records({ props }) {
 					/>
 					<div className="user-name-box">
 						<div className="user-name">User Name</div>
-						<div className="mark">Mark</div>
+						<div className="mark">{props.name}</div>
 					</div>
 					<div className="current-ip-box">
 						<div className="current-ip">Current IP</div>

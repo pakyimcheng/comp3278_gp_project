@@ -41,18 +41,19 @@ cursor = cnx.cursor()
 def index():
     return render_template("index.html")
 
-'''
+
+"""
 INFO:
 Every result json should include "status"
 to indicate whether the request is okay or not
-'''
+"""
 
-'''
+"""
 Login In Requests
 1. First check matching user
 2. Update the current_login_time
 3. Get the student info
-'''
+"""
 
 # email and password login
 @app.route("/login", methods=["POST"])
@@ -60,7 +61,7 @@ def login():
     email = request.get_json()["email_address"]
     login_pwd = request.get_json()["login_pwd"]
     cursor.execute(
-        "SELECT studentID FROM student WHERE email_address = %s AND login_pwd = %s",
+        "SELECT studentID, name FROM student WHERE email_address = %s AND login_pwd = %s",
         (email, login_pwd),
     )
     # get all rows that match the result (though suppose there should be only one)
@@ -68,16 +69,12 @@ def login():
 
     if row:
         r = row[0]
-        result = {
-            "status": True,
-            "studentID": r[0]
-        }
+        result = {"status": True, "studentID": r[0], "name": r[1]}
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
+
 
 @app.route("/loginFace", methods=["POST"])
 def login_face():
@@ -85,7 +82,7 @@ def login_face():
     login_pwd = request.args.get("login_pwd")
 
     cursor.execute(
-        "SELECT studentID FROM student WHERE face_idx = %s AND login_pwd = %s",
+        "SELECT studentID, name FROM student WHERE face_idx = %s AND login_pwd = %s",
         (face_idx, login_pwd),
     )
 
@@ -94,14 +91,9 @@ def login_face():
 
     if row:
         r = row[0]
-        result = {
-            "status": True,
-            "studentID": r[0]
-        }
+        result = {"status": True, "studentID": r[0], "name": r[1]}
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
 
@@ -119,11 +111,10 @@ def create_login_info():
     )
     cnx.commit()
 
-    result = {
-        "status": True
-    }
+    result = {"status": True}
 
     return result
+
 
 # Return student info
 @app.route("/student", methods=["POST"])
@@ -144,20 +135,19 @@ def student():
             "studentID": r[0],
             "name": r[1],
             "email_address": r[2],
-            "current_login_time": r[3]
+            "current_login_time": r[3],
         }
 
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
 
 
-'''
+"""
 Course Info related requests
-'''
+"""
+
 
 @app.route("/getCourseInfo", methods=["POST"])
 def get_course_info():
@@ -170,7 +160,7 @@ def get_course_info():
         FROM course
         WHERE course_code = %s
         """,
-        (course_code,)
+        (course_code,),
     )
 
     rows = cursor.fetchall()
@@ -185,13 +175,11 @@ def get_course_info():
             "course_name": r[2],
             "summary.course_info": r[3],
             "summary.teacher_message": r[4],
-            "other_course_materials": r[5]
+            "other_course_materials": r[5],
         }
 
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
 
@@ -222,13 +210,11 @@ def get_course_teaching_team():
             "office_hour": r[3],
             "office_address": r[4],
             "email": r[5],
-            "name": r[6]
+            "name": r[6],
         }
 
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
 
@@ -249,23 +235,21 @@ def get_lecture():
     rows = cursor.fetchall()
 
     if rows:
-        r = rows[0]        
+        r = rows[0]
 
         result = {
             "status": True,
             "courseID": r[0],
             "lectureID": r[1],
-            "note": json.loads(r[2]),       # json byte string to json object
+            "note": json.loads(r[2]),  # json byte string to json object
             "start_time": r[3],
             "end_time": r[4],
             "zoom_link": r[5],
-            "class_address": r[6]
+            "class_address": r[6],
         }
 
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
     return result
 
 
@@ -291,19 +275,18 @@ def get_tutorial():
             "status": True,
             "courseID": r[0],
             "turorialID": r[1],
-            "note": json.loads(r[2]),       # json byte string to json object
+            "note": json.loads(r[2]),  # json byte string to json object
             "start_time": r[3],
             "end_time": r[4],
             "zoom_link": r[5],
-            "class_address": r[6]
+            "class_address": r[6],
         }
 
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
+
 
 @app.route("/getAssignment", methods=["POST"])
 def get_assignment():
@@ -330,23 +313,23 @@ def get_assignment():
             "name": r[2],
             "weighting": r[3],
             "asm_id": r[4],
-            "link": r[5]
+            "link": r[5],
         }
     else:
-        result = {
-            "status": False
-        }
+        result = {"status": False}
 
     return result
+
 
 @app.route("/test")
 def members():
     return {"test": ["1", "2", "3"]}
 
 
-'''
+"""
 Facial Login Requests
-'''
+"""
+
 
 @app.route("/classify", methods=["POST"])
 def classify():

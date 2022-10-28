@@ -12,6 +12,7 @@ import Class from "./pages/class";
 
 function App() {
 	const [login, setLogin] = useState(false);
+	const [name, setName] = useState("");
 
 	return (
 		<BrowserRouter>
@@ -19,11 +20,15 @@ function App() {
 			<div className="App">
 				The user is currently logged in: {login ? "true" : "false"}
 				<Routes>
-					<Route exact path="/" element={<Home />} />
+					<Route exact path="/" element={<Home name={name} />} />
 					<Route exact path="/timetable" element={<TimeTable />} />
 					<Route exact path="/class" element={<Class />} />
-					<Route exact path="/records" element={<Records />} />
-					<Route exact path="/login" element={<Login setLogin={setLogin} />} />
+					<Route exact path="/records" element={<Records name={name} />} />
+					<Route
+						exact
+						path="/login"
+						element={<Login setLogin={setLogin} setName={setName} />}
+					/>
 				</Routes>
 			</div>
 		</BrowserRouter>

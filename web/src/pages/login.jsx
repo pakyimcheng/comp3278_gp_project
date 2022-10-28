@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-const Login = ({setLogin}) => {
+const Login = ({ setLogin, setName }) => {
 	const navigate = useNavigate();
 	const canvasRef = useRef();
 	const imageRef = useRef();
@@ -35,7 +35,6 @@ const Login = ({setLogin}) => {
 	const [errorAlertOpen, setErrorAlertOpen] = useState(false);
 	const [successAlertOpen, setSuccessAlertOpen] = useState(false);
 
-
 	const handleModalClose = () => {
 		setModalOpen(false);
 	};
@@ -44,33 +43,33 @@ const Login = ({setLogin}) => {
 		setModalOpen(true);
 	};
 
-	const handleLogin= async (email, password) => {
-		axios.post('http://127.0.0.1:5001/login', {
-			"email_address": email,
-			"login_pwd": password
-		  })
-		  .then(async function (response) {
-			if (response.status === 200){
-				if(response.data.status === false){
-					//alert fail
-					setErrorAlertOpen(true);
-				}
-				else{
-					setLogin(true);
-					if(videosStream){
-						videosStream.getTracks().forEach(function(track) {
-							track.stop();
-						});
+	const handleLogin = async (email, password) => {
+		axios
+			.post("http://127.0.0.1:5001/login", {
+				email_address: email,
+				login_pwd: password,
+			})
+			.then(async function (response) {
+				setName(response.data.name);
+				if (response.status === 200) {
+					if (response.data.status === false) {
+						//alert fail
+						setErrorAlertOpen(true);
+					} else {
+						setLogin(true);
+						if (videosStream) {
+							videosStream.getTracks().forEach(function (track) {
+								track.stop();
+							});
+						}
+						setSuccessAlertOpen(true);
+						navigate("/");
 					}
-					setSuccessAlertOpen(true);
-					navigate("/")
 				}
-			}
-		  })
-		  .catch(function (error) {
-			console.log(error);
-		});
-
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 
 	useEffect(() => {
@@ -218,7 +217,7 @@ const Login = ({setLogin}) => {
 							style={{
 								backgroundColor: "#FFF",
 							}}
-							onChange={(e)=>{
+							onChange={(e) => {
 								setPassword(e.target.value);
 							}}
 						/>
@@ -481,7 +480,7 @@ const Login = ({setLogin}) => {
 									style={{
 										backgroundColor: "#FFF",
 									}}
-									onChange={(e)=>{
+									onChange={(e) => {
 										setEmail(e.target.value);
 									}}
 								/>
@@ -513,7 +512,7 @@ const Login = ({setLogin}) => {
 									style={{
 										backgroundColor: "#FFF",
 									}}
-									onChange={(e)=>{
+									onChange={(e) => {
 										setPassword(e.target.value);
 									}}
 								/>
