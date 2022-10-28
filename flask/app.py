@@ -57,8 +57,8 @@ Login In Requests
 # email and password login
 @app.route("/login", methods=["POST"])
 def login():
-    email = request.args.get("email_address")
-    login_pwd = request.args.get("login_pwd")
+    email = request.get_json()["email_address"]
+    login_pwd = request.get_json()["login_pwd"]
     cursor.execute(
         "SELECT studentID FROM student WHERE email_address = %s AND login_pwd = %s",
         (email, login_pwd),

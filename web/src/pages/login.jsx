@@ -45,8 +45,6 @@ const Login = ({setLogin}) => {
 	};
 
 	const handleLogin= async (email, password) => {
-		console.log(email, "  ", password)
-
 		axios.post('http://127.0.0.1:5001/login', {
 			"email_address": email,
 			"login_pwd": password
@@ -215,6 +213,7 @@ const Login = ({setLogin}) => {
 						</span>
 						<TextField
 							placeholder="Password"
+							type="password"
 							fullWidth
 							style={{
 								backgroundColor: "#FFF",
@@ -509,6 +508,7 @@ const Login = ({setLogin}) => {
 								</span>
 								<TextField
 									placeholder="Password"
+									type="password"
 									fullWidth
 									style={{
 										backgroundColor: "#FFF",
