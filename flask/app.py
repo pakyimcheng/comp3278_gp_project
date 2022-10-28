@@ -73,6 +73,33 @@ def login():
 
     return result
 
+@app.route("loginFace", methods=["POST"])
+def login_face():
+    face_idx = request.args.get("face_idx")
+    login_pwd = request.args.get("login_pwd")
+
+    cursor.execute(
+        "SELECT studentID FROM student WHERE face_idx = %s AND login_pwd = %s",
+        (face_idx, login_pwd),
+    )
+
+    # get all rows that match the result (though suppose there should be only one)
+    row = cursor.fetchall()
+
+    if row:
+        r = row[0]
+        result = {
+            "status": True,
+            "studentID": r[0]
+        }
+    else:
+        result = {
+            "status": False
+        }
+
+    return result
+
+
 # Update the current login time of the student
 @app.route("/createLoginInfo", methods=["POST"])
 def create_login_info():
@@ -91,7 +118,6 @@ def create_login_info():
     }
 
     return result
-
 
 # Return student info
 @app.route("/student", methods=["POST"])
@@ -112,6 +138,29 @@ def student():
     }
     # print(result)
     return result
+
+
+'''
+Course Info related requests
+'''
+
+# @app.route("/getCourseInfo", methods=["POST"])
+# def get_course_info():
+#     # course code should be unique for a year
+#     course_code = request.args.get("course_code")
+
+#     cursor.execute(
+#         """
+#         SELECT courseID, course_code, course_name, summary.course_info, summary.teacher_message, other_course_materials 
+#         FROM course
+#         WHERE course_code = %s
+#         """,
+#         (course_code,)
+#     )
+
+#     row = cursor.fetchone()
+
+
 
 
 @app.route("/test")
