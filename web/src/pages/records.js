@@ -2,13 +2,48 @@
 import "./records.css";
 import { Avatar, ButtonBase } from "@mui/material";
 import { Link } from "react-router-dom";
+import LoginRecord from "../components/LoginRecord";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function records({ ...props }) {
+function Records({ props }) {
+	const [IP, setIP] = useState("");
+
+	const getData = async () => {
+		const res = await axios.get("https://geolocation-db.com/json/");
+		setIP(res.data.IPv4);
+	};
+
+	navigator.sayswho = (function () {
+		var ua = navigator.userAgent;
+		var tem;
+		var M =
+			ua.match(
+				/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
+			) || [];
+		if (/trident/i.test(M[1])) {
+			tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+			return "IE " + (tem[1] || "");
+		}
+		if (M[1] === "Chrome") {
+			tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+			if (tem != null) return tem.slice(1).join(" ").replace("OPR", "Opera");
+		}
+		M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
+		if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+		return M.join(" ");
+	})();
+
+	useEffect(() => {
+		getData();
+		console.log("IP is" + IP);
+	}, []);
+
 	return (
 		<div className="login-record">
 			<div className="login-record-frame">
 				<div className="login-record-info">
-					<Avatar 
+					<Avatar
 						sx={{
 							backgroundColor: "#d1f5ff",
 							width: "216px",
@@ -21,15 +56,15 @@ function records({ ...props }) {
 					</div>
 					<div className="current-ip-box">
 						<div className="current-ip">Current IP</div>
-						<div className="xxx-xxx-xxx-xxx">XXX.XXX.XXX.XXX</div>
+						<div className="xxx-xxx-xxx-xxx">{IP}</div>
 					</div>
 					<div className="current-os-box">
 						<div className="current-os">Current OS</div>
-						<div className="mac-win">Mac/Win</div>
+						<div className="mac-win">{navigator.userAgentData.platform}</div>
 					</div>
 					<div className="current-browser-box">
 						<div className="current-browser">Current Browser</div>
-						<div className="chrome-xx-xx">Chrome XX.XX</div>
+						<div className="chrome-xx-xx">{navigator.sayswho}</div>
 					</div>
 				</div>
 				<div className="all-login-records-frame">
@@ -63,6 +98,12 @@ function records({ ...props }) {
 							<div className="ip-address">IP Address</div>
 						</div>
 					</div>
+					<LoginRecord
+						IPAddress={"127.0.0.1"}
+						time={"2022-10-28 10:00:00"}
+						duration={"1m"}
+						number={1}
+					></LoginRecord>
 					<div className="login-records-list">
 						<div className="recorditem">
 							<div className="listnumber">
@@ -155,4 +196,4 @@ function records({ ...props }) {
 	);
 }
 
-export default records;
+export default Records;

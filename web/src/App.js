@@ -1,5 +1,6 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
