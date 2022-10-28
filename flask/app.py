@@ -135,14 +135,23 @@ def student():
         "SELECT studentID, name, email_address, current_login_time FROM student WHERE studentID = %s",
         (studentID,),
     )
-    s = cursor.fetchone()
-    result = {
-        "studentID": s[0],
-        "name": s[1],
-        "email_address": s[2],
-        "current_login_time": s[3]
-    }
-    # print(result)
+    rows = cursor.fetchall()
+
+    if rows:
+        r = rows[0]
+        result = {
+            "status": True,
+            "studentID": r[0],
+            "name": r[1],
+            "email_address": r[2],
+            "current_login_time": r[3]
+        }
+
+    else:
+        result = {
+            "status": False
+        }
+
     return result
 
 
@@ -167,16 +176,16 @@ def get_course_info():
     rows = cursor.fetchall()
 
     if rows:
-        row = rows[0]
+        r = rows[0]
 
         result = {
             "status": True,
-            "courseID": row[0],
-            "course_code": row[1],
-            "course_name": row[2],
-            "summary.course_info": row[3],
-            "summary.teacher_message": row[4],
-            "other_course_materials": row[5]
+            "courseID": r[0],
+            "course_code": r[1],
+            "course_name": r[2],
+            "summary.course_info": r[3],
+            "summary.teacher_message": r[4],
+            "other_course_materials": r[5]
         }
 
     else:
@@ -203,27 +212,98 @@ def get_course_teaching_team():
     rows = cursor.fetchall()
 
     if rows:
-        row = rows[0]
+        r = rows[0]
 
         result = {
             "status": True,
-            "courseID": row[0],
-            "teacherID": row[1],
-            "type": row[2],
-            "office_hour": row[3],
-            "office_address": row[4],
-            "email": row[5],
-            "name": row[6]
+            "courseID": r[0],
+            "teacherID": r[1],
+            "type": r[2],
+            "office_hour": r[3],
+            "office_address": r[4],
+            "email": r[5],
+            "name": r[6]
         }
 
     else:
         result = {
             "status": False
         }
-        
+
     return result
 
 
+@app.route("/getLecture", methods=["POST"])
+def get_lecture():
+    courseID = request.args.get("courseID")
+
+    cursor.execute(
+        """
+        SELECT courseID, lectureID, note, start_time, end_time, zoom_link, class_address
+        FROM `lecture`
+        WHERE courseID = %s
+        """,
+        (courseID,),
+    )
+
+    rows = cursor.fetchall()
+
+    if rows:
+        r = rows[0]        
+
+        result = {
+            "status": True,
+            "courseID": r[0],
+            "lectureID": r[1],
+            "note": json.loads(r[2]),       # json byte string to json object
+            "start_time": r[3],
+            "end_time": r[4],
+            "zoom_link": r[5],
+            "class_address": r[6]
+        }
+
+    else:
+        result = {
+            "status": False
+        }
+    return result
+
+
+@app.route("/getTutorial", methods=["POST"])
+def get_tutorial():
+    courseID = request.args.get("courseID")
+
+    cursor.execute(
+        """
+        SELECT courseID, tutorialID, note, start_time, end_time, zoom_link, class_address
+        FROM `tutorial`
+        WHERE courseID = %s
+        """,
+        (courseID,),
+    )
+
+    rows = cursor.fetchall()
+
+    if rows:
+        r = rows[0]
+
+        result = {
+            "status": True,
+            "courseID": r[0],
+            "turorialID": r[1],
+            "note": json.loads(r[2]),       # json byte string to json object
+            "start_time": r[3],
+            "end_time": r[4],
+            "zoom_link": r[5],
+            "class_address": r[6]
+        }
+
+    else:
+        result = {
+            "status": False
+        }
+
+    return result
 
 @app.route("/test")
 def members():
