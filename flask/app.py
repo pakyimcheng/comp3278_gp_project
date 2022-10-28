@@ -41,7 +41,39 @@ cursor = cnx.cursor()
 def index():
     return render_template("index.html")
 
+'''
+Login In Requests
+1. First check matching user
+2. Update the current_login_time
+3. Get the student info
+'''
 
+# email and password login
+@app.route("/login", methods=["POST"])
+def login():
+    email = request.args.get("email_address")
+    login_pwd = request.args.get("login_pwd")
+    cursor.execute(
+        "SELECT studentID FROM student WHERE email_address = %s AND login_pwd = %s",
+        (email, login_pwd),
+    )
+    # get all rows that match the result (though suppose there should be only one)
+    row = cursor.fetchall()
+
+    if row:
+        r = row[0]
+        result = {
+            "status": True,
+            "studentID": r[0]
+        }
+    else:
+        result = {
+            "status": False
+        }
+
+    return result
+
+# Update the current login time of the student
 @app.route("/createLoginInfo", methods=["POST"])
 def create_login_info():
     studentID = request.args.get("studentID")
@@ -53,14 +85,22 @@ def create_login_info():
         (now, studentID),
     )
     cnx.commit()
-    return "Success"
+
+    result = {
+        "status": True
+    }
+
+    return result
 
 
+# Return student info
 @app.route("/student", methods=["POST"])
 def student():
     studentID = request.args.get("studentID")
+
+    # TODO: notification
     cursor.execute(
-        "SELECT studentID, name, email_address FROM student WHERE studentID = %s",
+        "SELECT studentID, name, email_address, current_login_time FROM student WHERE studentID = %s",
         (studentID,),
     )
     s = cursor.fetchone()
@@ -68,8 +108,9 @@ def student():
         "studentID": s[0],
         "name": s[1],
         "email_address": s[2],
+        "current_login_time": s[3]
     }
-    print(result)
+    # print(result)
     return result
 
 
@@ -77,6 +118,10 @@ def student():
 def members():
     return {"test": ["1", "2", "3"]}
 
+
+'''
+Facial Login Requests
+'''
 
 @app.route("/classify", methods=["POST"])
 def classify():
