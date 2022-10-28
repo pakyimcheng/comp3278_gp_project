@@ -73,7 +73,7 @@ def login():
 
     return result
 
-@app.route("loginFace", methods=["POST"])
+@app.route("/loginFace", methods=["POST"])
 def login_face():
     face_idx = request.args.get("face_idx")
     login_pwd = request.args.get("login_pwd")
@@ -160,7 +160,16 @@ Course Info related requests
 
 #     row = cursor.fetchone()
 
+#     result = {
+#         "courseID": row[0],
+#         "course_code": row[1],
+#         "course_name": row[2],
+#         "summary.course_info": row[3],
+#         "summary.teacher_message": row[4],
+#         "other_course_materials": row[5]
+#     }
 
+#     return result
 
 
 @app.route("/test")
