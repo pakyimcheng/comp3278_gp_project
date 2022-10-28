@@ -164,11 +164,12 @@
   position: relative;
 }
 .duration {
+  width:  100%;
   display: flex;
   flex-direction: row;
   gap: 0px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-shrink: 0;
   position: relative;
 }

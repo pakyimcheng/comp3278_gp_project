@@ -176,9 +176,6 @@ const Login = () => {
 					</div>
 				</div>
 			</Dialog>
-			<header>
-				<h1>Image classifier</h1>
-			</header>
 			<main
 				style={{
 					display: "flex",
@@ -289,7 +286,7 @@ const Login = () => {
 								width: "42%",
 								display: "flex",
 								flexDirection: "column",
-								alignItems: "flex-start",
+								alignItems: "center",
 								alignSelf: "stretch",
 								padding: "32px",
 								gap: "16px",

@@ -33,6 +33,7 @@ function Navbar({ login }) {
 					width: "100%",
 				}}
 			>
+				{login ? (
 				<ButtonBase
 					style={{
 						borderRadius: "0px 16px 16px 0px",
@@ -50,6 +51,23 @@ function Navbar({ login }) {
 						/>
 					</Link>
 				</ButtonBase>
+				) : (
+					<div
+						style={{
+							borderRadius: "0px 16px 16px 0px",
+							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+						}}
+					>
+						<img
+							alt=""
+							src="logo.png"
+							height={"68px"}
+							style={{
+								borderRadius: "0px 16px 16px 0px",
+							}}
+						/>
+					</div>
+				)}
 
 				<div
 					style={{
@@ -62,80 +80,84 @@ function Navbar({ login }) {
 						height: "68px",
 					}}
 				>
-					{/* Timetable Icon */}
-					<ButtonBase
-						style={{
-							display: "flex",
-							flexDirection: "row",
-							justifyContent: "center",
-							alignItems: "flex-start",
-							padding: "2px 55px",
-
-							backgroundColor: "#fff",
-							border: "3px solid #14c38e",
-							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-							borderRadius: "32px",
-						}}
-					>
-						<Link to="/TimeTable">
-						    <Timetable
+					{login && (
+						<>
+							{/* Timetable Icon */}
+							<ButtonBase
 								style={{
-									color: "#000000",
-									fontSize: 64,
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									alignItems: "flex-start",
+									padding: "2px 55px",
+
+									backgroundColor: "#fff",
+									border: "3px solid #14c38e",
+									boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+									borderRadius: "32px",
 								}}
-							/>
-						</Link>
-					</ButtonBase>
+							>
+								<Link to="/TimeTable">
+									<Timetable
+										style={{
+											color: "#000000",
+											fontSize: 64,
+										}}
+									/>
+								</Link>
+							</ButtonBase>
 
-					{/* Class Icon */}
-					<ButtonBase
-						style={{
-							display: "flex",
-							flexDirection: "row",
-							justifyContent: "center",
-							alignItems: "flex-start",
-							padding: "2px 55px",
-
-							backgroundColor: "#fff",
-							border: "3px solid #14c38e",
-							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-							borderRadius: "32px",
-						}}
-					>
-						<Link to="/class">
-							<HumanMaleBoard
+							{/* Class Icon */}
+							<ButtonBase
 								style={{
-									color: "#000000",
-									fontSize: 64,
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									alignItems: "flex-start",
+									padding: "2px 55px",
+
+									backgroundColor: "#fff",
+									border: "3px solid #14c38e",
+									boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+									borderRadius: "32px",
 								}}
-							/>
-						</Link>
-					</ButtonBase>
+							>
+								<Link to="/class">
+									<HumanMaleBoard
+										style={{
+											color: "#000000",
+											fontSize: 64,
+										}}
+									/>
+								</Link>
+							</ButtonBase>
 
-					{/* Login Record Icon */}
-					<ButtonBase
-						style={{
-							display: "flex",
-							flexDirection: "row",
-							justifyContent: "center",
-							alignItems: "flex-start",
-							padding: "2px 55px",
-
-							backgroundColor: "#fff",
-							border: "3px solid #14c38e",
-							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-							borderRadius: "32px",
-						}}
-					>
-						<Link to="/records">
-							<Account
+							{/* Login Record Icon */}
+							<ButtonBase
 								style={{
-									color: "#000000",
-									fontSize: 64,
+									display: "flex",
+									flexDirection: "row",
+									justifyContent: "center",
+									alignItems: "flex-start",
+									padding: "2px 55px",
+
+									backgroundColor: "#fff",
+									border: "3px solid #14c38e",
+									boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+									borderRadius: "32px",
 								}}
-							/>
-						</Link>
-					</ButtonBase>
+							>
+								<Link to="/records">
+									<Account
+										style={{
+											color: "#000000",
+											fontSize: 64,
+										}}
+									/>
+								</Link>
+							</ButtonBase>
+						</>
+					)}
 
 					{/* Logout Icon */}
 					{login ? (
