@@ -23,7 +23,7 @@ function App() {
 					<Route exact path="/timetable" element={<TimeTable />} />
 					<Route exact path="/class" element={<Class />} />
 					<Route exact path="/records" element={<Records />} />
-					<Route exact path="/login" element={<Login />} />
+					<Route exact path="/login" element={<Login setLogin={setLogin} />} />
 				</Routes>
 			</div>
 		</BrowserRouter>

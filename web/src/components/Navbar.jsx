@@ -4,7 +4,7 @@ import { ButtonBase } from "@mui/material";
 import { Timetable, HumanMaleBoard, Account, Logout, Login } from "mdi-material-ui";
 
 // create a react functional component
-function Navbar({ login }) {
+function Navbar({ login, setLogin }) {
 	return (
 		<div
 			style={{
@@ -174,13 +174,19 @@ function Navbar({ login }) {
 								boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 								borderRadius: "32px",
 							}}
+
+							onClick={() => {
+								setLogin(false);
+							}}
 						>
-							<Logout
-								style={{
-									color: "#000000",
-									fontSize: 64,
-								}}
-							/>
+							<Link to="/login">
+								<Logout
+									style={{
+										color: "#000000",
+										fontSize: 64,
+									}}
+								/>
+							</Link>
 						</ButtonBase>
 					) : (
 						<ButtonBase

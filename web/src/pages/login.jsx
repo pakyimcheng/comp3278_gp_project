@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
 	FaceRecognition,
 	Login as LoginIcon,
@@ -10,17 +11,30 @@ import {
 	Dialog,
 	DialogTitle,
 	IconButton,
+	Alert,
+	Snackbar,
 } from "@mui/material";
+import axios from "axios";
 
-const Login = () => {
+const Login = ({setLogin}) => {
+	const navigate = useNavigate();
 	const canvasRef = useRef();
 	const imageRef = useRef();
 	const videoRef = useRef();
 
+	const [videosStream, setVideosStream] = useState();
+
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
 	const [result, setResult] = useState("");
 	const [confidence, setConfidence] = useState(0);
-	const [modalOpen, setModalOpen] = useState(false);
 	const [verify, setVerify] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
+
+	const [errorAlertOpen, setErrorAlertOpen] = useState(false);
+	const [successAlertOpen, setSuccessAlertOpen] = useState(false);
+
 
 	const handleModalClose = () => {
 		setModalOpen(false);
@@ -30,12 +44,45 @@ const Login = () => {
 		setModalOpen(true);
 	};
 
+	const handleLogin= async (email, password) => {
+		console.log(email, "  ", password)
+
+		axios.post('http://127.0.0.1:5001/login', {
+			"email_address": email,
+			"login_pwd": password
+		  })
+		  .then(async function (response) {
+			if (response.status === 200){
+				if(response.data.status === false){
+					//alert fail
+					setErrorAlertOpen(true);
+				}
+				else{
+					setLogin(true);
+					if(videosStream){
+						videosStream.getTracks().forEach(function(track) {
+							track.stop();
+						});
+					}
+					setSuccessAlertOpen(true);
+					navigate("/")
+				}
+			}
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		});
+
+	};
+
 	useEffect(() => {
 		async function getCameraStream() {
 			const stream = await navigator.mediaDevices.getUserMedia({
 				audio: false,
 				video: true,
 			});
+
+			setVideosStream(stream);
 
 			if (videoRef.current) {
 				videoRef.current.srcObject = stream;
@@ -171,6 +218,9 @@ const Login = () => {
 							fullWidth
 							style={{
 								backgroundColor: "#FFF",
+							}}
+							onChange={(e)=>{
+								setPassword(e.target.value);
 							}}
 						/>
 					</div>
@@ -432,6 +482,9 @@ const Login = () => {
 									style={{
 										backgroundColor: "#FFF",
 									}}
+									onChange={(e)=>{
+										setEmail(e.target.value);
+									}}
 								/>
 							</div>
 							<div
@@ -460,6 +513,9 @@ const Login = () => {
 									style={{
 										backgroundColor: "#FFF",
 									}}
+									onChange={(e)=>{
+										setPassword(e.target.value);
+									}}
 								/>
 							</div>
 							<Button
@@ -471,6 +527,7 @@ const Login = () => {
 										"0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)",
 									borderRadius: "4px",
 								}}
+								onClick={() => handleLogin(email, password)}
 							>
 								<span
 									style={{
@@ -484,6 +541,22 @@ const Login = () => {
 					</div>
 				</div>
 			</main>
+
+			<Snackbar
+				open={errorAlertOpen}
+				autoHideDuration={2500}
+				onClose={() => setErrorAlertOpen(false)}
+			>
+				<Alert severity="error">Login Failed, Please Try Again.</Alert>
+			</Snackbar>
+
+			<Snackbar
+				open={successAlertOpen}
+				autoHideDuration={2500}
+				onClose={() => setSuccessAlertOpen(false)}
+			>
+				<Alert severity="success">Login Successful, Redirecting Now.</Alert>
+			</Snackbar>
 		</>
 	);
 };
