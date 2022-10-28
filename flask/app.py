@@ -42,6 +42,12 @@ def index():
     return render_template("index.html")
 
 '''
+INFO:
+Every result json should include "status"
+to indicate whether the request is okay or not
+'''
+
+'''
 Login In Requests
 1. First check matching user
 2. Update the current_login_time
@@ -144,32 +150,79 @@ def student():
 Course Info related requests
 '''
 
-# @app.route("/getCourseInfo", methods=["POST"])
-# def get_course_info():
-#     # course code should be unique for a year
-#     course_code = request.args.get("course_code")
+@app.route("/getCourseInfo", methods=["POST"])
+def get_course_info():
+    # course code should be unique for a year
+    course_code = request.args.get("course_code")
 
-#     cursor.execute(
-#         """
-#         SELECT courseID, course_code, course_name, summary.course_info, summary.teacher_message, other_course_materials 
-#         FROM course
-#         WHERE course_code = %s
-#         """,
-#         (course_code,)
-#     )
+    cursor.execute(
+        """
+        SELECT courseID, course_code, course_name, `summary.course_info`, `summary.teacher_message`, other_course_materials 
+        FROM course
+        WHERE course_code = %s
+        """,
+        (course_code,)
+    )
 
-#     row = cursor.fetchone()
+    rows = cursor.fetchall()
 
-#     result = {
-#         "courseID": row[0],
-#         "course_code": row[1],
-#         "course_name": row[2],
-#         "summary.course_info": row[3],
-#         "summary.teacher_message": row[4],
-#         "other_course_materials": row[5]
-#     }
+    if rows:
+        row = rows[0]
 
-#     return result
+        result = {
+            "status": True,
+            "courseID": row[0],
+            "course_code": row[1],
+            "course_name": row[2],
+            "summary.course_info": row[3],
+            "summary.teacher_message": row[4],
+            "other_course_materials": row[5]
+        }
+
+    else:
+        result = {
+            "status": False
+        }
+
+    return result
+
+
+@app.route("/getCourseTeachingTeam", methods=["POST"])
+def get_course_teaching_team():
+    courseID = request.args.get("courseID")
+
+    cursor.execute(
+        """
+        SELECT courseID, teacherID, type, office_hour, office_address, email, name
+        FROM `teachingTeam`
+        WHERE courseID = %s
+        """,
+        (courseID,),
+    )
+
+    rows = cursor.fetchall()
+
+    if rows:
+        row = rows[0]
+
+        result = {
+            "status": True,
+            "courseID": row[0],
+            "teacherID": row[1],
+            "type": row[2],
+            "office_hour": row[3],
+            "office_address": row[4],
+            "email": row[5],
+            "name": row[6]
+        }
+
+    else:
+        result = {
+            "status": False
+        }
+        
+    return result
+
 
 
 @app.route("/test")
