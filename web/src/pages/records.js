@@ -7,13 +7,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Records({ ...props }) {
-	const [IP, setIP] = useState("");
-
-	const getData = async () => {
-		const res = await axios.get("https://geolocation-db.com/json/");
-		setIP(res.data.IPv4);
-	};
-
 	navigator.sayswho = (function () {
 		var ua = navigator.userAgent;
 		var tem;
@@ -34,11 +27,6 @@ function Records({ ...props }) {
 		return M.join(" ");
 	})();
 
-	useEffect(() => {
-		getData();
-		console.log("IP is" + IP);
-	}, []);
-
 	return (
 		<div className="login-record">
 			<div className="login-record-frame">
@@ -56,7 +44,7 @@ function Records({ ...props }) {
 					</div>
 					<div className="current-ip-box">
 						<div className="current-ip">Current IP</div>
-						<div className="xxx-xxx-xxx-xxx">{IP}</div>
+						<div className="xxx-xxx-xxx-xxx">{props.IP_Address}</div>
 					</div>
 					<div className="current-os-box">
 						<div className="current-os">Current OS</div>

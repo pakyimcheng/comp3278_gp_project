@@ -16,7 +16,13 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
-const Login = ({ setLogin, setName }) => {
+const Login = ({
+	setLogin,
+	setName,
+	setStudentID,
+	setIP_Address,
+	IP_Address,
+}) => {
 	const navigate = useNavigate();
 	const canvasRef = useRef();
 	const imageRef = useRef();
@@ -51,6 +57,7 @@ const Login = ({ setLogin, setName }) => {
 			})
 			.then(async function (response) {
 				setName(response.data.name);
+				setStudentID(response.data.studentID);
 				if (response.status === 200) {
 					if (response.data.status === false) {
 						//alert fail
@@ -72,7 +79,13 @@ const Login = ({ setLogin, setName }) => {
 			});
 	};
 
+	const getData = async () => {
+		const res = await axios.get("https://geolocation-db.com/json/");
+		setIP_Address(res.data.IPv4);
+	};
+
 	useEffect(() => {
+		getData();
 		async function getCameraStream() {
 			const stream = await navigator.mediaDevices.getUserMedia({
 				audio: false,

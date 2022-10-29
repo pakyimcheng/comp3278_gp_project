@@ -102,9 +102,16 @@ def login_face():
 # Update the current login time of the student
 @app.route("/createLoginInfo", methods=["POST"])
 def create_login_info():
-    studentID = request.args.get("studentID")
+    studentID = request.get_json()["studentID"]
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(now, studentID)
+    IP_Address = request.get_json()["IP_Address"]
+
+    cursor.execute(
+        "INSERT INTO logininfo (studentID, login_date_time, login_IPAddress) VALUES (%s, %s, %s)",
+        (studentID, now, IP_Address),
+    )
+    cnx.commit()
+
     # update the current_login_time in the student table
     cursor.execute(
         "UPDATE student SET current_login_time=%s WHERE studentID=%s",
