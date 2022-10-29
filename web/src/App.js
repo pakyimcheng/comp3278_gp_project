@@ -11,10 +11,28 @@ import Records from "./pages/records";
 import Class from "./pages/class";
 
 function App() {
-	const [login, setLogin] = useState(false);
-	const [name, setName] = useState("");
-	const [studentID, setStudentID] = useState("");
+	const [login, setLogin] = useState(
+		window.localStorage.getItem("3278login") || false
+	);
+	const [name, setName] = useState(
+		window.localStorage.getItem("3278name") || ""
+	);
+	const [studentID, setStudentID] = useState(
+		window.localStorage.getItem("3278studentID") || ""
+	);
 	const [IP_Address, setIP_Address] = useState("");
+
+	useEffect(() => {
+		window.localStorage.setItem("3278login", login);
+	}, [login]);
+
+	useEffect(() => {
+		window.localStorage.setItem("3278name", name);
+	}, [name]);
+
+	useEffect(() => {
+		window.localStorage.setItem("3278studentID", studentID);
+	}, [studentID]);
 
 	const getData = async () => {
 		const res = await axios.get("https://geolocation-db.com/json/");
