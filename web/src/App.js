@@ -56,7 +56,13 @@ function App() {
 					<Route
 						exact
 						path="/records"
-						element={<Records name={name} IP_Address={IP_Address} />}
+						element={
+							<Records
+								name={name}
+								studentID={studentID}
+								IP_Address={IP_Address}
+							/>
+						}
 					/>
 					<Route
 						exact

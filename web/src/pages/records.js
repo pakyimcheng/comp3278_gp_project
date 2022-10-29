@@ -7,6 +7,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Records({ ...props }) {
+	const [records, setRecords] = useState([]);
+
+	useEffect(() => {
+		axios
+			.post("http://127.0.0.1:5001/getLoginInfo", {
+				studentID: props.studentID,
+			})
+			.then(async function (res) {
+				console.log(res);
+				setRecords(res.data.logininfo);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+
 	navigator.sayswho = (function () {
 		var ua = navigator.userAgent;
 		var tem;
@@ -86,6 +102,22 @@ function Records({ ...props }) {
 							<div className="ip-address">IP Address</div>
 						</div>
 					</div>
+
+					{/* render out individual login records */}
+					{records.map((record, index) => {
+						return (
+							<div>
+								<LoginRecord
+									IPAddress={record[1]}
+									time={record[0]}
+									duration={"unknown"}
+									number={index}
+								/>
+							</div>
+						);
+					})}
+
+					{/* 
 					<div className="login-records-list">
 						<LoginRecord
 							IPAddress={"127.0.0.1"}
@@ -93,7 +125,7 @@ function Records({ ...props }) {
 							duration={"1m"}
 							number={1}
 						/>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
