@@ -23,6 +23,7 @@ try:
         password=os.getenv("MYSQL_PASSWORD"),
         host="localhost",
         database="project",
+        port=3306 if os.getenv("MYSQL_PORT") is None else os.getenv("MYSQL_PORT"),
     )
 
 except mysql.connector.Error as err:

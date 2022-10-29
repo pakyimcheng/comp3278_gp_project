@@ -48,15 +48,22 @@
 7. create _.env_ file under folder /flask/
 
     Type the following. (The YOUR_PASSWORD can be found in the following steps.)
-
     ```
     MYSQL_PASSWORD='YOUR_PASSWORD'
     ```
+
+    If MySQL is launched with a port other than 3306, Type the following.
+    ```
+    MYSQL_PORT='PORT_NUMBER'
+    ```
+
+
 
 8. Launch XAMPP. Go to phpMyAdmin.
     On the top launch bar, click 'User accounts'. 
     Search for the column with 'User name' = 'root' and 'Host name' = 'localhost'. 
     Look at the password column, if the Password column said 'No', then leave the YOUR_PASSWORD empty (i.e. an empty string). Otherwise, copy the value to YOUR_PASSWORD.
+
 
     Then save the _.env_ file.
 
