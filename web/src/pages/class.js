@@ -18,8 +18,12 @@ function Class({ ...props }) {
 	const [courseInfo, setCourseInfo] = useState([]);
 	const [courseID, setCourseID] = useState(0);
 	const [teachingTeam, setTeachingTeam] = useState([]);
+	const [assignment, setAssignment] = useState([]);
+	const [lecture, setLecture] = useState([]);
+	const [tutorial, setTutorial] = useState([]);
 
 	const [modalOpen, setModalOpen] = useState(false);
+	const [zoomModalOpen, setZoomModalOpen] = useState(false);
 
 	const [fin, setFin] = useState(false);
 
@@ -29,6 +33,14 @@ function Class({ ...props }) {
 
 	const handleModalOpen = () => {
 		setModalOpen(true);
+	};
+
+	const handleZoomModalClose = () => {
+		setZoomModalOpen(false);
+	};
+
+	const handleZoomModalOpen = () => {
+		setZoomModalOpen(true);
 	};
 
 	useEffect(() => {
@@ -54,6 +66,32 @@ function Class({ ...props }) {
 				)
 				.then(async function (res) {
 					setTeachingTeam(res.data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			await axios
+				.post("http://127.0.0.1:5001/getLecture?courseID=" + courseID)
+				.then(async function (res) {
+					console.log(res.data);
+					setLecture(res.data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			await axios
+				.post("http://127.0.0.1:5001/getTutorial?courseID=" + courseID)
+				.then(async function (res) {
+					setTutorial(res.data);
+					console.log(res.data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			await axios
+				.post("http://127.0.0.1:5001/getAssignment?courseID=" + courseID)
+				.then(async function (res) {
+					setAssignment(res.data);
 					setFin(true);
 				})
 				.catch((err) => {
@@ -69,6 +107,7 @@ function Class({ ...props }) {
 		<>
 			{fin === true ? (
 				<div>
+					{/* OTHER MATERIAL MODAL */}
 					<Dialog
 						open={modalOpen}
 						onClose={handleModalClose}
@@ -105,6 +144,42 @@ function Class({ ...props }) {
 								color: "#425F57",
 							}}
 						>
+							{courseInfo.course_code} Assignments
+						</DialogTitle>
+						{assignment !== []
+							? assignment.map((ass) => (
+									<>
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												margin: "8px",
+											}}
+										>
+											Name: {ass.name}
+											<br />
+											Deadline: {ass.deadline}
+											<br />
+											Weight: {ass.weighting}
+											<br />
+											Link: <a href={ass.link}>Click to Download/Visit</a>
+											<br />
+										</div>
+									</>
+							  ))
+							: null}
+
+						<DialogTitle
+							style={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								fontWeight: "bold",
+								fontSize: 39,
+								lineHeight: "42px",
+								color: "#425F57",
+							}}
+						>
 							{courseInfo.course_code} Other Materials
 						</DialogTitle>
 
@@ -116,6 +191,126 @@ function Class({ ...props }) {
 											{courseInfo["other_course_materials"][key]}
 										</a>
 									</div>
+							  ))
+							: null}
+					</Dialog>
+
+					{/* ZOOM LINK MODAL */}
+					<Dialog
+						open={zoomModalOpen}
+						onClose={handleZoomModalClose}
+						style={{
+							backgroundColor: "white",
+							width: "70%",
+							height: "70%",
+							margin: "auto",
+							borderRadius: "20px",
+						}}
+					>
+						<IconButton
+							onClick={() => handleModalClose()}
+							size="large"
+							style={{
+								position: "absolute",
+							}}
+						>
+							<CloseCircle
+								style={{
+									color: "red",
+									fontSize: "32px",
+								}}
+							/>
+						</IconButton>
+						<DialogTitle
+							style={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								fontWeight: "bold",
+								fontSize: 39,
+								lineHeight: "42px",
+								color: "#425F57",
+							}}
+						>
+							{courseInfo.course_code} Lectures Zoom
+						</DialogTitle>
+						{lecture !== []
+							? lecture.map((l) => (
+									<>
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												margin: "8px",
+											}}
+										>
+											Location: {l.class_address}
+											<br />
+											Start: {l.start_time}
+											<br />
+											End: {l.end_time}
+											<br />
+											Link: <a href={l.zoom_link}>{l.zoom_link}</a>
+											<br />
+											Notes:{" "}
+											{l.note !== []
+												? Object.keys(l.note).map((key) => (
+														<div style={{ fontSize: "18px" }}>
+															{key}: <br />
+															<a href={l.note[key]}>{l.note[key]}</a>
+														</div>
+												  ))
+												: "No notes"}
+											<br />
+										</div>
+									</>
+							  ))
+							: null}
+
+						<DialogTitle
+							style={{
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								fontWeight: "bold",
+								fontSize: 39,
+								lineHeight: "42px",
+								color: "#425F57",
+							}}
+						>
+							{courseInfo.course_code} Tutorial Zooms
+						</DialogTitle>
+
+						{tutorial !== []
+							? tutorial.map((t) => (
+									<>
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												margin: "8px",
+											}}
+										>
+											Location: {t.class_address}
+											<br />
+											Start: {t.start_time}
+											<br />
+											End: {t.end_time}
+											<br />
+											Link: <a href={t.zoom_link}>{t.zoom_link}</a>
+											<br />
+											Notes:{" "}
+											{t.note !== []
+												? Object.keys(t.note).map((key) => (
+														<div style={{ fontSize: "18px" }}>
+															{key}: <br />
+															<a href={t.note[key]}>{t.note[key]}</a>
+														</div>
+												  ))
+												: "No notes"}
+											<br />
+										</div>
+									</>
 							  ))
 							: null}
 					</Dialog>
@@ -145,6 +340,7 @@ function Class({ ...props }) {
 										position: "relative",
 										boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 									}}
+									onClick={() => handleZoomModalOpen()}
 								>
 									<CursorDefaultClick
 										style={{
@@ -210,9 +406,11 @@ function Class({ ...props }) {
 																		<div>
 																			{member.name}
 																			<br />
-																			Office: {member.office}
+																			Office:{" "}
+																			{member.office ? member.office : "N/A"}
 																			<br />
-																			Email: {member.email}
+																			Email:{" "}
+																			{member.email ? member.email : "N/A"}
 																		</div>
 																	) : null}
 																</>
@@ -241,9 +439,11 @@ function Class({ ...props }) {
 																		<div>
 																			{member.name}
 																			<br />
-																			Office: {member.office}
+																			Office:{" "}
+																			{member.office ? member.office : "N/A"}
 																			<br />
-																			Email: {member.email}
+																			Email:{" "}
+																			{member.email ? member.email : "N/A"}
 																		</div>
 																	) : null}
 																</div>

@@ -345,17 +345,6 @@ def get_course_teaching_team():
             }
             result.append(temp)
 
-        # result = {
-        #     "status": True,
-        #     "courseID": r[0],
-        #     "teacherID": r[1],
-        #     "type": r[2],
-        #     "office_hour": r[3],
-        #     "office_address": r[4],
-        #     "email": r[5],
-        #     "name": r[6],
-        # }
-
     else:
         result = {"status": False}
     cursor.close()
@@ -394,18 +383,19 @@ def get_lecture():
     rows = cursor.fetchall()
 
     if rows:
-        r = rows[0]
-
-        result = {
-            "status": True,
-            "courseID": r[0],
-            "lectureID": r[1],
-            "note": json.loads(r[2]),  # json byte string to json object
-            "start_time": r[3],
-            "end_time": r[4],
-            "zoom_link": r[5],
-            "class_address": r[6],
-        }
+        result = []
+        for r in rows:
+            temp = {
+                "status": True,
+                "courseID": r[0],
+                "lectureID": r[1],
+                "note": json.loads(r[2]),  # json byte string to json object
+                "start_time": r[3],
+                "end_time": r[4],
+                "zoom_link": r[5],
+                "class_address": r[6],
+            }
+            result.append(temp)
 
     else:
         result = {"status": False}
@@ -447,19 +437,19 @@ def get_tutorial():
     rows = cursor.fetchall()
 
     if rows:
-        r = rows[0]
-
-        result = {
-            "status": True,
-            "courseID": r[0],
-            "turorialID": r[1],
-            "note": json.loads(r[2]),  # json byte string to json object
-            "start_time": r[3],
-            "end_time": r[4],
-            "zoom_link": r[5],
-            "class_address": r[6],
-        }
-
+        result = []
+        for r in rows:
+            temp = {
+                "status": True,
+                "courseID": r[0],
+                "turorialID": r[1],
+                "note": json.loads(r[2]),  # json byte string to json object
+                "start_time": r[3],
+                "end_time": r[4],
+                "zoom_link": r[5],
+                "class_address": r[6],
+            }
+            result.append(temp)
     else:
         result = {"status": False}
 
@@ -499,17 +489,18 @@ def get_assignment():
     rows = cursor.fetchall()
 
     if rows:
-        r = rows[0]
-
-        result = {
-            "status": True,
-            "courseID": r[0],
-            "deadline": r[1],
-            "name": r[2],
-            "weighting": r[3],
-            "asm_id": r[4],
-            "link": r[5],
-        }
+        result = []
+        for r in rows:
+            temp = {
+                "status": True,
+                "courseID": r[0],
+                "deadline": r[1],
+                "name": r[2],
+                "weighting": r[3],
+                "asm_id": r[4],
+                "link": r[5],
+            }
+            result.append(temp)
     else:
         result = {"status": False}
     cursor.close()
