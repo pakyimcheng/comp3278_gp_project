@@ -23,7 +23,7 @@ try:
         password=os.getenv("MYSQL_PASSWORD"),
         host="localhost",
         database="project",
-        port=3306 if os.getenv("MYSQL_PORT") is None else os.getenv("MYSQL_PORT"),
+        port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
     )
 
 except mysql.connector.Error as err:
@@ -35,6 +35,7 @@ except mysql.connector.Error as err:
         print(err)
 
 print(cnx)
+cursor = cnx.cursor()
 
 
 @app.route("/")
@@ -58,7 +59,7 @@ Login In Requests
 # email and password login
 @app.route("/login", methods=["POST"])
 def login():
-    cursor = cnx.cursor()
+
     email = request.get_json()["email_address"]
     login_pwd = request.get_json()["login_pwd"]
     cursor.execute(
@@ -73,13 +74,12 @@ def login():
         result = {"status": True, "studentID": r[0], "name": r[1]}
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
 @app.route("/loginFace", methods=["POST"])
 def login_face():
-    cursor = cnx.cursor()
     face_idx = request.args.get("face_idx")
     login_pwd = request.args.get("login_pwd")
 
@@ -96,14 +96,13 @@ def login_face():
         result = {"status": True, "studentID": r[0], "name": r[1]}
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
 # Update the current login time of the student
 @app.route("/createLoginInfo", methods=["POST"])
 def create_login_info():
-    cursor = cnx.cursor()
     studentID = request.get_json()["studentID"]
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     IP_Address = request.get_json()["IP_Address"]
@@ -122,14 +121,13 @@ def create_login_info():
     cnx.commit()
 
     result = {"status": True}
-    cursor.close()
+
     return result
 
 
 # Return student info
 @app.route("/student", methods=["POST"])
 def student():
-    cursor = cnx.cursor()
     studentID = request.args.get("studentID")
 
     # TODO: notification
@@ -152,13 +150,11 @@ def student():
     else:
         result = {"status": False}
 
-    cursor.close()
     return result
 
 
 @app.route("/getLoginInfo", methods=["POST"])
 def get_login_info():
-    cursor = cnx.cursor()
     studentID = request.get_json()["studentID"]
 
     cursor.execute(
@@ -172,7 +168,7 @@ def get_login_info():
         result = {"status": True, "logininfo": rows}
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
@@ -183,7 +179,6 @@ Course Info related requests
 
 @app.route("/getCourseInfo", methods=["POST"])
 def get_course_info():
-    cursor = cnx.cursor()
     # course code should be unique for a year
     course_code = request.args.get("course_code")
 
@@ -208,19 +203,17 @@ def get_course_info():
             "course_name": r[2],
             "summary.course_info": r[3],
             "summary.teacher_message": r[4],
-            "other_course_materials": r[5],
+            "other_course_materials": json.loads(r[5]),
         }
 
     else:
         result = {"status": False}
-    cursor.close()
 
     return result
 
 
 @app.route("/getCourseTeachingTeam", methods=["POST"])
 def get_course_teaching_team():
-    cursor = cnx.cursor()
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -250,13 +243,12 @@ def get_course_teaching_team():
 
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
 @app.route("/getLecture", methods=["POST"])
 def get_lecture():
-    cursor = cnx.cursor()
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -286,13 +278,12 @@ def get_lecture():
 
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
 @app.route("/getTutorial", methods=["POST"])
 def get_tutorial():
-    cursor = cnx.cursor()
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -322,13 +313,12 @@ def get_tutorial():
 
     else:
         result = {"status": False}
-    cursor.close()
+
     return result
 
 
 @app.route("/getAssignment", methods=["POST"])
 def get_assignment():
-    cursor = cnx.cursor()
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -357,7 +347,6 @@ def get_assignment():
     else:
         result = {"status": False}
 
-    cursor.close()
     return result
 
 
@@ -386,4 +375,4 @@ def classify():
 
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(port=5001)

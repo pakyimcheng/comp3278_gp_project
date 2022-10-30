@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./class.css";
 import { CursorDefaultClick, Email } from "mdi-material-ui";
 import { ButtonBase } from "@mui/material";
+import axios from "axios";
 
-function Class() {
+function Class({ ...props }) {
+	const courseCode = props.courseCode;
+	const [courseInfo, setCourseInfo] = useState([]);
+
+	useEffect(() => {
+		axios
+			.post(
+				"http://127.0.0.1:5001/getCourseInfo?course_code=" + props.courseCode
+			)
+			.then(async function (res) {
+				console.log(res);
+				setCourseInfo(res.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+
 	return (
 		<div className="course-info-detailed-">
 			<div className="frame-17">
 				<div className="frame-1">
 					<div className="frame-12">
 						<div className="class-name">
-							COMP3278 Introduction to Database Management Systems
+							{courseInfo.course_code} {courseInfo.course_name}
+							{/* COMP3278 Introduction to Database Management Systems */}
 						</div>
 					</div>
-					<ButtonBase 
+					<ButtonBase
 						className="email"
 						sx={{
 							backgroundColor: "#38e54d",
@@ -41,7 +60,7 @@ function Class() {
 						/>
 						<div className="zoom-links">Zoom Link(s)</div>
 					</ButtonBase>
-					<ButtonBase 
+					<ButtonBase
 						className="email"
 						sx={{
 							backgroundColor: "#38e54d",
@@ -73,13 +92,7 @@ function Class() {
 				<div className="frame-20">
 					<div className="frame-26">
 						<div className="course-message">
-							Welcome to COMP3278A, 2022/23!
-							<br />
-							Please feel free to contact me (Dr. Ping Luo), TA Mr. Yao Mu, Mr.
-							Yao Lai, and Mr. Yizhou Li.
-							<br />
-							If you have any questions with the lecture / tutorial materials,
-							we are very happy to help!
+							{courseInfo["summary.course_info"]}
 						</div>
 					</div>
 					<div className="frame-2">

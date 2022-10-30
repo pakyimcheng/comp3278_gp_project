@@ -17,6 +17,9 @@ function App() {
 	const [IP_Address, setIP_Address] = useState("");
 	const [duration, setDuration] = useState(0);
 
+	// classID of the class in the next hour
+	const [courseCode, setcourseCode] = useState("COMP3278A");
+
 	let interval = null;
 
 	const getData = async () => {
@@ -64,7 +67,11 @@ function App() {
 						element={<Home name={name} login={login} duration={duration} />}
 					/>
 					<Route exact path="/timetable" element={<TimeTable />} />
-					<Route exact path="/class" element={<Class />} />
+					<Route
+						exact
+						path="/class"
+						element={<Class courseCode={courseCode} />}
+					/>
 					<Route
 						exact
 						path="/records"
