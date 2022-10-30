@@ -407,7 +407,14 @@ function Class({ ...props }) {
 																			{member.name}
 																			<br />
 																			Office:{" "}
-																			{member.office ? member.office : "N/A"}
+																			{member.office_address
+																				? member.office_address
+																				: "N/A"}
+																			<br />
+																			Office Hours:{" "}
+																			{member.office_hour
+																				? member.office_hour
+																				: "N/A"}
 																			<br />
 																			Email:{" "}
 																			{member.email ? member.email : "N/A"}
@@ -440,7 +447,14 @@ function Class({ ...props }) {
 																			{member.name}
 																			<br />
 																			Office:{" "}
-																			{member.office ? member.office : "N/A"}
+																			{member.office_address
+																				? member.office_address
+																				: "N/A"}
+																			<br />
+																			Office Hours:{" "}
+																			{member.office_hour
+																				? member.office_hour
+																				: "N/A"}
 																			<br />
 																			Email:{" "}
 																			{member.email ? member.email : "N/A"}
