@@ -9,19 +9,19 @@ import axios from "axios";
 function Records({ ...props }) {
 	const [records, setRecords] = useState([]);
 
-	useEffect(() => {
-		axios
-			.post("http://127.0.0.1:5001/getLoginInfo", {
-				studentID: props.studentID,
-			})
-			.then(async function (res) {
-				console.log(res);
-				setRecords(res.data.logininfo);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	axios
+	// 		.post("http://127.0.0.1:5001/getLoginInfo", {
+	// 			studentID: props.studentID,
+	// 		})
+	// 		.then(async function (res) {
+	// 			console.log(res);
+	// 			setRecords(res.data.logininfo);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(err);
+	// 		});
+	// }, []);
 
 	navigator.sayswho = (function () {
 		var ua = navigator.userAgent;

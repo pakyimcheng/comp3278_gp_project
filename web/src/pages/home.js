@@ -8,8 +8,19 @@ import {
 	Bell,
 	ClockTimeFive,
 } from "mdi-material-ui";
+import React, { useState, useEffect } from "react";
 
-function home({ ...props }) {
+function Home({ ...props }) {
+	const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+
+	useEffect(() => {
+		// every second, update the time
+		const secTimer = setInterval(() => {
+			setCurrentTime(new Date().toLocaleString());
+		}, 1000);
+		return () => clearInterval(secTimer);
+	}, []);
+
 	return (
 		<div className="landing">
 			<div className="landing-page-frame">
@@ -22,7 +33,11 @@ function home({ ...props }) {
 						}}
 					/>
 					<div className="welcome-user">
-						<div className="welcome-back-">Welcome back!</div>
+						{props.login ? (
+							<div className="welcome-back-">Welcome back!</div>
+						) : (
+							<div className="welcome-back-">Please Login!</div>
+						)}
 						<div className="home_user-name">{props.name}</div>
 					</div>
 
@@ -44,9 +59,15 @@ function home({ ...props }) {
 							boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 						}}
 					>
-						<Link to="/records" style={{ textDecoration: "none" }}>
-							<div className="login-records">Login Records</div>
-						</Link>
+						{props.login ? (
+							<Link to="/records" style={{ textDecoration: "none" }}>
+								<div className="login-records">Login Records</div>
+							</Link>
+						) : (
+							<Link to="/login" style={{ textDecoration: "none" }}>
+								<div className="login-records">Login Records</div>
+							</Link>
+						)}
 					</ButtonBase>
 
 					<div className="notification">
@@ -73,16 +94,39 @@ function home({ ...props }) {
 									fontSize: 32,
 								}}
 							/>
-							<div className="_00-00">00:00</div>
+
+							<div className="currentTime" style={{ fontSize: "22px" }}>
+								{currentTime}
+							</div>
 						</div>
-						<div className="login-time--69-420">Login time: 69:420</div>
+						<div className="loginDuration" style={{ fontSize: "18px" }}>
+							Login time:{" "}
+							{props.login ? (
+								<>
+									<span>
+										{("0" + Math.floor((props.duration / 60000) % 60)).slice(
+											-2
+										)}
+										:
+									</span>
+									<span>
+										{("0" + Math.floor((props.duration / 1000) % 60)).slice(-2)}
+										.
+									</span>
+									<span>{("0" + ((props.duration / 10) % 100)).slice(-2)}</span>
+								</>
+							) : (
+								"Not Logged In Yet"
+							)}
+						</div>
 					</div>
 				</div>
 				<div className="landing-feature-frame">
 					<div className="feature-message">
 						<div className="welcome-to-icms">WELCOME to ICMS</div>
 						<div className="welcome-to-our-system--mark--this-system-provide-the-best-experience-in-organising-and-monitoring-your-courses--you-can-select-the-features-below-">
-							Welcome to our system, {props.name}!
+							Welcome to our system, {props.login ? props.name : "Please Login"}
+							!
 							<br />
 							This system provide the best experience in organising and
 							monitoring your courses. You can select the features below.
@@ -107,25 +151,47 @@ function home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							<Link
-								to="/timetable"
-								style={{
-									textDecoration: "none",
-									display: "flex",
-									flexDirection: "row",
-									gap: "18px",
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<Timetable
+							{props.login ? (
+								<Link
+									to="/timetable"
 									style={{
-										color: "#222222",
-										fontSize: 64,
+										textDecoration: "none",
+										display: "flex",
+										flexDirection: "row",
+										gap: "18px",
+										alignItems: "center",
+										justifyContent: "center",
 									}}
-								/>
-								<div className="timetable">Timetable</div>
-							</Link>
+								>
+									<Timetable
+										style={{
+											color: "#222222",
+											fontSize: 64,
+										}}
+									/>
+									<div className="timetable">Timetable</div>
+								</Link>
+							) : (
+								<Link
+									to="/login"
+									style={{
+										textDecoration: "none",
+										display: "flex",
+										flexDirection: "row",
+										gap: "18px",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<Timetable
+										style={{
+											color: "#222222",
+											fontSize: 64,
+										}}
+									/>
+									<div className="timetable">Timetable</div>
+								</Link>
+							)}
 						</ButtonBase>
 						<ButtonBase
 							className="course-button"
@@ -145,25 +211,47 @@ function home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							<Link
-								to="/class"
-								style={{
-									textDecoration: "none",
-									display: "flex",
-									flexDirection: "row",
-									gap: "18px",
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<ExclamationThick
+							{props.login ? (
+								<Link
+									to="/class"
 									style={{
-										color: "#222222",
-										fontSize: 64,
+										textDecoration: "none",
+										display: "flex",
+										flexDirection: "row",
+										gap: "18px",
+										alignItems: "center",
+										justifyContent: "center",
 									}}
-								/>
-								<div className="upcoming-courses">Upcoming courses</div>
-							</Link>
+								>
+									<ExclamationThick
+										style={{
+											color: "#222222",
+											fontSize: 64,
+										}}
+									/>
+									<div className="upcoming-courses">Upcoming courses</div>
+								</Link>
+							) : (
+								<Link
+									to="/login"
+									style={{
+										textDecoration: "none",
+										display: "flex",
+										flexDirection: "row",
+										gap: "18px",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
+								>
+									<ExclamationThick
+										style={{
+											color: "#222222",
+											fontSize: 64,
+										}}
+									/>
+									<div className="upcoming-courses">Upcoming courses</div>
+								</Link>
+							)}
 						</ButtonBase>
 					</div>
 				</div>
@@ -172,4 +260,4 @@ function home({ ...props }) {
 	);
 }
 
-export default home;
+export default Home;

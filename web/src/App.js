@@ -15,6 +15,9 @@ function App() {
 	const [name, setName] = useState("");
 	const [studentID, setStudentID] = useState("");
 	const [IP_Address, setIP_Address] = useState("");
+	const [duration, setDuration] = useState(0);
+
+	let interval = null;
 
 	const getData = async () => {
 		const res = await axios.get("https://geolocation-db.com/json/");
@@ -24,6 +27,10 @@ function App() {
 	// on login change to true, call localhost:5001/createLogin info with JSON IP_Address and studentID
 	useEffect(() => {
 		if (login) {
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+			interval = setInterval(() => {
+				setDuration((prev) => (prev += 10));
+			}, 10);
 			getData();
 			axios
 				.post("http://127.0.0.1:5001/createLoginInfo", {
@@ -40,6 +47,7 @@ function App() {
 		if (!login) {
 			setName("");
 			setStudentID("");
+			clearInterval(interval);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [login]);
@@ -50,7 +58,11 @@ function App() {
 			<div className="App">
 				The user is currently logged in: {login ? "true" : "false"}
 				<Routes>
-					<Route exact path="/" element={<Home name={name} />} />
+					<Route
+						exact
+						path="/"
+						element={<Home name={name} login={login} duration={duration} />}
+					/>
 					<Route exact path="/timetable" element={<TimeTable />} />
 					<Route exact path="/class" element={<Class />} />
 					<Route
