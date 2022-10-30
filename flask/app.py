@@ -17,26 +17,6 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-try:
-    cnx = mysql.connector.connect(
-        user="root",
-        password=os.getenv("MYSQL_PASSWORD"),
-        host="localhost",
-        database="project",
-        port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
-    )
-
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with your user name or password")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
-    else:
-        print(err)
-
-print(cnx)
-cursor = cnx.cursor()
-
 
 @app.route("/")
 def index():
@@ -59,6 +39,22 @@ Login In Requests
 # email and password login
 @app.route("/login", methods=["POST"])
 def login():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
 
     email = request.get_json()["email_address"]
     login_pwd = request.get_json()["login_pwd"]
@@ -75,11 +71,29 @@ def login():
     else:
         result = {"status": False}
 
+    cursor.close()
     return result
 
 
 @app.route("/loginFace", methods=["POST"])
 def login_face():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
     face_idx = request.args.get("face_idx")
     login_pwd = request.args.get("login_pwd")
 
@@ -97,12 +111,30 @@ def login_face():
     else:
         result = {"status": False}
 
+    cursor.close()
+
     return result
 
 
 # Update the current login time of the student
 @app.route("/createLoginInfo", methods=["POST"])
 def create_login_info():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
     studentID = request.get_json()["studentID"]
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     IP_Address = request.get_json()["IP_Address"]
@@ -119,6 +151,7 @@ def create_login_info():
         (now, studentID),
     )
     cnx.commit()
+    cursor.close()
 
     result = {"status": True}
 
@@ -128,6 +161,23 @@ def create_login_info():
 # Return student info
 @app.route("/student", methods=["POST"])
 def student():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
     studentID = request.args.get("studentID")
 
     # TODO: notification
@@ -150,11 +200,28 @@ def student():
     else:
         result = {"status": False}
 
+    cursor.close()
     return result
 
 
 @app.route("/getLoginInfo", methods=["POST"])
 def get_login_info():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
     studentID = request.get_json()["studentID"]
 
     cursor.execute(
@@ -169,6 +236,7 @@ def get_login_info():
     else:
         result = {"status": False}
 
+    cursor.close()
     return result
 
 
@@ -179,6 +247,23 @@ Course Info related requests
 
 @app.route("/getCourseInfo", methods=["POST"])
 def get_course_info():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
     # course code should be unique for a year
     course_code = request.args.get("course_code")
 
@@ -208,12 +293,29 @@ def get_course_info():
 
     else:
         result = {"status": False}
-
+    cursor.close()
     return result
 
 
 @app.route("/getCourseTeachingTeam", methods=["POST"])
 def get_course_teaching_team():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -228,27 +330,56 @@ def get_course_teaching_team():
     rows = cursor.fetchall()
 
     if rows:
-        r = rows[0]
+        result = []
+        for r in rows:
+            print(r)
+            temp = {
+                "status": True,
+                "courseID": r[0],
+                "teacherID": r[1],
+                "type": r[2],
+                "office_hour": r[3],
+                "office_address": r[4],
+                "email": r[5],
+                "name": r[6],
+            }
+            result.append(temp)
 
-        result = {
-            "status": True,
-            "courseID": r[0],
-            "teacherID": r[1],
-            "type": r[2],
-            "office_hour": r[3],
-            "office_address": r[4],
-            "email": r[5],
-            "name": r[6],
-        }
+        # result = {
+        #     "status": True,
+        #     "courseID": r[0],
+        #     "teacherID": r[1],
+        #     "type": r[2],
+        #     "office_hour": r[3],
+        #     "office_address": r[4],
+        #     "email": r[5],
+        #     "name": r[6],
+        # }
 
     else:
         result = {"status": False}
-
+    cursor.close()
     return result
 
 
 @app.route("/getLecture", methods=["POST"])
 def get_lecture():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -279,11 +410,29 @@ def get_lecture():
     else:
         result = {"status": False}
 
+    cursor.close()
     return result
 
 
 @app.route("/getTutorial", methods=["POST"])
 def get_tutorial():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -314,11 +463,28 @@ def get_tutorial():
     else:
         result = {"status": False}
 
+    cursor.close()
     return result
 
 
 @app.route("/getAssignment", methods=["POST"])
 def get_assignment():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
     courseID = request.args.get("courseID")
 
     cursor.execute(
@@ -346,7 +512,7 @@ def get_assignment():
         }
     else:
         result = {"status": False}
-
+    cursor.close()
     return result
 
 
@@ -375,4 +541,4 @@ def classify():
 
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5001, debug=True)
