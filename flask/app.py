@@ -195,9 +195,16 @@ def create_login_info():
         (now, studentID),
     )
     cnx.commit()
+
+    cursor.execute(
+        "SELECT * FROM `logininfo` WHERE studentID= %s ORDER BY login_date_time DESC LIMIT 1;",
+        (studentID,),
+    )
+    r = cursor.fetchall()
+
     cursor.close()
 
-    result = {"status": True}
+    result = {"status": True, "sessionID": r[0][0]}
 
     return result
 

@@ -18,6 +18,8 @@ function App() {
 	const [studentEmail, setStudentEmail] = useState("");
 	const [duration, setDuration] = useState(0);
 
+	const [sessionID, setSessionID] = useState(0);
+
 	// classID of the class in the next hour
 	const [courseCode, setcourseCode] = useState("COMP3278A");
 
@@ -42,7 +44,7 @@ function App() {
 					studentID: studentID,
 				})
 				.then(async function (res) {
-					// console.log(res);
+					setSessionID(res.data.sessionID);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -64,6 +66,8 @@ function App() {
 				The user is currently logged in: {login ? "true" : "false"}
 				<br />
 				Email: {studentEmail}
+				<br />
+				SessionID: {sessionID}
 				<Routes>
 					<Route
 						exact
