@@ -31,6 +31,7 @@
 4. Install nodejs and flask and supporting packages for frontend
     ```
     conda install -c anaconda flask
+    conda install -c conda-forge flask-mail
     conda install -c conda-forge nodejs
     pip install python-dotenv
     conda install -c anaconda flask-cors

@@ -21,6 +21,7 @@ const Login = ({
 	setName,
 	setStudentID,
 	setIP_Address,
+	setStudentEmail,
 	IP_Address,
 }) => {
 	const navigate = useNavigate();
@@ -57,6 +58,7 @@ const Login = ({
 			})
 			.then(async function (response) {
 				setName(response.data.name);
+				setStudentEmail(response.data.email_address);
 				setStudentID(response.data.studentID);
 				if (response.status === 200) {
 					if (response.data.status === false) {

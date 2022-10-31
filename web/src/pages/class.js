@@ -58,6 +58,30 @@ function Class({ ...props }) {
 		a();
 	}, []);
 
+	async function sendEmail() {
+		if (fin) {
+			await axios
+				.post("http://127.0.0.1:5001/sendEmail", {
+					recipient: props.studentEmail,
+					name: props.name,
+					courseCode: courseCode,
+					courseInfo: courseInfo,
+					teachingTeam: teachingTeam,
+					assignment: assignment,
+					lecture: lecture,
+					tutorial: tutorial,
+				})
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			return;
+		}
+	}
+
 	useEffect(() => {
 		async function t() {
 			await axios
@@ -369,6 +393,7 @@ function Class({ ...props }) {
 										position: "relative",
 										boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 									}}
+									onClick={() => sendEmail()}
 								>
 									<Email
 										style={{

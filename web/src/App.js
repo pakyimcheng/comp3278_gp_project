@@ -15,6 +15,7 @@ function App() {
 	const [name, setName] = useState("");
 	const [studentID, setStudentID] = useState("");
 	const [IP_Address, setIP_Address] = useState("");
+	const [studentEmail, setStudentEmail] = useState("");
 	const [duration, setDuration] = useState(0);
 
 	// classID of the class in the next hour
@@ -50,6 +51,7 @@ function App() {
 		if (!login) {
 			setName("");
 			setStudentID("");
+			setStudentEmail("");
 			clearInterval(interval);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,6 +62,8 @@ function App() {
 			<Navbar login={login} setLogin={setLogin} />
 			<div className="App">
 				The user is currently logged in: {login ? "true" : "false"}
+				<br />
+				Email: {studentEmail}
 				<Routes>
 					<Route
 						exact
@@ -70,7 +74,13 @@ function App() {
 					<Route
 						exact
 						path="/class"
-						element={<Class courseCode={courseCode} />}
+						element={
+							<Class
+								name={name}
+								studentEmail={studentEmail}
+								courseCode={courseCode}
+							/>
+						}
 					/>
 					<Route
 						exact
@@ -93,6 +103,7 @@ function App() {
 								setStudentID={setStudentID}
 								setLogin={setLogin}
 								setName={setName}
+								setStudentEmail={setStudentEmail}
 							/>
 						}
 					/>

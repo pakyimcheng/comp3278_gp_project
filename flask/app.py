@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from flask_cors import CORS
+from flask_mail import Mail, Message
 from classifier import get_prediction
 import json
 import datetime
@@ -17,10 +18,48 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USERNAME"] = "2022ICMS@gmail.com"
+app.config["MAIL_PASSWORD"] = "myfuqlykyimdnrqr"
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
+
+mail = Mail(app)
+
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/sendEmail", methods=["POST"])
+def sendEmail():
+    recipient = request.get_json()["recipient"]
+    name = request.get_json()["name"]
+    courseCode = request.get_json()["courseCode"]
+    courseInfo = request.get_json()["courseInfo"]
+    teachingTeam = request.get_json()["teachingTeam"]
+    assignment = request.get_json()["assignment"]
+    lecture = request.get_json()["lecture"]
+    tutorial = request.get_json()["tutorial"]
+    msg = Message(
+        "ICMS: " + courseCode + " Course Infomation",
+        sender="2022ICMS@gmail.com",
+        recipients=[recipient],
+    )
+    msg.html = render_template(
+        "template.html",
+        name=name,
+        courseCode=courseCode,
+        courseInfo=courseInfo,
+        teachingTeam=teachingTeam,
+        assignment=assignment,
+        lecture=lecture,
+        tutorial=tutorial,
+    )
+    mail.send(msg)
+    return "Sent"
 
 
 """
@@ -59,7 +98,7 @@ def login():
     email = request.get_json()["email_address"]
     login_pwd = request.get_json()["login_pwd"]
     cursor.execute(
-        "SELECT studentID, name FROM student WHERE email_address = %s AND login_pwd = %s",
+        "SELECT studentID, name, email_address FROM student WHERE email_address = %s AND login_pwd = %s",
         (email, login_pwd),
     )
     # get all rows that match the result (though suppose there should be only one)
@@ -67,7 +106,12 @@ def login():
 
     if row:
         r = row[0]
-        result = {"status": True, "studentID": r[0], "name": r[1]}
+        result = {
+            "status": True,
+            "studentID": r[0],
+            "name": r[1],
+            "email_address": r[2],
+        }
     else:
         result = {"status": False}
 
