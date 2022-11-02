@@ -558,6 +558,122 @@ def get_assignment():
     return result
 
 
+'''
+Get near one hour lecture
+'''
+@app.route("/getNearOneHourLecture", methods=["POST"])
+def get_near_one_hour_lecture():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
+    studentID = request.args.get("studentID")
+
+    commands = [
+        "CREATE TEMPORARY TABLE lec SELECT DISTINCT student.studentID, lecture.*, TIMESTAMPDIFF(SECOND, NOW(), lecture.start_time) AS timestamp_diff FROM student, course, courselist, lecture WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND lecture.courseID = course.courseID;".format(studentID),
+        """
+        SELECT courseID FROM lec 
+        WHERE lec.timestamp_diff <= 3600 AND lec.timestamp_diff >= 0;
+        """
+    ]
+
+    for command in commands:
+        for result in cursor.execute(command, multi=True):
+            if result.with_rows:
+                print("Rows produced by statement:", result.statement)
+                print("result.fetchall():", result.fetchall())
+                break
+
+
+    rows = result.fetchall()
+
+    if rows:
+        result = []
+        for r in rows:
+            temp = {
+                "status": True,
+                "courseID": r[0]
+            }
+            result.append(temp)
+    else:
+        result = {"status": False}
+
+    cursor.close()
+    return result
+
+
+'''
+Get near one hour tutorial
+'''
+@app.route("/getNearOneHourTutorial", methods=["POST"])
+def get_near_one_hour_tutorial():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
+
+    studentID = request.args.get("studentID")
+
+    commands = [
+        "CREATE TEMPORARY TABLE tut SELECT DISTINCT student.studentID, tutorial.*, TIMESTAMPDIFF(SECOND, NOW(), tutorial.start_time) AS timestamp_diff FROM student, course, courselist, tutorial WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND tutorial.courseID = course.courseID;".format(studentID),
+        """
+        SELECT courseID FROM tut
+        WHERE tut.timestamp_diff <= 3600 AND tut.timestamp_diff >= 0;
+        """
+    ]
+
+    for command in commands:
+        for result in cursor.execute(command, multi=True):
+            if result.with_rows:
+                print("Rows produced by statement:", result.statement)
+                break
+                # print("result.fetchall():", result.fetchall())
+            # else:
+                # print("Number of rows affected by statement '{}': {}\n".format(
+                #     result.statement, result.rowcount))
+
+    rows = result.fetchall()
+
+    if rows:
+        result = []
+        for r in rows:
+            temp = {
+                "status": True,
+                "courseID": r[0]
+            }
+            result.append(temp)
+    else:
+        result = {"status": False}
+
+    cursor.close()
+    return result
+
 @app.route("/test")
 def members():
     return {"test": ["1", "2", "3"]}
