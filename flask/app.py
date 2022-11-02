@@ -716,6 +716,8 @@ def get_weekly_timetable_lectures():
         else:
             print(err)
 
+    studentID = request.args.get("studentID")
+
     # get current date
     today = datetime.combine(date.today(), datetime.min.time())
     start = today - timedelta(days=today.weekday())
@@ -734,9 +736,14 @@ def get_weekly_timetable_lectures():
         SELECT L.courseID, C.course_code, L.start_time, L.end_time, L.class_address
         FROM lecture L, course C
         WHERE L.start_time >= %s AND L.start_time <= %s AND L.end_time >= %s AND L.end_time <= %s
-        AND L.courseID = C.courseID;
+        AND L.courseID = C.courseID
+        AND L.courseID IN (
+            SELECT courseID
+            FROM courseList
+            WHERE courseList.studentID = %s
+        );
         """,
-        (start, end, start, end),
+        (start, end, start, end, studentID),
     )
 
     rows_lecture = cursor.fetchall()
@@ -780,6 +787,8 @@ def get_weekly_timetable_tutorials():
         else:
             print(err)
 
+    studentID = request.args.get("studentID")
+
     # get current date
     today = datetime.combine(date.today(), datetime.min.time())
     start = today - timedelta(days=today.weekday())
@@ -798,9 +807,14 @@ def get_weekly_timetable_tutorials():
         SELECT T.courseID, C.course_code, T.start_time, T.end_time, T.class_address
         FROM tutorial T, course C
         WHERE T.start_time >= %s AND T.start_time <= %s AND T.end_time >= %s AND T.end_time <= %s
-        AND T.courseID = C.courseID;
+        AND T.courseID = C.courseID
+        AND T.courseID IN (
+            SELECT courseID
+            FROM courseList
+            WHERE courseList.studentID = %s
+        );
         """,
-        (start, end, start, end),
+        (start, end, start, end, studentID),
     )
 
     rows_tutorial = cursor.fetchall()
