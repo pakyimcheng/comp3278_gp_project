@@ -22,6 +22,10 @@ function App() {
 
 	// classID of the class in the next hour
 	const [courseCode, setCourseCode] = useState("");
+	const [startTime, setStartTime] = useState("");
+	const [endTime, setEndTime] = useState("");
+
+	const [notification, setNotification] = useState([]);
 
 	let interval = null;
 	let intervalTutor = null;
@@ -41,6 +45,8 @@ function App() {
 				console.log(res.data);
 				if (res.data[0]) {
 					setCourseCode(res.data[0].course_code);
+					setStartTime(res.data[0].start_time);
+					setEndTime(res.data[0].end_time);
 				}
 			})
 			.catch((err) => {
@@ -57,12 +63,25 @@ function App() {
 				console.log(res.data);
 				if (res.data[0]) {
 					setCourseCode(res.data[0].course_code);
+					setStartTime(res.data[0].start_time);
+					setEndTime(res.data[0].end_time);
 				}
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	};
+
+	useEffect(() => {
+		if (startTime !== "") {
+			setNotification((prev) => {
+				return [
+					...prev,
+					`Course ${courseCode} is about to begin! \n start:${startTime} \n end: ${endTime}`,
+				];
+			});
+		}
+	}, [startTime]);
 
 	// on login change to true, call localhost:5001/createLogin info with JSON IP_Address and studentID
 	useEffect(() => {
@@ -121,7 +140,14 @@ function App() {
 					<Route
 						exact
 						path="/"
-						element={<Home name={name} login={login} duration={duration} />}
+						element={
+							<Home
+								name={name}
+								login={login}
+								duration={duration}
+								notification={notification}
+							/>
+						}
 					/>
 					<Route exact path="/timetable" element={<TimeTable />} />
 					<Route

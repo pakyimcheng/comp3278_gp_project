@@ -12,7 +12,9 @@ import {
 import React, { useState, useEffect } from "react";
 
 function Home({ ...props }) {
-	const [currentTime, setCurrentTime] = useState(format(new Date(), "HH:mm:ss"));
+	const [currentTime, setCurrentTime] = useState(
+		format(new Date(), "HH:mm:ss")
+	);
 
 	useEffect(() => {
 		// every second, update the time
@@ -43,8 +45,8 @@ function Home({ ...props }) {
 					</div>
 
 					<ButtonBase
-						component={Link} 
-						to= {props.login? "records" : "login"}
+						component={Link}
+						to={props.login ? "records" : "login"}
 						className="record-button"
 						sx={{
 							background: "#d1f5ff",
@@ -75,11 +77,11 @@ function Home({ ...props }) {
 							<div className="notification2">Notification</div>
 						</div>
 						<div className="-notif-date---notif-----">
-							&lt;Notif date&gt;
-							<br />
-							&lt;Notif&gt;
-							<br />
-							...
+							{props.notification && props.notification.length > 0 ? (
+								props.notification.map((notif) => <div>{notif}</div>)
+							) : (
+								<div>NO NOTIFICATION</div>
+							)}
 						</div>
 					</div>
 					<div className="login-duration">
@@ -89,13 +91,13 @@ function Home({ ...props }) {
 									fontSize: 32,
 								}}
 							/>
-							<div 
-								className="currentTime" 
-								style={{ 
-									fontSize: "32px", 
+							<div
+								className="currentTime"
+								style={{
+									fontSize: "32px",
 									fontWeight: 700,
 								}}
-								>
+							>
 								{currentTime}
 							</div>
 						</div>
@@ -138,8 +140,8 @@ function Home({ ...props }) {
 					</div>
 					<div className="landing-options">
 						<ButtonBase
-							component={Link} 
-							to= {props.login? "timetable" : "login"}
+							component={Link}
+							to={props.login ? "timetable" : "login"}
 							className="timetable-button"
 							sx={{
 								background: "#ecffea",
@@ -166,8 +168,8 @@ function Home({ ...props }) {
 							<div className="timetable">Timetable</div>
 						</ButtonBase>
 						<ButtonBase
-							component={Link} 
-							to= {props.login? "class" : "login"}
+							component={Link}
+							to={props.login ? "class" : "login"}
 							className="course-button"
 							sx={{
 								background: "#ecffea",
