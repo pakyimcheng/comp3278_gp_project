@@ -12,11 +12,7 @@ function Records({ ...props }) {
 	const [recordPageIndex, setRecordPageIndex] = useState(0);
 	const handleRecordPageChange = (event, value) => {
 		setRecordPageIndex(value-1);
-	  };
-
-	if(records){
-		console.log(records.length);
-	}
+	};
 
 	useEffect(() => {
 		axios
