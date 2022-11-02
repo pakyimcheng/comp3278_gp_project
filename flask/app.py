@@ -585,8 +585,8 @@ def get_near_one_hour_lecture():
     commands = [
         "CREATE TEMPORARY TABLE lec SELECT DISTINCT student.studentID, lecture.*, TIMESTAMPDIFF(SECOND, NOW(), lecture.start_time) AS timestamp_diff FROM student, course, courselist, lecture WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND lecture.courseID = course.courseID;".format(studentID),
         """
-        SELECT courseID FROM lec 
-        WHERE lec.timestamp_diff <= 3600 AND lec.timestamp_diff >= 0;
+        SELECT course.course_code FROM lec, course
+        WHERE lec.timestamp_diff <= 3600 AND lec.timestamp_diff >= 0 AND lec.courseID = course.courseID;
         """
     ]
 
@@ -605,7 +605,7 @@ def get_near_one_hour_lecture():
         for r in rows:
             temp = {
                 "status": True,
-                "courseID": r[0]
+                "course_code": r[0]
             }
             result.append(temp)
     else:
@@ -643,8 +643,8 @@ def get_near_one_hour_tutorial():
     commands = [
         "CREATE TEMPORARY TABLE tut SELECT DISTINCT student.studentID, tutorial.*, TIMESTAMPDIFF(SECOND, NOW(), tutorial.start_time) AS timestamp_diff FROM student, course, courselist, tutorial WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND tutorial.courseID = course.courseID;".format(studentID),
         """
-        SELECT courseID FROM tut
-        WHERE tut.timestamp_diff <= 3600 AND tut.timestamp_diff >= 0;
+        SELECT course.course_code FROM tut, course
+        WHERE tut.timestamp_diff <= 3600 AND tut.timestamp_diff >= 0 AND tut.courseID = course.courseID;
         """
     ]
 
@@ -665,7 +665,7 @@ def get_near_one_hour_tutorial():
         for r in rows:
             temp = {
                 "status": True,
-                "courseID": r[0]
+                "course_code": r[0]
             }
             result.append(temp)
     else:
