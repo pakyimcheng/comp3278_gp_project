@@ -12,6 +12,7 @@
   position: relative;
 }
 .login-record-frame {
+  height: 960px;
   width: 100%;
   background: linear-gradient(
     116.23deg,

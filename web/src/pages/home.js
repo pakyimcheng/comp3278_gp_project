@@ -1,4 +1,5 @@
 /* Code generated with AutoHTML for Figma */
+import { format } from "date-fns";
 import "./home.css";
 import { Avatar, ButtonBase } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -11,12 +12,12 @@ import {
 import React, { useState, useEffect } from "react";
 
 function Home({ ...props }) {
-	const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+	const [currentTime, setCurrentTime] = useState(format(new Date(), "HH:mm:ss"));
 
 	useEffect(() => {
 		// every second, update the time
 		const secTimer = setInterval(() => {
-			setCurrentTime(new Date().toLocaleString());
+			setCurrentTime(format(new Date(), "HH:mm:ss"));
 		}, 1000);
 		return () => clearInterval(secTimer);
 	}, []);
@@ -88,8 +89,13 @@ function Home({ ...props }) {
 									fontSize: 32,
 								}}
 							/>
-
-							<div className="currentTime" style={{ fontSize: "22px" }}>
+							<div 
+								className="currentTime" 
+								style={{ 
+									fontSize: "32px", 
+									fontWeight: 700,
+								}}
+								>
 								{currentTime}
 							</div>
 						</div>
@@ -98,6 +104,12 @@ function Home({ ...props }) {
 							{props.login ? (
 								<>
 									<span>
+										{("0" + Math.floor((props.duration / 1440000) % 60)).slice(
+											-2
+										)}
+										:
+									</span>
+									<span>
 										{("0" + Math.floor((props.duration / 60000) % 60)).slice(
 											-2
 										)}
@@ -105,9 +117,7 @@ function Home({ ...props }) {
 									</span>
 									<span>
 										{("0" + Math.floor((props.duration / 1000) % 60)).slice(-2)}
-										.
 									</span>
-									<span>{("0" + ((props.duration / 10) % 100)).slice(-2)}</span>
 								</>
 							) : (
 								"Not Logged In Yet"

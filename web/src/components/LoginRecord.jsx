@@ -10,6 +10,7 @@ function LoginRecord(props) {
 	return (
 		<div
 			style={{
+				width: "100%",
 				background: "#cce9cc",
 				borderRadius: "16px",
 				border: "solid #7fb77e",

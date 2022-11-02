@@ -1,6 +1,7 @@
 /* Code generated with AutoHTML for Figma */
 import "./records.css";
-import { Avatar, ButtonBase } from "@mui/material";
+import { format } from "date-fns";
+import { Avatar, ButtonBase, Pagination } from "@mui/material";
 import { Link } from "react-router-dom";
 import LoginRecord from "../components/LoginRecord";
 import React, { useState, useEffect } from "react";
@@ -8,6 +9,14 @@ import axios from "axios";
 
 function Records({ ...props }) {
 	const [records, setRecords] = useState([]);
+	const [recordPageIndex, setRecordPageIndex] = useState(0);
+	const handleRecordPageChange = (event, value) => {
+		setRecordPageIndex(value-1);
+	  };
+
+	if(records){
+		console.log(records.length);
+	}
 
 	useEffect(() => {
 		axios
@@ -104,18 +113,28 @@ function Records({ ...props }) {
 					</div>
 
 					{/* render out individual login records */}
-					{records.map((record, index) => {
-						return (
-							<div>
+					<div className="login-records-list">
+						{records.slice(5*recordPageIndex, 5*recordPageIndex+5).map((record, index) => {
+							return (
 								<LoginRecord
 									IPAddress={record[1]}
-									time={record[0]}
+									time={format(new Date(record[0]).setHours(new Date(record[0]).getHours() - 8), "M/d/u, HH:mm")}
 									duration={"unknown"}
-									number={index}
+									number={5*(recordPageIndex) + index + 1}
 								/>
-							</div>
-						);
-					})}
+							);
+						})}
+
+						<Pagination 
+							count={Math.ceil(records.length/5)} 
+							page={recordPageIndex+1} 
+							onChange={handleRecordPageChange} 
+							style={{
+								display: "flex",
+								alignSelf: "center",
+							}}
+						/>
+					</div>
 
 					{/* 
 					<div className="login-records-list">

@@ -12,6 +12,7 @@
   position: relative;
 }
 .landing-page-frame {
+  height: 960px;
   background: linear-gradient(
     117.03deg,
     rgba(177, 215, 180, 1) 0%,
@@ -33,6 +34,7 @@
   gap: 16px;
   align-items: center;
   justify-content: flex-start;
+  align-self: stretch;
   flex-shrink: 0;
   position: relative;
 }
@@ -116,6 +118,7 @@
   align-self: stretch;
   flex: 1;
   position: relative;
+  height: 100%;
 }
 .notification-icon-text {
   display: flex;
@@ -160,7 +163,6 @@
   justify-content: flex-start;
   align-self: stretch;
   flex-shrink: 0;
-  height: 82px;
   position: relative;
 }
 .duration {
