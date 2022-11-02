@@ -24,6 +24,7 @@ function App() {
 	const [courseCode, setCourseCode] = useState("");
 	const [startTime, setStartTime] = useState("");
 	const [endTime, setEndTime] = useState("");
+	const [type, setType] = useState("");
 
 	const [notification, setNotification] = useState([]);
 
@@ -47,6 +48,7 @@ function App() {
 					setCourseCode(res.data[0].course_code);
 					setStartTime(res.data[0].start_time);
 					setEndTime(res.data[0].end_time);
+					setType("Lecture");
 				}
 			})
 			.catch((err) => {
@@ -65,6 +67,7 @@ function App() {
 					setCourseCode(res.data[0].course_code);
 					setStartTime(res.data[0].start_time);
 					setEndTime(res.data[0].end_time);
+					setType("Tutorial");
 				}
 			})
 			.catch((err) => {
@@ -77,7 +80,7 @@ function App() {
 			setNotification((prev) => {
 				return [
 					...prev,
-					`Course ${courseCode} is about to begin! \n start:${startTime} \n end: ${endTime}`,
+					`A ${courseCode} ${type} is about to begin! \n start:${startTime} \n end: ${endTime}`,
 				];
 			});
 		}
