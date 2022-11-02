@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_mail import Mail, Message
 from classifier import get_prediction
 import json
-import datetime
+from datetime import date, datetime, timedelta
 
 from dotenv import load_dotenv
 
@@ -180,7 +180,7 @@ def create_login_info():
         else:
             print(err)
     studentID = request.get_json()["studentID"]
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     IP_Address = request.get_json()["IP_Address"]
 
     cursor.execute(
@@ -593,7 +593,7 @@ def get_near_one_hour_lecture():
             studentID
         ),
         """
-        SELECT course.course_code FROM lec, course
+        SELECT course.course_code, lec.start_time, lec.end_time FROM lec, course
         WHERE lec.timestamp_diff <= 3600 AND lec.timestamp_diff >= 0 AND lec.courseID = course.courseID;
         """,
     ]
@@ -610,7 +610,12 @@ def get_near_one_hour_lecture():
     if rows:
         result = []
         for r in rows:
-            temp = {"status": True, "course_code": r[0]}
+            temp = {
+                "status": True,
+                "course_code": r[0],
+                "start_time": r[1],
+                "end_time": r[2]
+            }
             result.append(temp)
     else:
         result = {"status": False}
@@ -650,7 +655,7 @@ def get_near_one_hour_tutorial():
             studentID
         ),
         """
-        SELECT course.course_code FROM tut, course
+        SELECT course.course_code, tut.start_time, tut.end_time FROM tut, course
         WHERE tut.timestamp_diff <= 3600 AND tut.timestamp_diff >= 0 AND tut.courseID = course.courseID;
         """,
     ]
@@ -670,7 +675,12 @@ def get_near_one_hour_tutorial():
     if rows:
         result = []
         for r in rows:
-            temp = {"status": True, "course_code": r[0]}
+            temp = {
+                "status": True,
+                "course_code": r[0],
+                "start_time": r[1],
+                "end_time": r[2]
+            }
             result.append(temp)
     else:
         result = {"status": False}
@@ -682,6 +692,38 @@ def get_near_one_hour_tutorial():
 @app.route("/test")
 def members():
     return {"test": ["1", "2", "3"]}
+
+
+"""
+Get weekly lectures and tutorials
+"""
+@app.route("/getWeeklyTimetable", methods=["POST"])
+def get_weekly_timetable():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
+    # get current date
+    today = datetime.combine(date.today(), datetime.min.time())
+    start = today - timedelta(days=today.weekday())
+    end = start + timedelta(days=7) - timedelta(seconds=1)
+
+    print('today:', today)
+    print('start:', start)
+    print('end:', end)
 
 
 """
