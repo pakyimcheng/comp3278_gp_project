@@ -602,7 +602,7 @@ def get_near_one_hour_lecture():
         for result in cursor.execute(command, multi=True):
             if result.with_rows:
                 print("Rows produced by statement:", result.statement)
-                print("result.fetchall():", result.fetchall())
+                # print("result.fetchall():", result.fetchall())
                 break
 
     rows = result.fetchall()
