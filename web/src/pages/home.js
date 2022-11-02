@@ -42,6 +42,8 @@ function Home({ ...props }) {
 					</div>
 
 					<ButtonBase
+						component={Link} 
+						to= {props.login? "records" : "login"}
 						className="record-button"
 						sx={{
 							background: "#d1f5ff",
@@ -59,15 +61,7 @@ function Home({ ...props }) {
 							boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 						}}
 					>
-						{props.login ? (
-							<Link to="/records" style={{ textDecoration: "none" }}>
-								<div className="login-records">Login Records</div>
-							</Link>
-						) : (
-							<Link to="/login" style={{ textDecoration: "none" }}>
-								<div className="login-records">Login Records</div>
-							</Link>
-						)}
+						<div className="login-records">Login Records</div>
 					</ButtonBase>
 
 					<div className="notification">
@@ -134,6 +128,8 @@ function Home({ ...props }) {
 					</div>
 					<div className="landing-options">
 						<ButtonBase
+							component={Link} 
+							to= {props.login? "timetable" : "login"}
 							className="timetable-button"
 							sx={{
 								background: "#ecffea",
@@ -151,49 +147,17 @@ function Home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							{props.login ? (
-								<Link
-									to="/timetable"
-									style={{
-										textDecoration: "none",
-										display: "flex",
-										flexDirection: "row",
-										gap: "18px",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
-								>
-									<Timetable
-										style={{
-											color: "#222222",
-											fontSize: 64,
-										}}
-									/>
-									<div className="timetable">Timetable</div>
-								</Link>
-							) : (
-								<Link
-									to="/login"
-									style={{
-										textDecoration: "none",
-										display: "flex",
-										flexDirection: "row",
-										gap: "18px",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
-								>
-									<Timetable
-										style={{
-											color: "#222222",
-											fontSize: 64,
-										}}
-									/>
-									<div className="timetable">Timetable</div>
-								</Link>
-							)}
+							<Timetable
+								style={{
+									color: "#222222",
+									fontSize: 64,
+								}}
+							/>
+							<div className="timetable">Timetable</div>
 						</ButtonBase>
 						<ButtonBase
+							component={Link} 
+							to= {props.login? "class" : "login"}
 							className="course-button"
 							sx={{
 								background: "#ecffea",
@@ -211,47 +175,13 @@ function Home({ ...props }) {
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 							}}
 						>
-							{props.login ? (
-								<Link
-									to="/class"
-									style={{
-										textDecoration: "none",
-										display: "flex",
-										flexDirection: "row",
-										gap: "18px",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
-								>
-									<ExclamationThick
-										style={{
-											color: "#222222",
-											fontSize: 64,
-										}}
-									/>
-									<div className="upcoming-courses">Upcoming courses</div>
-								</Link>
-							) : (
-								<Link
-									to="/login"
-									style={{
-										textDecoration: "none",
-										display: "flex",
-										flexDirection: "row",
-										gap: "18px",
-										alignItems: "center",
-										justifyContent: "center",
-									}}
-								>
-									<ExclamationThick
-										style={{
-											color: "#222222",
-											fontSize: 64,
-										}}
-									/>
-									<div className="upcoming-courses">Upcoming courses</div>
-								</Link>
-							)}
+							<ExclamationThick
+								style={{
+									color: "#222222",
+									fontSize: 64,
+								}}
+							/>
+							<div className="upcoming-courses">Upcoming courses</div>
 						</ButtonBase>
 					</div>
 				</div>

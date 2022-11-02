@@ -35,21 +35,21 @@ function Navbar({ login, setLogin }) {
 			>
 				{login ? (
 				<ButtonBase
+					component={Link} 
+					to="/"
 					style={{
 						borderRadius: "0px 16px 16px 0px",
 						boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 					}}
 				>
-					<Link to="/">
-						<img
-							alt=""
-							src="logo.png"
-							height={"68px"}
-							style={{
-								borderRadius: "0px 16px 16px 0px",
-							}}
-						/>
-					</Link>
+					<img
+						alt=""
+						src="logo.png"
+						height={"68px"}
+						style={{
+							borderRadius: "0px 16px 16px 0px",
+						}}
+					/>
 				</ButtonBase>
 				) : (
 					<div
@@ -84,6 +84,8 @@ function Navbar({ login, setLogin }) {
 						<>
 							{/* Timetable Icon */}
 							<ButtonBase
+								component={Link} 
+								to="/TimeTable"
 								style={{
 									display: "flex",
 									flexDirection: "row",
@@ -97,18 +99,18 @@ function Navbar({ login, setLogin }) {
 									borderRadius: "32px",
 								}}
 							>
-								<Link to="/TimeTable">
-									<Timetable
-										style={{
-											color: "#000000",
-											fontSize: 64,
-										}}
-									/>
-								</Link>
+								<Timetable
+									style={{
+										color: "#000000",
+										fontSize: 64,
+									}}
+								/>
 							</ButtonBase>
 
 							{/* Class Icon */}
 							<ButtonBase
+								component={Link} 
+								to="/class"
 								style={{
 									display: "flex",
 									flexDirection: "row",
@@ -122,18 +124,18 @@ function Navbar({ login, setLogin }) {
 									borderRadius: "32px",
 								}}
 							>
-								<Link to="/class">
-									<HumanMaleBoard
-										style={{
-											color: "#000000",
-											fontSize: 64,
-										}}
-									/>
-								</Link>
+								<HumanMaleBoard
+									style={{
+										color: "#000000",
+										fontSize: 64,
+									}}
+								/>
 							</ButtonBase>
 
 							{/* Login Record Icon */}
 							<ButtonBase
+								component={Link} 
+								to="/records"
 								style={{
 									display: "flex",
 									flexDirection: "row",
@@ -147,14 +149,12 @@ function Navbar({ login, setLogin }) {
 									borderRadius: "32px",
 								}}
 							>
-								<Link to="/records">
-									<Account
-										style={{
-											color: "#000000",
-											fontSize: 64,
-										}}
-									/>
-								</Link>
+								<Account
+									style={{
+										color: "#000000",
+										fontSize: 64,
+									}}
+								/>
 							</ButtonBase>
 						</>
 					)}
@@ -162,6 +162,8 @@ function Navbar({ login, setLogin }) {
 					{/* Logout Icon */}
 					{login ? (
 						<ButtonBase
+							component={Link} 
+							to="/login"
 							style={{
 								display: "flex",
 								flexDirection: "row",
@@ -179,17 +181,17 @@ function Navbar({ login, setLogin }) {
 								setLogin(false);
 							}}
 						>
-							<Link to="/login">
-								<Logout
-									style={{
-										color: "#000000",
-										fontSize: 64,
-									}}
-								/>
-							</Link>
+							<Logout
+								style={{
+									color: "#000000",
+									fontSize: 64,
+								}}
+							/>
 						</ButtonBase>
 					) : (
 						<ButtonBase
+							component={Link} 
+							to="/login"
 							style={{
 								display: "flex",
 								flexDirection: "row",
@@ -203,14 +205,12 @@ function Navbar({ login, setLogin }) {
 								borderRadius: "32px",
 							}}
 						>
-							<Link to="/login">
-								<Login
-									style={{
-										color: "#000000",
-										fontSize: 64,
-									}}
-								/>
-							</Link>
+							<Login
+								style={{
+									color: "#000000",
+									fontSize: 64,
+								}}
+							/>
 						</ButtonBase>
 					)}
 				</div>
