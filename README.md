@@ -2,12 +2,12 @@
 ### Windows
 
     1. .\venv\Scripts\Activate
-    2. py server.py
+    2. py app.py
     
 ### MacOS/Linux
 
     1. source venv/bin/activate
-    2. python server.py
+    2. python app.py
 
 
 ## Installation Setup
