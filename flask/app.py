@@ -695,10 +695,10 @@ def members():
 
 
 """
-Get weekly lectures and tutorials
+Get weekly lectures for timetable
 """
-@app.route("/getWeeklyTimetable", methods=["POST"])
-def get_weekly_timetable():
+@app.route("/getWeeklyTimetableLectures", methods=["POST"])
+def get_weekly_timetable_lectures():
     try:
         cnx = mysql.connector.connect(
             user="root",
@@ -721,10 +721,108 @@ def get_weekly_timetable():
     start = today - timedelta(days=today.weekday())
     end = start + timedelta(days=7) - timedelta(seconds=1)
 
-    print('today:', today)
-    print('start:', start)
-    print('end:', end)
+    start = start.strftime("%Y-%m-%d %H:%M:%S")
+    end = end.strftime("%Y-%m-%d %H:%M:%S")
 
+    # print('today:', today)
+    # print('start:', start)
+    # print('end:', end)
+
+
+    cursor.execute(
+        """
+        SELECT L.courseID, C.course_code, L.start_time, L.end_time, L.class_address
+        FROM lecture L, course C
+        WHERE L.start_time >= %s AND L.start_time <= %s AND L.end_time >= %s AND L.end_time <= %s
+        AND L.courseID = C.courseID;
+        """,
+        (start, end, start, end),
+    )
+
+    rows_lecture = cursor.fetchall()
+
+    result = []
+    if rows_lecture:
+        for r in rows_lecture:
+            temp = {
+                "status": True,
+                "type": "Lecture",
+                "courseID": r[0],
+                "course_code": r[1],
+                "start_time": r[2],
+                "end_time": r[3],
+                "class_address": r[4]
+            }
+            result.append(temp)
+    else:
+        result = {"status":False}
+
+    cursor.close()
+    return result
+
+
+@app.route("/getWeeklyTimetableTutorials", methods=["POST"])
+def get_weekly_timetable_tutorials():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+
+    # get current date
+    today = datetime.combine(date.today(), datetime.min.time())
+    start = today - timedelta(days=today.weekday())
+    end = start + timedelta(days=7) - timedelta(seconds=1)
+
+    start = start.strftime("%Y-%m-%d %H:%M:%S")
+    end = end.strftime("%Y-%m-%d %H:%M:%S")
+
+    # print('today:', today)
+    # print('start:', start)
+    # print('end:', end)
+
+
+    cursor.execute(
+        """
+        SELECT T.courseID, C.course_code, T.start_time, T.end_time, T.class_address
+        FROM tutorial T, course C
+        WHERE T.start_time >= %s AND T.start_time <= %s AND T.end_time >= %s AND T.end_time <= %s
+        AND T.courseID = C.courseID;
+        """,
+        (start, end, start, end),
+    )
+
+    rows_tutorial = cursor.fetchall()
+
+    result = []
+    if rows_tutorial:
+        for r in rows_tutorial:
+            temp = {
+                "status": True,
+                "type": "Tutorial",
+                "courseID": r[0],
+                "course_code": r[1],
+                "start_time": r[2],
+                "end_time": r[3],
+                "class_address": r[4]
+            }
+            result.append(temp)
+    else:
+        result = {"status":False}
+
+    cursor.close()
+    return result
 
 """
 Facial Login Requests
