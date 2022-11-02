@@ -339,7 +339,7 @@ def get_course_info():
             "course_name": r[2],
             "summary.course_info": r[3],
             "summary.teacher_message": r[4],
-            "other_course_materials": json.loads(r[5]),
+            "other_course_materials": json.loads(r[5]) if r[5] else None,
         }
 
     else:
@@ -440,7 +440,9 @@ def get_lecture():
                 "status": True,
                 "courseID": r[0],
                 "lectureID": r[1],
-                "note": json.loads(r[2]),  # json byte string to json object
+                "note": json.loads(r[2])
+                if r[2]
+                else None,  # json byte string to json object
                 "start_time": r[3],
                 "end_time": r[4],
                 "zoom_link": r[5],
@@ -494,7 +496,9 @@ def get_tutorial():
                 "status": True,
                 "courseID": r[0],
                 "turorialID": r[1],
-                "note": json.loads(r[2]),  # json byte string to json object
+                "note": json.loads(r[2])
+                if r[2]
+                else None,  # json byte string to json object
                 "start_time": r[3],
                 "end_time": r[4],
                 "zoom_link": r[5],
@@ -558,9 +562,11 @@ def get_assignment():
     return result
 
 
-'''
+"""
 Get near one hour lecture
-'''
+"""
+
+
 @app.route("/getNearOneHourLecture", methods=["POST"])
 def get_near_one_hour_lecture():
     try:
@@ -583,11 +589,13 @@ def get_near_one_hour_lecture():
     studentID = request.args.get("studentID")
 
     commands = [
-        "CREATE TEMPORARY TABLE lec SELECT DISTINCT student.studentID, lecture.*, TIMESTAMPDIFF(SECOND, NOW(), lecture.start_time) AS timestamp_diff FROM student, course, courselist, lecture WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND lecture.courseID = course.courseID;".format(studentID),
+        "CREATE TEMPORARY TABLE lec SELECT DISTINCT student.studentID, lecture.*, TIMESTAMPDIFF(SECOND, NOW(), lecture.start_time) AS timestamp_diff FROM student, course, courselist, lecture WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND lecture.courseID = course.courseID;".format(
+            studentID
+        ),
         """
         SELECT course.course_code FROM lec, course
         WHERE lec.timestamp_diff <= 3600 AND lec.timestamp_diff >= 0 AND lec.courseID = course.courseID;
-        """
+        """,
     ]
 
     for command in commands:
@@ -597,16 +605,12 @@ def get_near_one_hour_lecture():
                 print("result.fetchall():", result.fetchall())
                 break
 
-
     rows = result.fetchall()
 
     if rows:
         result = []
         for r in rows:
-            temp = {
-                "status": True,
-                "course_code": r[0]
-            }
+            temp = {"status": True, "course_code": r[0]}
             result.append(temp)
     else:
         result = {"status": False}
@@ -615,9 +619,11 @@ def get_near_one_hour_lecture():
     return result
 
 
-'''
+"""
 Get near one hour tutorial
-'''
+"""
+
+
 @app.route("/getNearOneHourTutorial", methods=["POST"])
 def get_near_one_hour_tutorial():
     try:
@@ -637,15 +643,16 @@ def get_near_one_hour_tutorial():
         else:
             print(err)
 
-
     studentID = request.args.get("studentID")
 
     commands = [
-        "CREATE TEMPORARY TABLE tut SELECT DISTINCT student.studentID, tutorial.*, TIMESTAMPDIFF(SECOND, NOW(), tutorial.start_time) AS timestamp_diff FROM student, course, courselist, tutorial WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND tutorial.courseID = course.courseID;".format(studentID),
+        "CREATE TEMPORARY TABLE tut SELECT DISTINCT student.studentID, tutorial.*, TIMESTAMPDIFF(SECOND, NOW(), tutorial.start_time) AS timestamp_diff FROM student, course, courselist, tutorial WHERE student.studentID = {} AND student.studentID = courselist.studentID AND course.courseID = courselist.courseID AND tutorial.courseID = course.courseID;".format(
+            studentID
+        ),
         """
         SELECT course.course_code FROM tut, course
         WHERE tut.timestamp_diff <= 3600 AND tut.timestamp_diff >= 0 AND tut.courseID = course.courseID;
-        """
+        """,
     ]
 
     for command in commands:
@@ -655,24 +662,22 @@ def get_near_one_hour_tutorial():
                 break
                 # print("result.fetchall():", result.fetchall())
             # else:
-                # print("Number of rows affected by statement '{}': {}\n".format(
-                #     result.statement, result.rowcount))
+            # print("Number of rows affected by statement '{}': {}\n".format(
+            #     result.statement, result.rowcount))
 
     rows = result.fetchall()
 
     if rows:
         result = []
         for r in rows:
-            temp = {
-                "status": True,
-                "course_code": r[0]
-            }
+            temp = {"status": True, "course_code": r[0]}
             result.append(temp)
     else:
         result = {"status": False}
 
     cursor.close()
     return result
+
 
 @app.route("/test")
 def members():

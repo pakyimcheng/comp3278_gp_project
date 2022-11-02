@@ -170,7 +170,7 @@ function Class({ ...props }) {
 						>
 							{courseInfo.course_code} Assignments
 						</DialogTitle>
-						{assignment !== []
+						{assignment && assignment !== []
 							? assignment.map((ass) => (
 									<>
 										<div
@@ -258,7 +258,7 @@ function Class({ ...props }) {
 						>
 							{courseInfo.course_code} Lectures Zoom
 						</DialogTitle>
-						{lecture !== []
+						{lecture && lecture !== []
 							? lecture.map((l) => (
 									<>
 										<div
@@ -277,7 +277,7 @@ function Class({ ...props }) {
 											Link: <a href={l.zoom_link}>{l.zoom_link}</a>
 											<br />
 											Notes:{" "}
-											{l.note !== []
+											{l && l.note && l.note !== []
 												? Object.keys(l.note).map((key) => (
 														<div style={{ fontSize: "18px" }}>
 															{key}: <br />
@@ -305,7 +305,7 @@ function Class({ ...props }) {
 							{courseInfo.course_code} Tutorial Zooms
 						</DialogTitle>
 
-						{tutorial !== []
+						{tutorial && tutorial !== []
 							? tutorial.map((t) => (
 									<>
 										<div
@@ -324,7 +324,7 @@ function Class({ ...props }) {
 											Link: <a href={t.zoom_link}>{t.zoom_link}</a>
 											<br />
 											Notes:{" "}
-											{t.note !== []
+											{t && t.note && t.note !== []
 												? Object.keys(t.note).map((key) => (
 														<div style={{ fontSize: "18px" }}>
 															{key}: <br />
@@ -423,7 +423,7 @@ function Class({ ...props }) {
 													className="course-instructor-list"
 													style={{ display: "flex", flexDirection: "column" }}
 												>
-													{teachingTeam !== []
+													{teachingTeam && teachingTeam !== []
 														? teachingTeam.map((member) => (
 																<>
 																	{member.type === "Course Instructor" ||
@@ -463,7 +463,7 @@ function Class({ ...props }) {
 													</span>
 												</div>
 												<div className="frame-202">
-													{teachingTeam !== []
+													{teachingTeam && teachingTeam !== []
 														? teachingTeam.map((member) => (
 																<div className="teaching-assistant-list">
 																	{member.type !== "Course Instructor" &&

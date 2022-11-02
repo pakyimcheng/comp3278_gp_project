@@ -21,13 +21,47 @@ function App() {
 	const [sessionID, setSessionID] = useState(0);
 
 	// classID of the class in the next hour
-	const [courseCode, setcourseCode] = useState("COMP3278A");
+	const [courseCode, setCourseCode] = useState("");
 
 	let interval = null;
+	let intervalTutor = null;
+	let intervalLecture = null;
 
 	const getData = async () => {
 		const res = await axios.get("https://geolocation-db.com/json/");
 		setIP_Address(res.data.IPv4);
+	};
+
+	const getOneHourLecture = async () => {
+		axios
+			.post(
+				"http://127.0.0.1:5001/getNearOneHourLecture?studentID=" + studentID
+			)
+			.then(async function (res) {
+				console.log(res.data);
+				if (res.data[0]) {
+					setCourseCode(res.data[0].course_code);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const getOneHourTutorial = async () => {
+		axios
+			.post(
+				"http://127.0.0.1:5001/getNearOneHourTutorial?studentID=" + studentID
+			)
+			.then(async function (res) {
+				console.log(res.data);
+				if (res.data[0]) {
+					setCourseCode(res.data[0].course_code);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	// on login change to true, call localhost:5001/createLogin info with JSON IP_Address and studentID
@@ -49,12 +83,25 @@ function App() {
 				.catch((err) => {
 					console.log(err);
 				});
+			//getNearOneHourTutorial on 1 minute base
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+			intervalTutor = setInterval(() => {
+				getOneHourTutorial();
+			}, 60000);
+			// eslint-disable-next-line react-hooks/exhaustive-deps
+			intervalLecture = setInterval(() => {
+				getOneHourLecture();
+			}, 60000);
+			getOneHourLecture();
+			getOneHourTutorial();
 		}
 		if (!login) {
 			setName("");
 			setStudentID("");
 			setStudentEmail("");
 			clearInterval(interval);
+			clearInterval(intervalTutor);
+			clearInterval(intervalLecture);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [login]);
@@ -68,6 +115,8 @@ function App() {
 				Email: {studentEmail}
 				<br />
 				SessionID: {sessionID}
+				<br />
+				Course Code = {courseCode}
 				<Routes>
 					<Route
 						exact
