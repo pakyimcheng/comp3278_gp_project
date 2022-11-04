@@ -11,7 +11,7 @@ function Records({ ...props }) {
 	const [records, setRecords] = useState([]);
 	const [recordPageIndex, setRecordPageIndex] = useState(0);
 	const handleRecordPageChange = (event, value) => {
-		setRecordPageIndex(value-1);
+		setRecordPageIndex(value - 1);
 	};
 
 	useEffect(() => {
@@ -110,37 +110,34 @@ function Records({ ...props }) {
 
 					{/* render out individual login records */}
 					<div className="login-records-list">
-						{records.slice(5*recordPageIndex, 5*recordPageIndex+5).map((record, index) => {
-							return (
-								<LoginRecord
-									IPAddress={record[1]}
-									time={format(new Date(record[0]).setHours(new Date(record[0]).getHours() - 8), "M/d/u, HH:mm")}
-									duration={"unknown"}
-									number={5*(recordPageIndex) + index + 1}
-								/>
-							);
-						})}
+						{records
+							.slice(5 * recordPageIndex, 5 * recordPageIndex + 5)
+							.map((record, index) => {
+								return (
+									<LoginRecord
+										IPAddress={record[1]}
+										time={format(
+											new Date(record[0]).setHours(
+												new Date(record[0]).getHours() - 8
+											),
+											"M/d/u, HH:mm"
+										)}
+										duration={record[2] ?? "N/A"}
+										number={5 * recordPageIndex + index + 1}
+									/>
+								);
+							})}
 
-						<Pagination 
-							count={Math.ceil(records.length/5)} 
-							page={recordPageIndex+1} 
-							onChange={handleRecordPageChange} 
+						<Pagination
+							count={Math.ceil(records.length / 5)}
+							page={recordPageIndex + 1}
+							onChange={handleRecordPageChange}
 							style={{
 								display: "flex",
 								alignSelf: "center",
 							}}
 						/>
 					</div>
-
-					{/* 
-					<div className="login-records-list">
-						<LoginRecord
-							IPAddress={"127.0.0.1"}
-							time={"2022-10-28 10:00:00"}
-							duration={"1m"}
-							number={1}
-						/>
-					</div> */}
 				</div>
 			</div>
 		</div>

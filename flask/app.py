@@ -316,7 +316,7 @@ def get_login_info():
     studentID = request.get_json()["studentID"]
 
     cursor.execute(
-        "SELECT login_date_time, login_IPAddress FROM logininfo WHERE studentID = %s",
+        "SELECT login_date_time, login_IPAddress, duration FROM logininfo WHERE studentID = %s",
         (studentID,),
     )
     rows = cursor.fetchall()

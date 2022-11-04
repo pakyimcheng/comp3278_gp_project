@@ -114,7 +114,11 @@ function LoginRecord(props) {
 						color: "black",
 					}}
 				>
-					{props.duration}
+					{props.duration !== "N/A" ? (
+						<a>{new Date(props.duration * 1000).toISOString().slice(11, 19)}</a>
+					) : (
+						"N/A"
+					)}
 				</div>
 			</div>
 
