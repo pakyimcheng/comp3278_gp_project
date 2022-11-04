@@ -175,6 +175,7 @@ function App() {
 								login={login}
 								duration={duration}
 								notification={notification}
+								courseCode={courseCode}
 							/>
 						}
 					/>

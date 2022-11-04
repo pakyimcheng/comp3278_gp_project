@@ -169,7 +169,9 @@ function Home({ ...props }) {
 						</ButtonBase>
 						<ButtonBase
 							component={Link}
-							to={props.login ? "class" : "login"}
+							to={
+								props.login ? (props.courseCode !== "" ? "class" : "") : "login"
+							}
 							className="course-button"
 							sx={{
 								background: "#ecffea",
