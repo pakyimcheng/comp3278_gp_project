@@ -209,6 +209,46 @@ def create_login_info():
     return result
 
 
+@app.route("/updateLoginDuration", methods=["POST"])
+def update_login_duration():
+    try:
+        cnx = mysql.connector.connect(
+            user="root",
+            password=os.getenv("MYSQL_PASSWORD"),
+            host="localhost",
+            database="project",
+            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
+        )
+        cursor = cnx.cursor()
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print(err)
+    studentID = request.get_json()["studentID"]
+
+    cursor.execute(
+        "SELECT sessionID, login_date_time FROM `logininfo` WHERE studentID= %s ORDER BY login_date_time DESC LIMIT 1;",
+        (studentID,),
+    )
+    r = cursor.fetchall()
+
+    delta = datetime.now().replace(microsecond=0) - r[0][1]
+
+    # update the current_login_time in the student table
+    cursor.execute(
+        "UPDATE logininfo SET duration=%s WHERE studentID=%s AND sessionID=%s",
+        (int(delta.total_seconds()), studentID, r[0][0]),
+    )
+    cnx.commit()
+
+    result = {"status": True}
+
+    return result
+
+
 # Return student info
 @app.route("/student", methods=["POST"])
 def student():
@@ -614,7 +654,7 @@ def get_near_one_hour_lecture():
                 "status": True,
                 "course_code": r[0],
                 "start_time": r[1],
-                "end_time": r[2]
+                "end_time": r[2],
             }
             result.append(temp)
     else:
@@ -679,7 +719,7 @@ def get_near_one_hour_tutorial():
                 "status": True,
                 "course_code": r[0],
                 "start_time": r[1],
-                "end_time": r[2]
+                "end_time": r[2],
             }
             result.append(temp)
     else:
@@ -697,6 +737,8 @@ def members():
 """
 Get weekly lectures for timetable
 """
+
+
 @app.route("/getWeeklyTimetableLectures", methods=["POST"])
 def get_weekly_timetable_lectures():
     try:
@@ -730,7 +772,6 @@ def get_weekly_timetable_lectures():
     # print('start:', start)
     # print('end:', end)
 
-
     cursor.execute(
         """
         SELECT L.courseID, C.course_code, L.start_time, L.end_time, L.class_address
@@ -758,11 +799,11 @@ def get_weekly_timetable_lectures():
                 "course_code": r[1],
                 "start_time": r[2],
                 "end_time": r[3],
-                "class_address": r[4]
+                "class_address": r[4],
             }
             result.append(temp)
     else:
-        result = {"status":False}
+        result = {"status": False}
 
     cursor.close()
     return result
@@ -801,7 +842,6 @@ def get_weekly_timetable_tutorials():
     # print('start:', start)
     # print('end:', end)
 
-
     cursor.execute(
         """
         SELECT T.courseID, C.course_code, T.start_time, T.end_time, T.class_address
@@ -829,14 +869,15 @@ def get_weekly_timetable_tutorials():
                 "course_code": r[1],
                 "start_time": r[2],
                 "end_time": r[3],
-                "class_address": r[4]
+                "class_address": r[4],
             }
             result.append(temp)
     else:
-        result = {"status":False}
+        result = {"status": False}
 
     cursor.close()
     return result
+
 
 """
 Facial Login Requests

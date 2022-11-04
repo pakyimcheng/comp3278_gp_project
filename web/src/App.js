@@ -17,6 +17,7 @@ function App() {
 	const [IP_Address, setIP_Address] = useState("");
 	const [studentEmail, setStudentEmail] = useState("");
 	const [duration, setDuration] = useState(0);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [sessionID, setSessionID] = useState(0);
 
@@ -31,6 +32,7 @@ function App() {
 	let interval = null;
 	let intervalTutor = null;
 	let intervalLecture = null;
+	let intervalUpdateDuration = null;
 
 	const getData = async () => {
 		const res = await axios.get("https://geolocation-db.com/json/");
@@ -86,6 +88,28 @@ function App() {
 		}
 	}, [startTime]);
 
+	const updateFunc = () => {
+		intervalUpdateDuration =
+			!intervalUpdateDuration &&
+			setInterval(() => {
+				console.log(duration);
+				axios
+					.post("http://127.0.0.1:5001/updateLoginDuration", {
+						studentID: studentID,
+						duration: Math.floor(duration / 1000),
+					})
+					.catch((err) => {
+						console.log(err);
+					});
+			}, 5000);
+	};
+
+	useEffect(() => {
+		updateFunc();
+
+		return () => clearInterval(intervalUpdateDuration);
+	}, [login, isLoading]);
+
 	// on login change to true, call localhost:5001/createLogin info with JSON IP_Address and studentID
 	useEffect(() => {
 		if (login) {
@@ -105,6 +129,7 @@ function App() {
 				.catch((err) => {
 					console.log(err);
 				});
+			setIsLoading(false);
 			//getNearOneHourTutorial on 1 minute base
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 			intervalTutor = setInterval(() => {
@@ -124,6 +149,7 @@ function App() {
 			clearInterval(interval);
 			clearInterval(intervalTutor);
 			clearInterval(intervalLecture);
+			clearInterval(intervalUpdateDuration);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [login]);
