@@ -58,6 +58,8 @@ function TimeTable({ ...props }) {
 								wednesday: [],
 								thursday: [],
 								friday: [],
+								saturday: [],
+								sunday: [],
 							},
 						});
 						setIsLoading(false);
