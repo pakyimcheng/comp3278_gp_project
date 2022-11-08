@@ -4,7 +4,9 @@ from flask_cors import CORS
 from flask_mail import Mail, Message
 from classifier import get_prediction
 import json
-from datetime import date, datetime, timedelta
+from datetime import date, time, timedelta, datetime
+import time
+
 
 from dotenv import load_dotenv
 
@@ -855,6 +857,7 @@ def members():
 Get weekly lectures and tutorials for timetable
 """
 
+
 @app.route("/getWeeklyTimetable", methods=["POST"])
 def get_weekly_timetable():
     try:
@@ -920,7 +923,7 @@ def get_weekly_timetable():
 
     cursor.close()
 
-    if ((not rows_lecture) and (not rows_tutorial)):
+    if (not rows_lecture) and (not rows_tutorial):
         return {"status": False}
 
     events = {
@@ -929,62 +932,68 @@ def get_weekly_timetable():
         "wednesday": [],
         "thursday": [],
         "friday": [],
+        "saturday": [],
+        "sunday": [],
     }
 
     if rows_lecture:
         for r in rows_lecture:
             # follow the return style of the react library we are using
             temp = {
-                "id": int(datetime.timestamp(r[2])),    # id: timestamp of startTime
-                "name": r[1],                           # course title           
+                "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
+                "name": r[1],  # course title
                 "type": "lecture",
-                "startTime": r[2],                      # datetime object already
-                "endTime": r[3]
+                "startTime": int(datetime.timestamp(r[2])) * 1000,
+                "endTime": int(datetime.timestamp(r[3])) * 1000,
             }
 
             time_diff = r[2] - start
-            if ((time_diff.days > 0) and (time_diff.days < 1)):
+            if (time_diff.days > 0) and (time_diff.days < 1):
                 events["monday"].append(temp)
-            elif (time_diff.days < 2):
+            elif time_diff.days < 2:
                 events["tuesday"].append(temp)
-            elif (time_diff.days < 3):
+            elif time_diff.days < 3:
                 events["wednesday"].append(temp)
-            elif (time_diff.days < 4):
+            elif time_diff.days < 4:
                 events["thursday"].append(temp)
-            else:
+            elif time_diff.days < 5:
                 events["friday"].append(temp)
+            elif time_diff.days < 6:
+                events["saturday"].append(temp)
+            elif time_diff.days < 7:
+                events["sunday"].append(temp)
 
     if rows_tutorial:
         for r in rows_tutorial:
             # follow the return style of the react library we are using
             temp = {
-                "id": int(datetime.timestamp(r[2])),    # id: timestamp of startTime
-                "name": r[1],                           # course title           
+                "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
+                "name": r[1],  # course title
                 "type": "tutorial",
-                "startTime": r[2],                      # datetime object already
-                "endTime": r[3]
+                "startTime": int(datetime.timestamp(r[2])) * 1000,
+                "endTime": int(datetime.timestamp(r[3])) * 1000,
             }
 
             time_diff = r[2] - start
-            if ((time_diff.days > 0) and (time_diff.days < 1)):
+            if (time_diff.days > 0) and (time_diff.days < 1):
                 events["monday"].append(temp)
-            elif (time_diff.days < 2):
+            elif time_diff.days < 2:
                 events["tuesday"].append(temp)
-            elif (time_diff.days < 3):
+            elif time_diff.days < 3:
                 events["wednesday"].append(temp)
-            elif (time_diff.days < 4):
+            elif time_diff.days < 4:
                 events["thursday"].append(temp)
-            else:
+            elif time_diff.days < 5:
                 events["friday"].append(temp)
+            elif time_diff.days < 6:
+                events["saturday"].append(temp)
+            elif time_diff.days < 7:
+                events["sunday"].append(temp)
 
-    result = {
-        "status": True,
-        "events": events
-    }
+    result = {"status": True, "events": events}
 
     return result
 
-    
 
 # TODO: delete this function if above get_weekly_timetable works
 @app.route("/getWeeklyTimetableLectures", methods=["POST"])
@@ -1044,30 +1053,26 @@ def get_weekly_timetable_lectures():
         for r in rows_lecture:
             # follow the return style of the react library we are using
             temp = {
-                "id": int(datetime.timestamp(r[2])),    # id: timestamp of startTime
-                "name": r[1],                           # course title           
+                "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
+                "name": r[1],  # course title
                 "type": "custom",
-                "startTime": r[2],                      # datetime object already
-                "endTime": r[3]
+                "startTime": r[2],  # datetime object already
+                "endTime": r[3],
             }
 
             time_diff = r[2] - start
-            if ((time_diff.days > 0) and (time_diff.days < 1)):
+            if (time_diff.days > 0) and (time_diff.days < 1):
                 events["monday"].append(temp)
-            elif (time_diff.days < 2):
+            elif time_diff.days < 2:
                 events["tuesday"].append(temp)
-            elif (time_diff.days < 3):
+            elif time_diff.days < 3:
                 events["wednesday"].append(temp)
-            elif (time_diff.days < 4):
+            elif time_diff.days < 4:
                 events["thursday"].append(temp)
             else:
                 events["friday"].append(temp)
 
-
-        result = {
-            "status": True,
-            "events": events
-        }
+        result = {"status": True, "events": events}
     else:
         result = {"status": False}
 

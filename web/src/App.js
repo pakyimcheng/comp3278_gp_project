@@ -92,7 +92,6 @@ function App() {
 		intervalUpdateDuration =
 			!intervalUpdateDuration &&
 			setInterval(() => {
-				console.log(duration);
 				axios
 					.post("http://127.0.0.1:5001/updateLoginDuration", {
 						studentID: studentID,
@@ -165,6 +164,8 @@ function App() {
 				SessionID: {sessionID}
 				<br />
 				Course Code = {courseCode}
+				<br />
+				studentID = {studentID}
 				<Routes>
 					<Route
 						exact
@@ -179,7 +180,11 @@ function App() {
 							/>
 						}
 					/>
-					<Route exact path="/timetable" element={<TimeTable />} />
+					<Route
+						exact
+						path="/timetable"
+						element={<TimeTable studentID={studentID} />}
+					/>
 					<Route
 						exact
 						path="/class"
