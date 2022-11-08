@@ -1,7 +1,13 @@
 /* Code generated with AutoHTML for Figma */
 import "./records.css";
 import { format } from "date-fns";
-import { Avatar, ButtonBase, Pagination } from "@mui/material";
+import {
+	Avatar,
+	FormGroup,
+	Pagination,
+	Switch,
+	FormControlLabel,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import LoginRecord from "../components/LoginRecord";
 import React, { useState, useEffect } from "react";
@@ -10,9 +16,12 @@ import axios from "axios";
 function Records({ ...props }) {
 	const [records, setRecords] = useState([]);
 	const [recordPageIndex, setRecordPageIndex] = useState(0);
+	const [reversed, setReversed] = useState(false);
 	const handleRecordPageChange = (event, value) => {
 		setRecordPageIndex(value - 1);
 	};
+
+	const label = { inputProps: { "aria-label": "Reversed" } };
 
 	useEffect(() => {
 		axios
@@ -75,6 +84,15 @@ function Records({ ...props }) {
 						<div className="current-browser">Current Browser</div>
 						<div className="chrome-xx-xx">{navigator.sayswho}</div>
 					</div>
+					<div>
+						<FormGroup>
+							<FormControlLabel
+								label="Reverse Order(Time)"
+								control={<Switch />}
+								onChange={() => setReversed(!reversed)}
+							/>
+						</FormGroup>
+					</div>
 				</div>
 				<div className="all-login-records-frame">
 					<div className="login-description">
@@ -110,23 +128,49 @@ function Records({ ...props }) {
 
 					{/* render out individual login records */}
 					<div className="login-records-list">
-						{records
-							.slice(5 * recordPageIndex, 5 * recordPageIndex + 5)
-							.map((record, index) => {
-								return (
-									<LoginRecord
-										IPAddress={record[1]}
-										time={format(
-											new Date(record[0]).setHours(
-												new Date(record[0]).getHours() - 8
-											),
-											"M/d/u, HH:mm"
-										)}
-										duration={record[2] ?? "N/A"}
-										number={5 * recordPageIndex + index + 1}
-									/>
-								);
-							})}
+						{!reversed ? (
+							<>
+								{records
+									.slice(5 * recordPageIndex, 5 * recordPageIndex + 5)
+									.map((record, index) => {
+										return (
+											<LoginRecord
+												IPAddress={record[1]}
+												time={format(
+													new Date(record[0]).setHours(
+														new Date(record[0]).getHours() - 8
+													),
+													"M/d/u, HH:mm"
+												)}
+												duration={record[2] ?? "00:00:00"}
+												number={5 * recordPageIndex + index + 1}
+											/>
+										);
+									})}
+							</>
+						) : (
+							<>
+								{records
+									.slice(0)
+									.reverse()
+									.slice(5 * recordPageIndex, 5 * recordPageIndex + 5)
+									.map((record, index) => {
+										return (
+											<LoginRecord
+												IPAddress={record[1]}
+												time={format(
+													new Date(record[0]).setHours(
+														new Date(record[0]).getHours() - 8
+													),
+													"M/d/u, HH:mm"
+												)}
+												duration={record[2] ?? "00:00:00"}
+												number={records.length - (5 * recordPageIndex + index)}
+											/>
+										);
+									})}
+							</>
+						)}
 
 						<Pagination
 							count={Math.ceil(records.length / 5)}
