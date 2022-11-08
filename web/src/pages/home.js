@@ -2,19 +2,40 @@
 import { format } from "date-fns";
 import "./home.css";
 import { Avatar, ButtonBase } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { CloseCircle } from "mdi-material-ui";
 import {
 	Timetable,
 	ExclamationThick,
 	Bell,
 	ClockTimeFive,
 } from "mdi-material-ui";
+import {
+	Button,
+	Modal,
+	Dialog,
+	Box,
+	DialogTitle,
+	IconButton,
+	Typography,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 function Home({ ...props }) {
 	const [currentTime, setCurrentTime] = useState(
 		format(new Date(), "HH:mm:ss")
 	);
+	const navigate = useNavigate();
+
+	const [modalOpen, setModalOpen] = useState(false);
+
+	const handleModalClose = () => {
+		setModalOpen(false);
+	};
+
+	const handleModalOpen = () => {
+		setModalOpen(true);
+	};
 
 	useEffect(() => {
 		// every second, update the time
@@ -43,6 +64,36 @@ function Home({ ...props }) {
 						)}
 						<div className="home_user-name">{props.name}</div>
 					</div>
+
+					<Modal
+						open={modalOpen}
+						onClose={handleModalClose}
+						BackdropProps={{ style: { backgroundColor: "transparent" } }}
+						style={{
+							backgroundColor: "grey",
+							boxShadow: "none",
+							width: "fit-content",
+							height: "fit-content",
+							padding: "1%",
+							margin: "auto",
+							borderRadius: "20px",
+							fontWeight: "bold",
+							fontSize: 39,
+						}}
+						touchRipple={true}
+					>
+						<div style={{ display: "flex", flexDirection: "row" }}>
+							<IconButton onClick={() => handleModalClose()} size="medium">
+								<CloseCircle
+									style={{
+										color: "red",
+										fontSize: "32px",
+									}}
+								/>
+							</IconButton>
+							<div>No Upcoming Course in 1 Hour</div>
+						</div>
+					</Modal>
 
 					<ButtonBase
 						component={Link}
@@ -80,7 +131,7 @@ function Home({ ...props }) {
 							{props.notification && props.notification.length > 0 ? (
 								props.notification.map((notif) => <div>{notif}</div>)
 							) : (
-								<div>NO NOTIFICATION</div>
+								<div style={{ textAlign: "center" }}>NO NOTIFICATION!</div>
 							)}
 						</div>
 					</div>
@@ -167,10 +218,13 @@ function Home({ ...props }) {
 							/>
 							<div className="timetable">Timetable</div>
 						</ButtonBase>
-						<ButtonBase
-							component={Link}
-							to={
-								props.login ? (props.courseCode !== "" ? "class" : "") : "login"
+						<Button
+							onClick={() =>
+								props.login
+									? props.courseCode !== ""
+										? navigate("/class")
+										: handleModalOpen()
+									: navigate("/login")
 							}
 							className="course-button"
 							sx={{
@@ -187,6 +241,9 @@ function Home({ ...props }) {
 								alignSelf: "stretch",
 								position: "relative",
 								boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+								"&.MuiButtonBase-root:hover": {
+									bgcolor: "#ecffea",
+								},
 							}}
 						>
 							<ExclamationThick
@@ -196,7 +253,7 @@ function Home({ ...props }) {
 								}}
 							/>
 							<div className="upcoming-courses">Upcoming courses</div>
-						</ButtonBase>
+						</Button>
 					</div>
 				</div>
 			</div>

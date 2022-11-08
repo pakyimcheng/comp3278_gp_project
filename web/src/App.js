@@ -155,7 +155,7 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			<Navbar login={login} setLogin={setLogin} />
+			<Navbar login={login} setLogin={setLogin} courseCode={courseCode} />
 			<div className="App">
 				The user is currently logged in: {login ? "true" : "false"}
 				<br />
