@@ -36,6 +36,7 @@ const Login = ({
 
 	const [result, setResult] = useState("");
 	const [confidence, setConfidence] = useState(0);
+	const [faceIdx, setFaceIdx] = useState();
 	const [verify, setVerify] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -56,6 +57,39 @@ const Login = ({
 				email_address: email,
 				login_pwd: password,
 			})
+			.then(async function (response) {
+				setName(response.data.name);
+				setStudentEmail(response.data.email_address);
+				setStudentID(response.data.studentID);
+				if (response.status === 200) {
+					if (response.data.status === false) {
+						//alert fail
+						setErrorAlertOpen(true);
+					} else {
+						setLogin(true);
+						if (videosStream) {
+							videosStream.getTracks().forEach(function (track) {
+								track.stop();
+							});
+						}
+						setSuccessAlertOpen(true);
+						navigate("/");
+					}
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
+	const handleFaceLogin = async (faceIdx, password) => {
+		axios
+			.post(
+				"http://127.0.0.1:5001/loginFace?face_idx=" +
+					faceIdx +
+					"&login_pwd=" +
+					password
+			)
 			.then(async function (response) {
 				setName(response.data.name);
 				setStudentEmail(response.data.email_address);
@@ -126,6 +160,7 @@ const Login = ({
 						setConfidence(
 							JSON.parse(text.substring(0, text.length - 1)).confidence_score
 						);
+						setFaceIdx(JSON.parse(text.substring(0, text.length - 1)).index);
 					} else {
 						setResult("Error from API.");
 					}
@@ -189,7 +224,7 @@ const Login = ({
 						flexDirection: "column",
 						padding: "64px",
 						gap: 16,
-						width: "25vw",
+						width: "24vw",
 					}}
 				>
 					<DialogTitle
@@ -236,6 +271,26 @@ const Login = ({
 								setPassword(e.target.value);
 							}}
 						/>
+
+						<Button
+							variant="contained"
+							style={{
+								padding: "8px 16px",
+								backgroundColor: "#14C38E",
+								boxShadow:
+									"0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)",
+								borderRadius: "4px",
+							}}
+							onClick={() => handleFaceLogin(faceIdx, password)}
+						>
+							<span
+								style={{
+									fontSize: "26px",
+								}}
+							>
+								Confirm
+							</span>
+						</Button>
 					</div>
 				</div>
 			</Dialog>

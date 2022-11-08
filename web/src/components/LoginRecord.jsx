@@ -1,9 +1,3 @@
-// create a functional component named Login record
-// this component will be used to display the login record
-// of a user
-// pamras: number, time, duration, IPAddress
-
-import { BlackMesa } from "mdi-material-ui";
 import React from "react";
 
 function LoginRecord(props) {
@@ -114,10 +108,10 @@ function LoginRecord(props) {
 						color: "black",
 					}}
 				>
-					{props.duration !== "N/A" ? (
+					{props.duration !== null && props.duration !== "N/A" ? (
 						<a>{new Date(props.duration * 1000).toISOString().slice(11, 19)}</a>
 					) : (
-						"N/A"
+						"00:00:00"
 					)}
 				</div>
 			</div>

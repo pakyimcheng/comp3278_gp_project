@@ -142,7 +142,7 @@ function Records({ ...props }) {
 													),
 													"M/d/u, HH:mm"
 												)}
-												duration={record[2] ?? "00:00:00"}
+												duration={record[2] ?? "N/A"}
 												number={5 * recordPageIndex + index + 1}
 											/>
 										);
@@ -164,7 +164,7 @@ function Records({ ...props }) {
 													),
 													"M/d/u, HH:mm"
 												)}
-												duration={record[2] ?? "00:00:00"}
+												duration={record[2] ?? "N/A"}
 												number={records.length - (5 * recordPageIndex + index)}
 											/>
 										);

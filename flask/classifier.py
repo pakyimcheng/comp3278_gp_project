@@ -31,9 +31,9 @@ def inference(model, img_rgb_cropped):
     confidence_score = prediction[0][index]
 
     if confidence_score >= 0.5:
-        return class_name, confidence_score
+        return class_name, confidence_score, index
     else:
-        return "NULL", 0.0
+        return "NULL", 0.0, -1
 
 
 model = load_keras_model()
@@ -70,8 +70,12 @@ def get_prediction(img_bytes):
         # crop the image
         img_rgb_cropped = img_rgb[ymin : ymin + h + 1, xmin : xmin + w + 1]
 
-        class_name, confidence_score = inference(model, img_rgb_cropped)
+        class_name, confidence_score, idx = inference(model, img_rgb_cropped)
 
-        return {"class_name": class_name, "confidence_score": float(confidence_score)}
+        return {
+            "class_name": class_name,
+            "confidence_score": float(confidence_score),
+            "index": int(idx),
+        }
 
-    return {"class_name": "NULL", "confidence_score": 0.0}
+    return {"class_name": "NULL", "confidence_score": 0.0, "index": None}

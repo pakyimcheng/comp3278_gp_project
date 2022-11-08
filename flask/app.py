@@ -144,7 +144,7 @@ def login_face():
     login_pwd = request.args.get("login_pwd")
 
     cursor.execute(
-        "SELECT studentID, name FROM student WHERE face_idx = %s AND login_pwd = %s",
+        "SELECT studentID, name, email_address FROM student WHERE face_idx = %s AND login_pwd = %s",
         (face_idx, login_pwd),
     )
 
@@ -153,7 +153,12 @@ def login_face():
 
     if row:
         r = row[0]
-        result = {"status": True, "studentID": r[0], "name": r[1]}
+        result = {
+            "status": True,
+            "studentID": r[0],
+            "name": r[1],
+            "email_address": r[2],
+        }
     else:
         result = {"status": False}
 
