@@ -12,6 +12,7 @@ import {
 	Typography,
 } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Class({ ...props }) {
 	const courseCode = props.courseCode;
@@ -25,7 +26,12 @@ function Class({ ...props }) {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [zoomModalOpen, setZoomModalOpen] = useState(false);
 
+	const navigate = useNavigate();
 	const [fin, setFin] = useState(false);
+
+	if (!props.studentID) {
+		navigate("/login");
+	}
 
 	const handleModalClose = () => {
 		setModalOpen(false);

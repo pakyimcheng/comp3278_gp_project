@@ -12,14 +12,21 @@ import { Link } from "react-router-dom";
 import LoginRecord from "../components/LoginRecord";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Records({ ...props }) {
 	const [records, setRecords] = useState([]);
 	const [recordPageIndex, setRecordPageIndex] = useState(0);
 	const [reversed, setReversed] = useState(false);
+	const navigate = useNavigate();
+
 	const handleRecordPageChange = (event, value) => {
 		setRecordPageIndex(value - 1);
 	};
+
+	if (!props.studentID) {
+		navigate("/login");
+	}
 
 	const label = { inputProps: { "aria-label": "Reversed" } };
 

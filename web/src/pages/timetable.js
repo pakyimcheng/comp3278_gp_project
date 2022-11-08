@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Timetable from "react-timetable-events";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function TimeTable({ ...props }) {
 	const [timetable, setTimetable] = useState();
 	const [isLoading, setIsLoading] = useState(true);
+	const navigate = useNavigate();
+
+	if (!props.studentID) {
+		navigate("/login");
+	}
 
 	useEffect(() => {
 		async function a() {
