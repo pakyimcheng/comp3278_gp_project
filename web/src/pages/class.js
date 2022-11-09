@@ -22,7 +22,6 @@ function Class({ ...props }) {
 	const [assignment, setAssignment] = useState([]);
 	const [lecture, setLecture] = useState([]);
 	const [tutorial, setTutorial] = useState([]);
-
 	const [modalOpen, setModalOpen] = useState(false);
 	const [zoomModalOpen, setZoomModalOpen] = useState(false);
 
@@ -489,17 +488,14 @@ function Class({ ...props }) {
 												<div className="course-instructor">
 													Course Instructor
 												</div>
-												<div
-													className="course-instructor-list"
-													style={{ display: "flex", flexDirection: "column" }}
-												>
+												<div className="frame-202">
 													{teachingTeam.status === true &&
 													teachingTeam.array.length > 0 &&
 													teachingTeam.array !== []
 														? teachingTeam.array.map((member) => (
-																<>
-																	{member.type === "Course Instructor" ||
-																	member.type === "Instructor" ? (
+																member.type === "Course Instructor" ||
+																member.type === "Instructor" ? (
+																	<div className="course-instructor-list">
 																		<div>
 																			{member.name}
 																			<br />
@@ -516,8 +512,8 @@ function Class({ ...props }) {
 																			Email:{" "}
 																			{member.email ? member.email : "N/A"}
 																		</div>
-																	) : null}
-																</>
+																	</div>
+																) : null
 														  ))
 														: null}
 												</div>
@@ -539,9 +535,8 @@ function Class({ ...props }) {
 													teachingTeam.array.length > 0 &&
 													teachingTeam.array !== []
 														? teachingTeam.array.map((member) => (
-																<div className="teaching-assistant-list">
-																	{member.type !== "Course Instructor" &&
-																	member.type !== "Instructor" ? (
+																member.type === "TA" ? (
+																	<div className="teaching-assistant-list">
 																		<div>
 																			{member.name}
 																			<br />
@@ -558,8 +553,8 @@ function Class({ ...props }) {
 																			Email:{" "}
 																			{member.email ? member.email : "N/A"}
 																		</div>
-																	) : null}
-																</div>
+																	</div>
+																) : null
 														  ))
 														: null}
 												</div>

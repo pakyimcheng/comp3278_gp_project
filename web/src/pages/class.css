@@ -175,18 +175,18 @@
   position: relative;
 }
 .frame-262 {
+  max-width: 33.33vw;
   background: #7af7ff;
   border-radius: 32px;
   padding: 16px 32px 16px 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  position: relative;
+  align-items: flex-start;
+  justify-content: center;
 }
 .frame-29 {
+  width: 100%;
   background: #bde6f1;
   border-radius: 16px;
   padding: 16px 16px 16px 16px;
@@ -194,10 +194,7 @@
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  justify-content: center;
 }
 .course-instructor {
   color: #000000;
@@ -211,13 +208,12 @@
   text-align: left;
   font: 400 24px "Inter";
   position: relative;
-  align-self: stretch;
-  height: 84.25px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .frame-30 {
+  width: 100%;
   background: #bde6f1;
   border-radius: 16px;
   padding: 16px 16px 16px 16px;
@@ -225,10 +221,7 @@
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  justify-content: center;
 }
 .teaching-assistants {
   text-align: center;
