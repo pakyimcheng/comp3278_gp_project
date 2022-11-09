@@ -256,7 +256,8 @@ function Class({ ...props }) {
 											<br />
 											{ass.link !== null ? (
 												<>
-													<b>Link:</b> <a href={ass.link}>Click to Download/Visit</a>
+													<b>Link:</b>{" "}
+													<a href={ass.link}>Click to Download/Visit</a>
 													<br />
 												</>
 											) : null}
@@ -300,7 +301,7 @@ function Class({ ...props }) {
 						open={zoomModalOpen}
 						onClose={handleZoomModalClose}
 						sx={{
-							padding:"32px 0px",
+							padding: "32px 0px",
 							display: "flex",
 							overflow: "scroll",
 						}}
@@ -353,56 +354,59 @@ function Class({ ...props }) {
 								</div>
 								{lecture.status === true &&
 								lecture.array.length > 0 &&
-								lecture.array !== []
-									? lecture.array.map((l) => (
-											<>
-												<div
-													style={{
-														backgroundColor: "lightgreen",
-														borderRadius: "12px",
-														padding: "12px",
-														fontSize: "20px",
-													}}
-												>
-													<b>Location:</b> {l.class_address}
-													<br />
-													<b>Start:</b> {l.start_time}
-													<br />
-													<b>End:</b> {l.end_time}
-													<br />
-													{l.zoom_link ? (
-														<>
-															<b>Link:</b> <a href={l.zoom_link}>{l.zoom_link}</a>
-															<br />
-														</>
-													) : (
-														"No Zoom Link"
-													)}
-													<b>Notes:</b>{" "}
-													{l && l.note && l.note.length > 0 && l.note !== []
-														? Object.keys(l.note).map((key) => (
-																<div style={{ fontSize: "18px" }}>
-																	{key}: <br />
-																	<a href={l.note[key]}>{l.note[key]}</a>
-																</div>
-														))
-														: "No Note"}
-													<br />
-												</div>
-											</>
+								lecture.array !== [] ? (
+									lecture.array.map((l) => (
+										<>
+											<div
+												style={{
+													backgroundColor: "lightgreen",
+													borderRadius: "12px",
+													padding: "12px",
+													fontSize: "20px",
+												}}
+											>
+												<b>Location:</b> {l.class_address}
+												<br />
+												<b>Start:</b> {l.start_time}
+												<br />
+												<b>End:</b> {l.end_time}
+												<br />
+												{l.zoom_link ? (
+													<>
+														<b>Link:</b> <a href={l.zoom_link}>{l.zoom_link}</a>
+														<br />
+													</>
+												) : (
+													<>
+														No Zoom Link
+														<br />
+													</>
+												)}
+												<b>Notes:</b>{" "}
+												{l && l.note && l.note.length > 0 && l.note !== []
+													? Object.keys(l.note).map((key) => (
+															<div style={{ fontSize: "18px" }}>
+																{key}: <br />
+																<a href={l.note[key]}>{l.note[key]}</a>
+															</div>
+													  ))
+													: "No Note"}
+												<br />
+											</div>
+										</>
 									))
-									: 
-										<div
-											style={{
-												backgroundColor: "lightgreen",
-												borderRadius: "12px",
-												padding: "12px",
-												fontSize: "20px",
-											}}
-										>
-											No Lecture Zoom Link
-										</div>
-									}
+								) : (
+									<div
+										style={{
+											backgroundColor: "lightgreen",
+											borderRadius: "12px",
+											padding: "12px",
+											fontSize: "20px",
+										}}
+									>
+										No Lecture Zoom Link
+									</div>
+								)}
 
 								<div
 									style={{
@@ -420,50 +424,58 @@ function Class({ ...props }) {
 
 								{tutorial.status === true &&
 								tutorial.array.length > 0 &&
-								tutorial.array !== []
-									? tutorial.array.map((t) => (
-											<>
-												<div
-													style={{
-														backgroundColor: "lightgreen",
-														borderRadius: "12px",
-														padding: "12px",
-														fontSize: "20px",
-													}}
-												>
-													<b>Location:</b> {t.class_address}
-													<br />
-													<b>Start:</b> {t.start_time}
-													<br />
-													<b>End:</b> {t.end_time}
-													<br />
-													<b>Link:</b> <a href={t.zoom_link}>{t.zoom_link}</a>
-													<br />
-													<b>Notes:</b>{" "}
-													{t && t.note && t.note.length > 0 && t.note !== []
-														? Object.keys(t.note).map((key) => (
-																<div style={{ fontSize: "18px" }}>
-																	{key}: <br />
-																	<a href={t.note[key]}>{t.note[key]}</a>
-																</div>
-														))
-														: "No Note"}
-													<br />
-												</div>
-											</>
+								tutorial.array !== [] ? (
+									tutorial.array.map((t) => (
+										<>
+											<div
+												style={{
+													backgroundColor: "lightgreen",
+													borderRadius: "12px",
+													padding: "12px",
+													fontSize: "20px",
+												}}
+											>
+												<b>Location:</b> {t.class_address}
+												<br />
+												<b>Start:</b> {t.start_time}
+												<br />
+												<b>End:</b> {t.end_time}
+												<br />
+												<b>Link: </b>
+												{t.zoom_link ? (
+													<a href={t.zoom_link}>{t.zoom_link}</a>
+												) : (
+													<>
+														No Zoom Link
+														<br />
+													</>
+												)}
+												<br />
+												<b>Notes:</b>{" "}
+												{t && t.note && t.note.length > 0 && t.note !== []
+													? Object.keys(t.note).map((key) => (
+															<div style={{ fontSize: "18px" }}>
+																{key}: <br />
+																<a href={t.note[key]}>{t.note[key]}</a>
+															</div>
+													  ))
+													: "No Note"}
+												<br />
+											</div>
+										</>
 									))
-									: 
-										<div
-											style={{
-												backgroundColor: "lightgreen",
-												borderRadius: "12px",
-												padding: "12px",
-												fontSize: "20px",
-											}}
-										>
-											No Tutorial Zoom Link
-										</div>
-									}
+								) : (
+									<div
+										style={{
+											backgroundColor: "lightgreen",
+											borderRadius: "12px",
+											padding: "12px",
+											fontSize: "20px",
+										}}
+									>
+										No Tutorial Zoom Link
+									</div>
+								)}
 							</div>
 						</div>
 					</Modal>
@@ -537,7 +549,10 @@ function Class({ ...props }) {
 							</div>
 							<div className="frame-20">
 								<div className="frame-26">
-									<div style={{whiteSpace:"pre-wrap"}} className="course-message">
+									<div
+										style={{ whiteSpace: "pre-wrap" }}
+										className="course-message"
+									>
 										{courseInfo["summary.teacher_message"]}
 									</div>
 								</div>
@@ -623,7 +638,10 @@ function Class({ ...props }) {
 									</div>
 									<div className="frame-192">
 										<div className="frame-27">
-											<div style={{whiteSpace:"pre-wrap"}} className="lecture-tut-course-assessment">
+											<div
+												style={{ whiteSpace: "pre-wrap" }}
+												className="lecture-tut-course-assessment"
+											>
 												{courseInfo["summary.course_info"]}
 											</div>
 										</div>
