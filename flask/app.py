@@ -913,7 +913,12 @@ def get_weekly_timetable():
             elif time_diff.days < 7:
                 events["sunday"].append(temp)
 
-    result = {"status": True, "events": events}
+    result = {
+        "status": True, 
+        "events": events, 
+        "week_start_date": start,
+        "week_end_date": end
+    }
 
     return result
 
