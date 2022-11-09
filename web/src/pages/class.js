@@ -192,8 +192,12 @@ function Class({ ...props }) {
 											<br />
 											Weight: {ass.weighting}
 											<br />
-											Link: <a href={ass.link}>Click to Download/Visit</a>
-											<br />
+											{ass.link !== null ? (
+												<>
+													Link: <a href={ass.link}>Click to Download/Visit</a>
+													<br />
+												</>
+											) : null}
 										</div>
 									</>
 							  ))
@@ -280,8 +284,14 @@ function Class({ ...props }) {
 											<br />
 											End: {l.end_time}
 											<br />
-											Link: <a href={l.zoom_link}>{l.zoom_link}</a>
-											<br />
+											{l.zoom_link ? (
+												<>
+													Link: <a href={l.zoom_link}>{l.zoom_link}</a>
+													<br />
+												</>
+											) : (
+												"No Zoom Link"
+											)}
 											Notes:{" "}
 											{l && l.note && l.note.length > 0 && l.note !== []
 												? Object.keys(l.note).map((key) => (
