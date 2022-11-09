@@ -161,7 +161,7 @@ function Class({ ...props }) {
 								fontWeight: 700,
 							}}
 						>
-							Send All The Course Related Informations To Your Email Address?
+							{`Send All The Course Related Informations To Your Email Address: ${props.studentEmail} ?`}
 						</DialogTitle>
 						<DialogContent>
 							<DialogContentText
