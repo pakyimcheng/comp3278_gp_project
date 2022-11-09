@@ -45,11 +45,11 @@ function App() {
 				"http://127.0.0.1:5001/getNearOneHourLecture?studentID=" + studentID
 			)
 			.then(async function (res) {
-				console.log(res.data);
-				if (res.data[0]) {
-					setCourseCode(res.data[0].course_code);
-					setStartTime(res.data[0].start_time);
-					setEndTime(res.data[0].end_time);
+				console.log();
+				if (res?.data?.array && res?.data?.array[0]) {
+					setCourseCode(res?.data?.array[0]?.course_code);
+					setStartTime(res?.data?.array[0]?.start_time);
+					setEndTime(res?.data?.array[0]?.end_time);
 					setType("Lecture");
 				}
 			})
@@ -65,10 +65,10 @@ function App() {
 			)
 			.then(async function (res) {
 				console.log(res.data);
-				if (res.data[0]) {
-					setCourseCode(res.data[0].course_code);
-					setStartTime(res.data[0].start_time);
-					setEndTime(res.data[0].end_time);
+				if (res?.data?.array && res?.data?.array[0]) {
+					setCourseCode(res?.data?.array[0]?.course_code);
+					setStartTime(res?.data?.array[0]?.start_time);
+					setEndTime(res?.data?.array[0]?.end_time);
 					setType("Tutorial");
 				}
 			})
@@ -82,7 +82,7 @@ function App() {
 			setNotification((prev) => {
 				return [
 					...prev,
-					`A ${courseCode} ${type} is about to begin! \n start:${startTime} \n end: ${endTime}`,
+					`${type} is starting soon (Course Code: ${courseCode})\nStart Time: ${startTime}\nEnd Time: ${endTime}`,
 				];
 			});
 		}
@@ -193,6 +193,7 @@ function App() {
 								name={name}
 								studentEmail={studentEmail}
 								courseCode={courseCode}
+								studentID={studentID}
 							/>
 						}
 					/>

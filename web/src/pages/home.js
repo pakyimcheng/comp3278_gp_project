@@ -141,7 +141,7 @@ function Home({ ...props }) {
 						</div>
 						<div className="-notif-date---notif-----">
 							{props.notification && props.notification.length > 0 ? (
-								props.notification.map((notif) => <div>{notif}</div>)
+								props.notification.map((notif) => <div style={{whiteSpace: "pre-wrap"}}>{notif}</div>)
 							) : (
 								<div style={{ textAlign: "center" }}>No Notification Yet</div>
 							)}
