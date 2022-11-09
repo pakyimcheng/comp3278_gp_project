@@ -888,10 +888,10 @@ def get_weekly_timetable():
 
     if rows_tutorial:
         for r in rows_tutorial:
-            # follow the return style of the react library we are using
             temp = {
                 "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
-                "name": "{}: {}".format(r[1], r[4]) if r[4] else "{}".format(r[1]),  # "course_title": "class_address"
+                "course_code:": r[1],
+                "class_address": r[4],
                 "type": "tutorial",
                 "startTime": int(datetime.timestamp(r[2])) * 1000,
                 "endTime": int(datetime.timestamp(r[3])) * 1000,
@@ -916,8 +916,8 @@ def get_weekly_timetable():
     result = {
         "status": True, 
         "events": events, 
-        "week_start_date": start,
-        "week_end_date": end
+        "week_start_date": int(datetime.timestamp(start)) * 1000,
+        "week_end_date": int(datetime.timestamp(end)) * 1000
     }
 
     return result

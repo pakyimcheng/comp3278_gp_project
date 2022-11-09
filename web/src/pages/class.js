@@ -478,7 +478,7 @@ function Class({ ...props }) {
 							</div>
 							<div className="frame-20">
 								<div className="frame-26">
-									<div className="course-message">
+									<div style={{whiteSpace:"pre-wrap"}} className="course-message">
 										{courseInfo["summary.teacher_message"]}
 									</div>
 								</div>
@@ -568,7 +568,7 @@ function Class({ ...props }) {
 									</div>
 									<div className="frame-192">
 										<div className="frame-27">
-											<div className="lecture-tut-course-assessment">
+											<div style={{whiteSpace:"pre-wrap"}} className="lecture-tut-course-assessment">
 												{courseInfo["summary.course_info"]}
 											</div>
 										</div>
