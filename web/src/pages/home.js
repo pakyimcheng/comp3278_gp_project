@@ -70,28 +70,40 @@ function Home({ ...props }) {
 						onClose={handleModalClose}
 						BackdropProps={{ style: { backgroundColor: "transparent" } }}
 						style={{
-							backgroundColor: "grey",
-							boxShadow: "none",
+							backgroundColor: "white",
+							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 							width: "fit-content",
 							height: "fit-content",
-							padding: "1%",
+							padding: "32px",
 							margin: "auto",
-							borderRadius: "20px",
-							fontWeight: "bold",
-							fontSize: 39,
+							borderRadius: "12px",
+							fontWeight: "600",
+							fontSize: 38,
+							color: "#33B5E5",
 						}}
 						touchRipple={true}
 					>
-						<div style={{ display: "flex", flexDirection: "row" }}>
-							<IconButton onClick={() => handleModalClose()} size="medium">
+						<div 
+							style={{ 
+								display: "flex", 
+								flexDirection: "row",
+								gap: 12,
+							}}
+						>
+							<IconButton 
+								onClick={() => handleModalClose()} 
+								size="large"
+							>
 								<CloseCircle
 									style={{
-										color: "red",
+										color: "#FF4444",
 										fontSize: "32px",
 									}}
 								/>
 							</IconButton>
-							<div>No Upcoming Course in 1 Hour</div>
+							<div>
+								No Upcoming Course in 1 Hour
+							</div>
 						</div>
 					</Modal>
 
@@ -131,7 +143,7 @@ function Home({ ...props }) {
 							{props.notification && props.notification.length > 0 ? (
 								props.notification.map((notif) => <div>{notif}</div>)
 							) : (
-								<div style={{ textAlign: "center" }}>NO NOTIFICATION!</div>
+								<div style={{ textAlign: "center" }}>No Notification Yet</div>
 							)}
 						</div>
 					</div>

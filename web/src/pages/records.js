@@ -94,7 +94,7 @@ function Records({ ...props }) {
 					<div>
 						<FormGroup>
 							<FormControlLabel
-								label="Reverse Order(Time)"
+								label={<span style={{fontSize: 20, fontWeight: "600"}}>Reverse Order(Time)</span>}
 								control={<Switch />}
 								onChange={() => setReversed(!reversed)}
 							/>
