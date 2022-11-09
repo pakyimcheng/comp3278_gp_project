@@ -439,10 +439,10 @@ function Class({ ...props }) {
 													className="course-instructor-list"
 													style={{ display: "flex", flexDirection: "column" }}
 												>
-													{teachingTeam &&
-													teachingTeam.length > 0 &&
-													teachingTeam !== []
-														? teachingTeam.map((member) => (
+													{teachingTeam.status === true &&
+													teachingTeam.array.length > 0 &&
+													teachingTeam.array !== []
+														? teachingTeam.array.map((member) => (
 																<>
 																	{member.type === "Course Instructor" ||
 																	member.type === "Instructor" ? (
@@ -481,10 +481,10 @@ function Class({ ...props }) {
 													</span>
 												</div>
 												<div className="frame-202">
-													{teachingTeam &&
-													teachingTeam.length > 0 &&
-													teachingTeam !== []
-														? teachingTeam.map((member) => (
+													{teachingTeam.status === true &&
+													teachingTeam.array.length > 0 &&
+													teachingTeam.array !== []
+														? teachingTeam.array.map((member) => (
 																<div className="teaching-assistant-list">
 																	{member.type !== "Course Instructor" &&
 																	member.type !== "Instructor" ? (
