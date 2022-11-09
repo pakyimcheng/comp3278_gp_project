@@ -176,8 +176,11 @@ function Class({ ...props }) {
 						>
 							{courseInfo.course_code} Assignments
 						</DialogTitle>
-						{assignment && assignment.length > 0 && assignment !== []
-							? assignment.map((ass) => (
+						{/* {console.log(assignment)} */}
+						{assignment.status === true &&
+						assignment.array.length > 0 &&
+						assignment.array !== []
+							? assignment.array.map((ass) => (
 									<>
 										<div
 											style={{
@@ -217,16 +220,20 @@ function Class({ ...props }) {
 							{courseInfo.course_code} Other Materials
 						</DialogTitle>
 
-						{courseInfo && courseInfo["other_course_materials"]
-							? Object.keys(courseInfo["other_course_materials"]).map((key) => (
-									<div style={{ fontSize: "18px" }}>
-										{key}: <br />
-										<a href={courseInfo["other_course_materials"][key]}>
-											{courseInfo["other_course_materials"][key]}
-										</a>
-									</div>
-							  ))
-							: null}
+						{courseInfo && courseInfo["other_course_materials"] ? (
+							Object.keys(courseInfo["other_course_materials"]).map((key) => (
+								<div style={{ fontSize: "18px" }}>
+									{key}: <br />
+									<a href={courseInfo["other_course_materials"][key]}>
+										{courseInfo["other_course_materials"][key]}
+									</a>
+								</div>
+							))
+						) : (
+							<div style={{ fontSize: "18px" }}>
+								"No Other Course Material!"
+							</div>
+						)}
 					</Dialog>
 
 					{/* ZOOM LINK MODAL */}
@@ -268,8 +275,10 @@ function Class({ ...props }) {
 						>
 							{courseInfo.course_code} Lectures Zoom
 						</DialogTitle>
-						{lecture && lecture.length > 0 && lecture !== []
-							? lecture.map((l) => (
+						{lecture.status === true &&
+						lecture.array.length > 0 &&
+						lecture.array !== []
+							? lecture.array.map((l) => (
 									<>
 										<div
 											style={{
@@ -290,7 +299,9 @@ function Class({ ...props }) {
 													<br />
 												</>
 											) : (
-												"No Zoom Link"
+												<>
+													Zoom: No Zoom Link<br></br>
+												</>
 											)}
 											Notes:{" "}
 											{l && l.note && l.note.length > 0 && l.note !== []
@@ -300,7 +311,7 @@ function Class({ ...props }) {
 															<a href={l.note[key]}>{l.note[key]}</a>
 														</div>
 												  ))
-												: "No notes"}
+												: "No Note"}
 											<br />
 										</div>
 									</>
@@ -321,8 +332,10 @@ function Class({ ...props }) {
 							{courseInfo.course_code} Tutorial Zooms
 						</DialogTitle>
 
-						{tutorial && tutorial.length > 0 && tutorial !== []
-							? tutorial.map((t) => (
+						{tutorial.status === true &&
+						tutorial.array.length > 0 &&
+						tutorial.array !== []
+							? tutorial.array.map((t) => (
 									<>
 										<div
 											style={{
@@ -337,8 +350,16 @@ function Class({ ...props }) {
 											<br />
 											End: {t.end_time}
 											<br />
-											Link: <a href={t.zoom_link}>{t.zoom_link}</a>
-											<br />
+											{t.zoom_link ? (
+												<>
+													Link: <a href={t.zoom_link}>{t.zoom_link}</a>
+													<br />
+												</>
+											) : (
+												<>
+													Zoom: No Zoom Link<br></br>
+												</>
+											)}
 											Notes:{" "}
 											{t && t.note && t.note.length > 0 && t.note !== []
 												? Object.keys(t.note).map((key) => (
