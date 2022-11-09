@@ -428,32 +428,11 @@ def get_course_teaching_team():
     rows = cursor.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         print(r)
-    #         temp = {
-    #             "courseID": r[0],
-    #             "teacherID": r[1],
-    #             "type": r[2],
-    #             "office_hour": r[3],
-    #             "office_address": r[4],
-    #             "email": r[5],
-    #             "name": r[6],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             print(r)
             temp = {
-                "status": True,
                 "courseID": r[0],
                 "teacherID": r[1],
                 "type": r[2],
@@ -462,7 +441,12 @@ def get_course_teaching_team():
                 "email": r[5],
                 "name": r[6],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
 
     else:
         result = {"status": False}
@@ -502,42 +486,25 @@ def get_lecture():
     rows = cursor.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         temp = {
-    #             "status": True,
-    #             "courseID": r[0],
-    #             "lectureID": r[1],
-    #             "note": json.loads(r[2]) if r[2] else None,  # json byte string to json object
-    #             "start_time": r[3],
-    #             "end_time": r[4],
-    #             "zoom_link": r[5],
-    #             "class_address": r[6],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             temp = {
                 "status": True,
                 "courseID": r[0],
                 "lectureID": r[1],
-                "note": json.loads(r[2])
-                if r[2]
-                else None,  # json byte string to json object
+                "note": json.loads(r[2]) if r[2] else None,  # json byte string to json object
                 "start_time": r[3],
                 "end_time": r[4],
                 "zoom_link": r[5],
                 "class_address": r[6],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
 
     else:
         result = {"status": False}
@@ -579,42 +546,26 @@ def get_tutorial():
     rows = cursor.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         temp = {
-    #             "status": True,
-    #             "courseID": r[0],
-    #             "turorialID": r[1],
-    #             "note": json.loads(r[2]) if r[2] else None,  # json byte string to json object
-    #             "start_time": r[3],
-    #             "end_time": r[4],
-    #             "zoom_link": r[5],
-    #             "class_address": r[6],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             temp = {
                 "status": True,
                 "courseID": r[0],
                 "turorialID": r[1],
-                "note": json.loads(r[2])
-                if r[2]
-                else None,  # json byte string to json object
+                "note": json.loads(r[2]) if r[2] else None,  # json byte string to json object
                 "start_time": r[3],
                 "end_time": r[4],
                 "zoom_link": r[5],
                 "class_address": r[6],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
+
     else:
         result = {"status": False}
 
@@ -654,27 +605,8 @@ def get_assignment():
     rows = cursor.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         temp = {
-    #             "status": True,
-    #             "courseID": r[0],
-    #             "deadline": r[1],
-    #             "name": r[2],
-    #             "weighting": r[3],
-    #             "asm_id": r[4],
-    #             "link": r[5],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             temp = {
                 "status": True,
@@ -685,7 +617,13 @@ def get_assignment():
                 "asm_id": r[4],
                 "link": r[5],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
+
     else:
         result = {"status": False}
     cursor.close()
@@ -738,24 +676,8 @@ def get_near_one_hour_lecture():
     rows = result.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         temp = {
-    #             "status": True,
-    #             "course_code": r[0],
-    #             "start_time": r[1],
-    #             "end_time": r[2],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             temp = {
                 "status": True,
@@ -763,7 +685,13 @@ def get_near_one_hour_lecture():
                 "start_time": r[1],
                 "end_time": r[2],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
+
     else:
         result = {"status": False}
 
@@ -820,24 +748,8 @@ def get_near_one_hour_tutorial():
     rows = result.fetchall()
 
     # temporary code for fixing cannot parse array in react for some machines
-    # if rows:
-    #     array = []
-    #     for r in rows:
-    #         temp = {
-    #             "status": True,
-    #             "course_code": r[0],
-    #             "start_time": r[1],
-    #             "end_time": r[2],
-    #         }
-    #         array.append(temp)
-
-    #     result = {
-    #         "status": True,
-    #         "array": array
-    #     }
-
     if rows:
-        result = []
+        array = []
         for r in rows:
             temp = {
                 "status": True,
@@ -845,7 +757,13 @@ def get_near_one_hour_tutorial():
                 "start_time": r[1],
                 "end_time": r[2],
             }
-            result.append(temp)
+            array.append(temp)
+
+        result = {
+            "status": True,
+            "array": array
+        }
+
     else:
         result = {"status": False}
 
@@ -946,7 +864,7 @@ def get_weekly_timetable():
             # follow the return style of the react library we are using
             temp = {
                 "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
-                "name": r[1],  # course title
+                "name": "{}: {}".format(r[1], r[4]) if r[4] else "{}".format(r[1]),  # "course_title": "class_address"
                 "type": "lecture",
                 "startTime": int(datetime.timestamp(r[2])) * 1000,
                 "endTime": int(datetime.timestamp(r[3])) * 1000,
@@ -973,7 +891,7 @@ def get_weekly_timetable():
             # follow the return style of the react library we are using
             temp = {
                 "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
-                "name": r[1],  # course title
+                "name": "{}: {}".format(r[1], r[4]) if r[4] else "{}".format(r[1]),  # "course_title": "class_address"
                 "type": "tutorial",
                 "startTime": int(datetime.timestamp(r[2])) * 1000,
                 "endTime": int(datetime.timestamp(r[3])) * 1000,
@@ -997,162 +915,6 @@ def get_weekly_timetable():
 
     result = {"status": True, "events": events}
 
-    return result
-
-
-# TODO: delete this function if above get_weekly_timetable works
-@app.route("/getWeeklyTimetableLectures", methods=["POST"])
-def get_weekly_timetable_lectures():
-    try:
-        cnx = mysql.connector.connect(
-            user="root",
-            password=os.getenv("MYSQL_PASSWORD"),
-            host="localhost",
-            database="project",
-            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
-        )
-        cursor = cnx.cursor()
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
-
-    studentID = request.args.get("studentID")
-
-    # get current date
-    today = datetime.combine(date.today(), datetime.min.time())
-    start = today - timedelta(days=today.weekday())
-    end = start + timedelta(days=7) - timedelta(seconds=1)
-
-    starttime_str = start.strftime("%Y-%m-%d %H:%M:%S")
-    endtime_str = end.strftime("%Y-%m-%d %H:%M:%S")
-
-    cursor.execute(
-        """
-        SELECT L.courseID, C.course_code, L.start_time, L.end_time, L.class_address
-        FROM lecture L, course C
-        WHERE L.start_time >= %s AND L.start_time <= %s AND L.end_time >= %s AND L.end_time <= %s
-        AND L.courseID = C.courseID
-        AND L.courseID IN (
-            SELECT courseID
-            FROM courseList
-            WHERE courseList.studentID = %s
-        );
-        """,
-        (starttime_str, endtime_str, starttime_str, endtime_str, studentID),
-    )
-
-    rows_lecture = cursor.fetchall()
-
-    if rows_lecture:
-        events = {
-            "monday": [],
-            "tuesday": [],
-            "wednesday": [],
-            "thursday": [],
-            "friday": [],
-        }
-        for r in rows_lecture:
-            # follow the return style of the react library we are using
-            temp = {
-                "id": int(datetime.timestamp(r[2])),  # id: timestamp of startTime
-                "name": r[1],  # course title
-                "type": "custom",
-                "startTime": r[2],  # datetime object already
-                "endTime": r[3],
-            }
-
-            time_diff = r[2] - start
-            if (time_diff.days > 0) and (time_diff.days < 1):
-                events["monday"].append(temp)
-            elif time_diff.days < 2:
-                events["tuesday"].append(temp)
-            elif time_diff.days < 3:
-                events["wednesday"].append(temp)
-            elif time_diff.days < 4:
-                events["thursday"].append(temp)
-            else:
-                events["friday"].append(temp)
-
-        result = {"status": True, "events": events}
-    else:
-        result = {"status": False}
-
-    cursor.close()
-    return result
-
-
-# TODO: delete this function if above get_weekly_timetable works
-@app.route("/getWeeklyTimetableTutorials", methods=["POST"])
-def get_weekly_timetable_tutorials():
-    try:
-        cnx = mysql.connector.connect(
-            user="root",
-            password=os.getenv("MYSQL_PASSWORD"),
-            host="localhost",
-            database="project",
-            port=3306 if not os.getenv("MYSQL_PORT") else os.getenv("MYSQL_PORT"),
-        )
-        cursor = cnx.cursor()
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
-
-    studentID = request.args.get("studentID")
-
-    # get current date
-    today = datetime.combine(date.today(), datetime.min.time())
-    start = today - timedelta(days=today.weekday())
-    end = start + timedelta(days=7) - timedelta(seconds=1)
-
-    start_str = start.strftime("%Y-%m-%d %H:%M:%S")
-    end_str = end.strftime("%Y-%m-%d %H:%M:%S")
-
-    # print('today:', today)
-    # print('start:', start)
-    # print('end:', end)
-
-    cursor.execute(
-        """
-        SELECT T.courseID, C.course_code, T.start_time, T.end_time, T.class_address
-        FROM tutorial T, course C
-        WHERE T.start_time >= %s AND T.start_time <= %s AND T.end_time >= %s AND T.end_time <= %s
-        AND T.courseID = C.courseID
-        AND T.courseID IN (
-            SELECT courseID
-            FROM courseList
-            WHERE courseList.studentID = %s
-        );
-        """,
-        (start_str, end_str, start_str, end_str, studentID),
-    )
-
-    rows_tutorial = cursor.fetchall()
-
-    result = []
-    if rows_tutorial:
-        for r in rows_tutorial:
-            temp = {
-                "status": True,
-                "type": "Tutorial",
-                "courseID": r[0],
-                "course_code": r[1],
-                "start_time": r[2],
-                "end_time": r[3],
-                "class_address": r[4],
-            }
-            result.append(temp)
-    else:
-        result = {"status": False}
-
-    cursor.close()
     return result
 
 
