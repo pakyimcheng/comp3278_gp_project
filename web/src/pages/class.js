@@ -10,6 +10,9 @@ import {
 	DialogTitle,
 	IconButton,
 	Typography,
+	DialogContent,
+	DialogContentText,
+	DialogActions,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +27,7 @@ function Class({ ...props }) {
 	const [tutorial, setTutorial] = useState([]);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [zoomModalOpen, setZoomModalOpen] = useState(false);
+	const [emailDialogOpen, setEmailDialogOpen] = useState(false);
 
 	const navigate = useNavigate();
 	const [fin, setFin] = useState(false);
@@ -46,6 +50,14 @@ function Class({ ...props }) {
 
 	const handleZoomModalOpen = () => {
 		setZoomModalOpen(true);
+	};
+
+	const handleEmailDialogClose = () => {
+		setEmailDialogOpen(false);
+	};
+
+	const handleEmailDialogOpen = () => {
+		setEmailDialogOpen(true);
 	};
 
 	useEffect(() => {
@@ -136,6 +148,54 @@ function Class({ ...props }) {
 		<>
 			{fin === true ? (
 				<div>
+					{/* CONFIRM EMAIL DIALOG */}
+					<Dialog
+						open={emailDialogOpen}
+						onClose={handleEmailDialogClose}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle
+							style={{
+								fontSize: 24,
+								fontWeight: 700,
+							}}
+						>
+							Send All The Course Related Informations To Your Email Address?
+						</DialogTitle>
+						<DialogContent>
+							<DialogContentText
+								style={{
+									fontSize: 18,
+								}}
+							>
+								The Informations include course information, classroom address, teacher’s message, links of Zoom, tutorial/lecture notes and other course materials.
+							</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+							<Button 
+								onClick={handleEmailDialogClose}
+								sx={{
+									color: "#FF4444"
+								}}
+							>
+								Cancel
+							</Button>
+							<Button 
+								onClick={() => {
+									handleEmailDialogClose();
+									sendEmail();
+								}} 
+								sx={{
+									color: "#00CB51"
+								}}
+								autoFocus
+							>
+								Confirm
+							</Button>
+						</DialogActions>
+					</Dialog>
+
 					{/* OTHER MATERIAL MODAL */}
 					<Dialog
 						open={modalOpen}
@@ -462,7 +522,7 @@ function Class({ ...props }) {
 										position: "relative",
 										boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
 									}}
-									onClick={() => sendEmail()}
+									onClick={() => handleEmailDialogOpen()}
 								>
 									<Email
 										style={{
