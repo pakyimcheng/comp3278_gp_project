@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sender Mail Test</title>
+    <title>[From ICMS] Your Personal Course information Is Ready</title>
 </head>
 <body>
-<h1>Hi {{ name }} ! Here is the information you asked for!</h1>
-{{courseCode}}
-{{courseInfo}}
-{{teachingTeam}}
-{{assignment}}
-{{lecture}}
-{{tutorial}}
+<h1>Hello {{ name }}! Here is the Course information you requested.</h1>
+<h3><b>Course Code:</b></h3> {{courseCode}} <br/>
+<h3><b>Course Information:</b></h3> {{courseInfo}} <br/>
+<h3><b>Teaching Team:</b></h3>  {{teachingTeam}} <br/>
+<h3><b>Assignment:</b></h3> {{assignment}} <br/>
+<h3><b>Lecture:</b></h3> {{lecture}} <br/>
+<h3><b>Tutorial:</b></h3> {{tutorial}} <br/>
+
+<h1>Thank you for using ICMS!</h1>
 </body>
 </html>

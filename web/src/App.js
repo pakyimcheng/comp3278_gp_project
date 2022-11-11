@@ -82,7 +82,7 @@ function App() {
 			setNotification((prev) => {
 				return [
 					...prev,
-					`${type} is starting soon (Course Code: ${courseCode})\nStart Time: ${startTime}\nEnd Time: ${endTime}`,
+					`${courseCode} ${type} is starting soon!\nStart Time: ${startTime}\nEnd Time: ${endTime}`,
 				];
 			});
 		}

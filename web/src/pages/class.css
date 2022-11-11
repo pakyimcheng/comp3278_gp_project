@@ -300,17 +300,18 @@
   font: 400 28px "Inter";
 }
 .frame-263 {
-  background: #e3fcbf;
+  width: 100%;
+  background: #F7F6DC;
   border-radius: 16px;
+  border: solid #7FB77E;
+  border-width: 2.5px;
   padding: 32px 32px 32px 32px;
   display: flex;
   flex-direction: row;
   gap: 16px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .other-course-materials- {
   color: #425f57;

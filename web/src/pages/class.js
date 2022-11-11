@@ -13,9 +13,12 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogActions,
+	Snackbar,
+	Alert
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { fontWeight } from "@mui/system";
 
 function Class({ ...props }) {
 	const courseCode = props.courseCode;
@@ -28,6 +31,7 @@ function Class({ ...props }) {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [zoomModalOpen, setZoomModalOpen] = useState(false);
 	const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+	const [successAlertOpen, setSuccessAlertOpen] = useState(false);
 
 	const navigate = useNavigate();
 	const [fin, setFin] = useState(false);
@@ -161,7 +165,7 @@ function Class({ ...props }) {
 								fontWeight: 700,
 							}}
 						>
-							{`Send All The Course Related Informations To Your Email Address: ${props.studentEmail} ?`}
+							{`Send All The Course Related Information To Your Email Address ${props.studentEmail}?`}
 						</DialogTitle>
 						<DialogContent>
 							<DialogContentText
@@ -169,14 +173,15 @@ function Class({ ...props }) {
 									fontSize: 18,
 								}}
 							>
-								The Informations include course information, classroom address, teacher’s message, links of Zoom, tutorial/lecture notes and other course materials.
+								The Information include course information, classroom address, teacher’s message, links of Zoom, tutorial/lecture notes and other course materials.
 							</DialogContentText>
 						</DialogContent>
 						<DialogActions>
 							<Button 
 								onClick={handleEmailDialogClose}
 								sx={{
-									color: "#FF4444"
+									color: "#FFC090",
+									fontWeight: 500,
 								}}
 							>
 								Cancel
@@ -185,9 +190,11 @@ function Class({ ...props }) {
 								onClick={() => {
 									handleEmailDialogClose();
 									sendEmail();
+									setSuccessAlertOpen(true);
 								}} 
 								sx={{
-									color: "#00CB51"
+									color: "#7FB77E",
+									fontWeight: 500,
 								}}
 								autoFocus
 							>
@@ -197,104 +204,162 @@ function Class({ ...props }) {
 					</Dialog>
 
 					{/* OTHER MATERIAL MODAL */}
-					<Dialog
+					<Modal
 						open={modalOpen}
 						onClose={handleModalClose}
-						style={{
-							backgroundColor: "white",
-							width: "70%",
-							height: "70%",
-							margin: "auto",
-							borderRadius: "20px",
+						sx={{
+							padding: "32px 0px",
+							display: "flex",
+							overflow: "scroll",
 						}}
 					>
-						<IconButton
-							onClick={() => handleModalClose()}
-							size="large"
+						<div
 							style={{
-								position: "absolute",
+								backgroundColor: "white",
+								width: "fit-content",
+								maxWidth: "60%",
+								padding: 12,
+								margin: "auto",
+								borderRadius: "12px",
 							}}
 						>
-							<CloseCircle
+							<IconButton
+								onClick={() => handleModalClose()}
+								size="large"
 								style={{
-									color: "red",
-									fontSize: "32px",
+									position: "absolute",
 								}}
-							/>
-						</IconButton>
-						<DialogTitle
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								fontWeight: "bold",
-								fontSize: 39,
-								lineHeight: "42px",
-								color: "#425F57",
-							}}
-						>
-							{courseInfo.course_code} Assignments
-						</DialogTitle>
-						{/* {console.log(assignment)} */}
-						{assignment.status === true &&
-						assignment.array.length > 0 &&
-						assignment.array !== []
-							? assignment.array.map((ass) => (
-									<>
+							>
+								<CloseCircle
+									style={{
+										color: "red",
+										fontSize: "32px",
+									}}
+								/>
+							</IconButton>
+
+							<div
+								style={{
+									display: "flex",
+									flexDirection: "row",
+									padding: "42px 24px",
+									gap: 42,
+								}}
+							>
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "column",
+										width: "50%",
+										gap: 16,
+									}}
+								>							
+									<div
+										style={{
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											fontWeight: "bold",
+											fontSize: 39,
+											lineHeight: "42px",
+											color: "#425F57",
+											textAlign: "center",
+										}}
+									>
+										{courseInfo.course_code}<br/>Assignments
+									</div>
+									{/* {console.log(assignment)} */}
+									{assignment.status === true &&
+									assignment.array.length > 0 &&
+									assignment.array !== []
+										? assignment.array.map((ass) => (
+												<>
+													<div
+														style={{
+															backgroundColor: "lightgreen",
+															borderRadius: "12px",
+															padding: "12px",
+															fontSize: "20px",
+														}}
+													>
+														<b>Name:</b> {ass.name}
+														<br />
+														<b>Deadline:</b> {ass.deadline}
+														<br />
+														<b>Weight:</b> {ass.weighting}
+														<br />
+														{ass.link !== null ? (
+															<>
+																<b>Link:</b>{" "}
+																<a href={ass.link}>Click to Download/Visit</a>
+																<br />
+															</>
+														) : null}
+													</div>
+												</>
+										))
+										: 
 										<div
 											style={{
 												backgroundColor: "lightgreen",
 												borderRadius: "12px",
-												margin: "8px",
+												padding: "12px",
+												fontSize: "20px",
 											}}
 										>
-											<b>Name:</b> {ass.name}
-											<br />
-											<b>Deadline:</b> {ass.deadline}
-											<br />
-											<b>Weight:</b> {ass.weighting}
-											<br />
-											{ass.link !== null ? (
-												<>
-													<b>Link:</b>{" "}
-													<a href={ass.link}>Click to Download/Visit</a>
-													<br />
-												</>
-											) : null}
+											No Assignments
 										</div>
-									</>
-							  ))
-							: null}
-
-						<DialogTitle
-							style={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								fontWeight: "bold",
-								fontSize: 39,
-								lineHeight: "42px",
-								color: "#425F57",
-							}}
-						>
-							{courseInfo.course_code} Other Materials
-						</DialogTitle>
-
-						{courseInfo && courseInfo["other_course_materials"] ? (
-							Object.keys(courseInfo["other_course_materials"]).map((key) => (
-								<div style={{ fontSize: "18px" }}>
-									{key}: <br />
-									<a href={courseInfo["other_course_materials"][key]}>
-										{courseInfo["other_course_materials"][key]}
-									</a>
+										}
 								</div>
-							))
-						) : (
-							<div style={{ fontSize: "18px" }}>
-								"No Other Course Material!"
+
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "column",
+										width: "50%",
+										gap: 16,
+									}}
+								>	
+									<div
+										style={{
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											fontWeight: "bold",
+											fontSize: 39,
+											lineHeight: "42px",
+											color: "#425F57",
+											textAlign: "center",
+										}}
+									>
+										{courseInfo.course_code}<br/>Other Materials
+									</div>
+
+									{courseInfo && courseInfo["other_course_materials"] ? (
+										Object.keys(courseInfo["other_course_materials"]).map((key) => (
+											<div style={{ fontSize: "18px" }}>
+												{key}: <br />
+												<a href={courseInfo["other_course_materials"][key]}>
+													{courseInfo["other_course_materials"][key]}
+												</a>
+											</div>
+										))
+									) : (
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												padding: "12px",
+												fontSize: "20px",
+											}}
+										>
+											No Other Course Material
+										</div>
+									)}
+								</div>
 							</div>
-						)}
-					</Dialog>
+						</div>
+					</Modal>
 
 					{/* ZOOM LINK MODAL */}
 					<Modal
@@ -310,7 +375,7 @@ function Class({ ...props }) {
 							style={{
 								backgroundColor: "white",
 								width: "fit-content",
-								maxWidth: "60%",
+								maxWidth: "70%",
 								padding: 12,
 								margin: "auto",
 								borderRadius: "12px",
@@ -334,148 +399,167 @@ function Class({ ...props }) {
 							<div
 								style={{
 									display: "flex",
-									flexDirection: "column",
-									padding: 42,
-									gap: 24,
+									flexDirection: "row",
+									padding: "42px 24px",
+									gap: 42,
 								}}
 							>
 								<div
 									style={{
 										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										fontWeight: "bold",
-										fontSize: 39,
-										lineHeight: "42px",
-										color: "#425F57",
+										flexDirection: "column",
+										width: "50%",
+										gap: 16,
 									}}
 								>
-									{courseInfo.course_code} Lectures Zoom
-								</div>
-								{lecture.status === true &&
-								lecture.array.length > 0 &&
-								lecture.array !== [] ? (
-									lecture.array.map((l) => (
-										<>
-											<div
-												style={{
-													backgroundColor: "lightgreen",
-													borderRadius: "12px",
-													padding: "12px",
-													fontSize: "20px",
-												}}
-											>
-												<b>Location:</b> {l.class_address}
-												<br />
-												<b>Start:</b> {l.start_time}
-												<br />
-												<b>End:</b> {l.end_time}
-												<br />
-												{l.zoom_link ? (
-													<>
-														<b>Link:</b> <a href={l.zoom_link}>{l.zoom_link}</a>
-														<br />
-													</>
-												) : (
-													<>
-														No Zoom Link
-														<br />
-													</>
-												)}
-												<b>Notes:</b>{" "}
-												{l && l.note && l.note.length > 0 && l.note !== []
-													? Object.keys(l.note).map((key) => (
-															<div style={{ fontSize: "18px" }}>
-																{key}: <br />
-																<a href={l.note[key]}>{l.note[key]}</a>
-															</div>
-													  ))
-													: "No Note"}
-												<br />
-											</div>
-										</>
-									))
-								) : (
 									<div
 										style={{
-											backgroundColor: "lightgreen",
-											borderRadius: "12px",
-											padding: "12px",
-											fontSize: "20px",
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											fontWeight: "bold",
+											fontSize: 39,
+											lineHeight: "42px",
+											color: "#425F57",
+											textAlign: "center",
 										}}
 									>
-										No Lecture Zoom Link
+										{courseInfo.course_code} <br/> Lectures Zooms
 									</div>
-								)}
+									{lecture.status === true &&
+									lecture.array.length > 0 &&
+									lecture.array !== [] ? (
+										lecture.array.map((l) => (
+											<>
+												<div
+													style={{
+														backgroundColor: "lightgreen",
+														borderRadius: "12px",
+														padding: "12px",
+														fontSize: "20px",
+													}}
+												>
+													<b>Location:</b> {l.class_address}
+													<br />
+													<b>Start:</b> {l.start_time}
+													<br />
+													<b>End:</b> {l.end_time}
+													<br />
+													{l.zoom_link ? (
+														<>
+															<b>Link:</b> <a href={l.zoom_link}>{l.zoom_link}</a>
+															<br />
+														</>
+													) : (
+														<>
+															<b>Link:</b> No Zoom Link
+															<br />
+														</>
+													)}
+													<b>Notes:</b>{" "}
+													{l && l.note && l.note.length > 0 && l.note !== []
+														? Object.keys(l.note).map((key) => (
+																<div style={{ fontSize: "18px" }}>
+																	{key}: <br />
+																	<a href={l.note[key]}>{l.note[key]}</a>
+																</div>
+														))
+														: "No Note"}
+													<br />
+												</div>
+											</>
+										))
+									) : (
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												padding: "12px",
+												fontSize: "20px",
+											}}
+										>
+											No Lecture Zoom Link
+										</div>
+									)}
+								</div>
 
 								<div
 									style={{
 										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										fontWeight: "bold",
-										fontSize: 39,
-										lineHeight: "42px",
-										color: "#425F57",
+										flexDirection: "column",
+										width: "50%",
+										gap: 16,
 									}}
-								>
-									{courseInfo.course_code} Tutorial Zooms
-								</div>
-
-								{tutorial.status === true &&
-								tutorial.array.length > 0 &&
-								tutorial.array !== [] ? (
-									tutorial.array.map((t) => (
-										<>
-											<div
-												style={{
-													backgroundColor: "lightgreen",
-													borderRadius: "12px",
-													padding: "12px",
-													fontSize: "20px",
-												}}
-											>
-												<b>Location:</b> {t.class_address}
-												<br />
-												<b>Start:</b> {t.start_time}
-												<br />
-												<b>End:</b> {t.end_time}
-												<br />
-												<b>Link: </b>
-												{t.zoom_link ? (
-													<a href={t.zoom_link}>{t.zoom_link}</a>
-												) : (
-													<>
-														No Zoom Link
-														<br />
-													</>
-												)}
-												<br />
-												<b>Notes:</b>{" "}
-												{t && t.note && t.note.length > 0 && t.note !== []
-													? Object.keys(t.note).map((key) => (
-															<div style={{ fontSize: "18px" }}>
-																{key}: <br />
-																<a href={t.note[key]}>{t.note[key]}</a>
-															</div>
-													  ))
-													: "No Note"}
-												<br />
-											</div>
-										</>
-									))
-								) : (
+								>			
 									<div
 										style={{
-											backgroundColor: "lightgreen",
-											borderRadius: "12px",
-											padding: "12px",
-											fontSize: "20px",
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											fontWeight: "bold",
+											fontSize: 39,
+											lineHeight: "42px",
+											color: "#425F57",
+											textAlign: "center",
 										}}
 									>
-										No Tutorial Zoom Link
+										{courseInfo.course_code} <br/> Tutorial Zooms
 									</div>
-								)}
+
+									{tutorial.status === true &&
+									tutorial.array.length > 0 &&
+									tutorial.array !== [] ? (
+										tutorial.array.map((t) => (
+											<>
+												<div
+													style={{
+														backgroundColor: "lightgreen",
+														borderRadius: "12px",
+														padding: "12px",
+														fontSize: "20px",
+													}}
+												>
+													<b>Location:</b> {t.class_address}
+													<br />
+													<b>Start:</b> {t.start_time}
+													<br />
+													<b>End:</b> {t.end_time}
+													<br />
+													<b>Link: </b>
+													{t.zoom_link ? (
+														<a href={t.zoom_link}>{t.zoom_link}</a>
+													) : (
+														<>
+															No Zoom Link
+															<br />
+														</>
+													)}
+													<b>Notes:</b>{" "}
+													{t && t.note && t.note.length > 0 && t.note !== []
+														? Object.keys(t.note).map((key) => (
+																<div style={{ fontSize: "18px" }}>
+																	{key}: <br />
+																	<a href={t.note[key]}>{t.note[key]}</a>
+																</div>
+														))
+														: "No Note"}
+													<br />
+												</div>
+											</>
+										))
+									) : (
+										<div
+											style={{
+												backgroundColor: "lightgreen",
+												borderRadius: "12px",
+												padding: "12px",
+												fontSize: "20px",
+											}}
+										>
+											No Tutorial Zoom Link
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</Modal>
@@ -645,19 +729,33 @@ function Class({ ...props }) {
 												{courseInfo["summary.course_info"]}
 											</div>
 										</div>
-
-										<div className="frame-263">
-											<Button onClick={handleModalOpen}>
+										<Button 
+											onClick={handleModalOpen}
+											sx={{
+												padding: 0,
+												width: "100%",
+												borderRadius: 4,
+											}}
+										>
+											<div className="frame-263">
 												<div className="other-course-materials-">
-													Other Course Materials:
+													View Other Course Materials
 												</div>
-											</Button>
-										</div>
+											</div>
+										</Button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
+					<Snackbar
+						open={successAlertOpen}
+						autoHideDuration={2500}
+						onClose={() => setSuccessAlertOpen(false)}
+					>
+						<Alert severity="success">Success! Please Check Your Email.</Alert>
+					</Snackbar>
 				</div>
 			) : (
 				"LOADING"
