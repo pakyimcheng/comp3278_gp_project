@@ -3,6 +3,7 @@
   box-sizing: border-box;
 }
 .landing {
+  width: 100%;
   padding: 32px 48px 32px 48px;
   display: flex;
   flex-direction: row;
@@ -12,6 +13,7 @@
   position: relative;
 }
 .landing-page-frame {
+  width: 100%;
   height: 960px;
   background: linear-gradient(
     117.03deg,
