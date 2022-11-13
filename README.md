@@ -70,26 +70,6 @@
 
 9. Create a database named 'project'. Import the .sql file in discord to 'project' database.
 
-## Start the application
-1. Activate the environment, cd to the web folder and install packages for nodejs
-```
-cd web
-npm install
-```
-
-2. Start the frontend
-```
-npm start
-```
-
-3. Open another terminal, activate the environment.
-    cd to the flask folder and run the backend
-```
-cd flask
-python app.py
-```
-
-
 ## MYSQL setup
 
 Assume XAMPP is installed in your computer.
@@ -144,3 +124,31 @@ The model is a bit rough but still performs better than opencv default one.
     python inference.py
     ```
     
+## Start the application
+1. Activate the environment, cd to the web folder and install packages for nodejs
+```
+cd web
+npm install
+```
+
+2. Start the frontend
+```
+npm start
+```
+
+3. Open another terminal, activate the environment.
+    cd to the flask folder and run the backend
+```
+cd flask
+python app.py
+```
+4. Navigating to the Application
+```
+Open a Web Browser and go to http://localhost:3000/
+Login using Facial Recognition or email and Password
+```
+
+4. Using the Application  
+If you have a Lecture/Tutorial in the next 60 minutes, you will see a notification at the  left side of the Home Page and you can naviagte to the "Upcoming Course" Page and see the course Info.    
+Else, you can always go to the "TimeTable" Page to view your personal timetable in the current week.
+To view all your login records, head to the Records Page, you will find all your login records there, including login ID, IP Address and Login Duration.

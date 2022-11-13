@@ -20,7 +20,6 @@ function TimeTable({ ...props }) {
 						props.studentID
 				)
 				.then(async function (res) {
-					console.log(res.data.status);
 					if (res.data.status === true) {
 						const days = [
 							"monday",

@@ -14,7 +14,7 @@ import {
 	DialogContentText,
 	DialogActions,
 	Snackbar,
-	Alert
+	Alert,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -118,7 +118,6 @@ function Class({ ...props }) {
 			await axios
 				.post("http://127.0.0.1:5001/getLecture?courseID=" + courseID)
 				.then(async function (res) {
-					console.log(res.data);
 					setLecture(res.data);
 				})
 				.catch((err) => {
@@ -128,7 +127,6 @@ function Class({ ...props }) {
 				.post("http://127.0.0.1:5001/getTutorial?courseID=" + courseID)
 				.then(async function (res) {
 					setTutorial(res.data);
-					console.log(res.data);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -173,11 +171,13 @@ function Class({ ...props }) {
 									fontSize: 18,
 								}}
 							>
-								The Information include course information, classroom address, teacher’s message, links of Zoom, tutorial/lecture notes and other course materials.
+								The Information include course information, classroom address,
+								teacher’s message, links of Zoom, tutorial/lecture notes and
+								other course materials.
 							</DialogContentText>
 						</DialogContent>
 						<DialogActions>
-							<Button 
+							<Button
 								onClick={handleEmailDialogClose}
 								sx={{
 									color: "#FFC090",
@@ -186,12 +186,12 @@ function Class({ ...props }) {
 							>
 								Cancel
 							</Button>
-							<Button 
+							<Button
 								onClick={() => {
 									handleEmailDialogClose();
 									sendEmail();
 									setSuccessAlertOpen(true);
-								}} 
+								}}
 								sx={{
 									color: "#7FB77E",
 									fontWeight: 500,
@@ -253,7 +253,7 @@ function Class({ ...props }) {
 										width: "50%",
 										gap: 16,
 									}}
-								>							
+								>
 									<div
 										style={{
 											display: "flex",
@@ -266,39 +266,40 @@ function Class({ ...props }) {
 											textAlign: "center",
 										}}
 									>
-										{courseInfo.course_code}<br/>Assignments
+										{courseInfo.course_code}
+										<br />
+										Assignments
 									</div>
-									{/* {console.log(assignment)} */}
 									{assignment.status === true &&
 									assignment.array.length > 0 &&
-									assignment.array !== []
-										? assignment.array.map((ass) => (
-												<>
-													<div
-														style={{
-															backgroundColor: "lightgreen",
-															borderRadius: "12px",
-															padding: "12px",
-															fontSize: "20px",
-														}}
-													>
-														<b>Name:</b> {ass.name}
-														<br />
-														<b>Deadline:</b> {ass.deadline}
-														<br />
-														<b>Weight:</b> {ass.weighting}
-														<br />
-														{ass.link !== null ? (
-															<>
-																<b>Link:</b>{" "}
-																<a href={ass.link}>Click to Download/Visit</a>
-																<br />
-															</>
-														) : null}
-													</div>
-												</>
+									assignment.array !== [] ? (
+										assignment.array.map((ass) => (
+											<>
+												<div
+													style={{
+														backgroundColor: "lightgreen",
+														borderRadius: "12px",
+														padding: "12px",
+														fontSize: "20px",
+													}}
+												>
+													<b>Name:</b> {ass.name}
+													<br />
+													<b>Deadline:</b> {ass.deadline}
+													<br />
+													<b>Weight:</b> {ass.weighting}
+													<br />
+													{ass.link !== null ? (
+														<>
+															<b>Link:</b>{" "}
+															<a href={ass.link}>Click to Download/Visit</a>
+															<br />
+														</>
+													) : null}
+												</div>
+											</>
 										))
-										: 
+									) : (
 										<div
 											style={{
 												backgroundColor: "lightgreen",
@@ -309,7 +310,7 @@ function Class({ ...props }) {
 										>
 											No Assignments
 										</div>
-										}
+									)}
 								</div>
 
 								<div
@@ -319,7 +320,7 @@ function Class({ ...props }) {
 										width: "50%",
 										gap: 16,
 									}}
-								>	
+								>
 									<div
 										style={{
 											display: "flex",
@@ -332,18 +333,22 @@ function Class({ ...props }) {
 											textAlign: "center",
 										}}
 									>
-										{courseInfo.course_code}<br/>Other Materials
+										{courseInfo.course_code}
+										<br />
+										Other Materials
 									</div>
 
 									{courseInfo && courseInfo["other_course_materials"] ? (
-										Object.keys(courseInfo["other_course_materials"]).map((key) => (
-											<div style={{ fontSize: "18px" }}>
-												{key}: <br />
-												<a href={courseInfo["other_course_materials"][key]}>
-													{courseInfo["other_course_materials"][key]}
-												</a>
-											</div>
-										))
+										Object.keys(courseInfo["other_course_materials"]).map(
+											(key) => (
+												<div style={{ fontSize: "18px" }}>
+													{key}: <br />
+													<a href={courseInfo["other_course_materials"][key]}>
+														{courseInfo["other_course_materials"][key]}
+													</a>
+												</div>
+											)
+										)
 									) : (
 										<div
 											style={{
@@ -424,7 +429,7 @@ function Class({ ...props }) {
 											textAlign: "center",
 										}}
 									>
-										{courseInfo.course_code} <br/> Lectures Zooms
+										{courseInfo.course_code} <br /> Lectures Zooms
 									</div>
 									{lecture.status === true &&
 									lecture.array.length > 0 &&
@@ -447,7 +452,8 @@ function Class({ ...props }) {
 													<br />
 													{l.zoom_link ? (
 														<>
-															<b>Link:</b> <a href={l.zoom_link}>{l.zoom_link}</a>
+															<b>Link:</b>{" "}
+															<a href={l.zoom_link}>{l.zoom_link}</a>
 															<br />
 														</>
 													) : (
@@ -463,7 +469,7 @@ function Class({ ...props }) {
 																	{key}: <br />
 																	<a href={l.note[key]}>{l.note[key]}</a>
 																</div>
-														))
+														  ))
 														: "No Note"}
 													<br />
 												</div>
@@ -490,7 +496,7 @@ function Class({ ...props }) {
 										width: "50%",
 										gap: 16,
 									}}
-								>			
+								>
 									<div
 										style={{
 											display: "flex",
@@ -503,7 +509,7 @@ function Class({ ...props }) {
 											textAlign: "center",
 										}}
 									>
-										{courseInfo.course_code} <br/> Tutorial Zooms
+										{courseInfo.course_code} <br /> Tutorial Zooms
 									</div>
 
 									{tutorial.status === true &&
@@ -541,7 +547,7 @@ function Class({ ...props }) {
 																	{key}: <br />
 																	<a href={t.note[key]}>{t.note[key]}</a>
 																</div>
-														))
+														  ))
 														: "No Note"}
 													<br />
 												</div>
@@ -651,7 +657,7 @@ function Class({ ...props }) {
 													{teachingTeam.status === true &&
 													teachingTeam.array.length > 0 &&
 													teachingTeam.array !== []
-														? teachingTeam.array.map((member) => (
+														? teachingTeam.array.map((member) =>
 																member.type === "Course Instructor" ||
 																member.type === "Instructor" ? (
 																	<div className="course-instructor-list">
@@ -673,7 +679,7 @@ function Class({ ...props }) {
 																		</div>
 																	</div>
 																) : null
-														  ))
+														  )
 														: null}
 												</div>
 											</div>
@@ -693,7 +699,7 @@ function Class({ ...props }) {
 													{teachingTeam.status === true &&
 													teachingTeam.array.length > 0 &&
 													teachingTeam.array !== []
-														? teachingTeam.array.map((member) => (
+														? teachingTeam.array.map((member) =>
 																member.type === "TA" ? (
 																	<div className="teaching-assistant-list">
 																		<div>
@@ -714,7 +720,7 @@ function Class({ ...props }) {
 																		</div>
 																	</div>
 																) : null
-														  ))
+														  )
 														: null}
 												</div>
 											</div>
@@ -729,7 +735,7 @@ function Class({ ...props }) {
 												{courseInfo["summary.course_info"]}
 											</div>
 										</div>
-										<Button 
+										<Button
 											onClick={handleModalOpen}
 											sx={{
 												padding: 0,

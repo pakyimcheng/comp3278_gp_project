@@ -36,7 +36,6 @@ function Records({ ...props }) {
 				studentID: props.studentID,
 			})
 			.then(async function (res) {
-				console.log(res);
 				setRecords(res.data.logininfo);
 			})
 			.catch((err) => {
@@ -94,7 +93,11 @@ function Records({ ...props }) {
 					<div>
 						<FormGroup>
 							<FormControlLabel
-								label={<span style={{fontSize: 20, fontWeight: "600"}}>Reverse Order(Time)</span>}
+								label={
+									<span style={{ fontSize: 20, fontWeight: "600" }}>
+										Reverse Order(Time)
+									</span>
+								}
 								control={<Switch />}
 								onChange={() => setReversed(!reversed)}
 							/>

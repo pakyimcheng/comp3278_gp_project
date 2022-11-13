@@ -45,7 +45,6 @@ function App() {
 				"http://127.0.0.1:5001/getNearOneHourLecture?studentID=" + studentID
 			)
 			.then(async function (res) {
-				console.log();
 				if (res?.data?.array && res?.data?.array[0]) {
 					setCourseCode(res?.data?.array[0]?.course_code);
 					setStartTime(res?.data?.array[0]?.start_time);
@@ -64,7 +63,6 @@ function App() {
 				"http://127.0.0.1:5001/getNearOneHourTutorial?studentID=" + studentID
 			)
 			.then(async function (res) {
-				console.log(res.data);
 				if (res?.data?.array && res?.data?.array[0]) {
 					setCourseCode(res?.data?.array[0]?.course_code);
 					setStartTime(res?.data?.array[0]?.start_time);
@@ -81,7 +79,7 @@ function App() {
 		if (startTime !== "") {
 			setNotification((prev) => {
 				return [
-					...prev,
+					...prev.slice(Math.max(prev.length - 2, 0)),
 					`${courseCode} ${type} is starting soon!\nStart Time: ${startTime}\nEnd Time: ${endTime}`,
 				];
 			});
@@ -145,6 +143,13 @@ function App() {
 			setName("");
 			setStudentID("");
 			setStudentEmail("");
+			setIP_Address("");
+			setDuration(0);
+			setCourseCode("");
+			setStartTime("");
+			setEndTime("");
+			setType("");
+			setNotification([]);
 			clearInterval(interval);
 			clearInterval(intervalTutor);
 			clearInterval(intervalLecture);
@@ -157,7 +162,7 @@ function App() {
 		<BrowserRouter>
 			<Navbar login={login} setLogin={setLogin} courseCode={courseCode} />
 			<div className="App">
-				The user is currently logged in: {login ? "true" : "false"}
+				{/* The user is currently logged in: {login ? "true" : "false"}
 				<br />
 				Email: {studentEmail}
 				<br />
@@ -165,7 +170,7 @@ function App() {
 				<br />
 				Course Code = {courseCode}
 				<br />
-				studentID = {studentID}
+				studentID = {studentID} */}
 				<Routes>
 					<Route
 						exact
