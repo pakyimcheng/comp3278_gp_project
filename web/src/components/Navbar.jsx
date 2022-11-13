@@ -28,13 +28,14 @@ function Navbar({ login, setLogin, courseCode }) {
 		>
 			<div
 				style={{
+					overflow: "hidden",
 					display: "flex",
 					flexDirection: "row",
 					justifyContent: "space-between",
 					alignItems: "center",
 					padding: "0px",
 					gap: "97px",
-					height: "68px",
+					height: 74,
 					background: "linear-gradient(90.13deg, #E3FCBF 0%, #8BF5E2 100%)",
 					width: "100%",
 				}}
@@ -44,6 +45,7 @@ function Navbar({ login, setLogin, courseCode }) {
 						component={Link}
 						to="/"
 						style={{
+							height: 72,
 							borderRadius: "0px 16px 16px 0px",
 							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 						}}
@@ -51,7 +53,7 @@ function Navbar({ login, setLogin, courseCode }) {
 						<img
 							alt=""
 							src="logo.png"
-							height={"68px"}
+							height={"72px"}
 							style={{
 								borderRadius: "0px 16px 16px 0px",
 							}}
@@ -60,6 +62,7 @@ function Navbar({ login, setLogin, courseCode }) {
 				) : (
 					<div
 						style={{
+							height: 72,
 							borderRadius: "0px 16px 16px 0px",
 							boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 						}}
@@ -67,7 +70,7 @@ function Navbar({ login, setLogin, courseCode }) {
 						<img
 							alt=""
 							src="logo.png"
-							height={"68px"}
+							height={"72px"}
 							style={{
 								borderRadius: "0px 16px 16px 0px",
 							}}
