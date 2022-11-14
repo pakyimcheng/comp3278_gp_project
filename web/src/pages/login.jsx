@@ -443,11 +443,6 @@ const Login = ({
 									}}
 								>
 									Facial Authentication{"\n"}
-									{result}
-									{"\n"}
-									{confidence}
-									{"\n"}
-									{String(verify)}
 								</span>
 							</div>
 							<video
