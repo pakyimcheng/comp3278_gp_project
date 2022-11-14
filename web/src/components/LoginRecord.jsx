@@ -147,12 +147,6 @@ function LoginRecord(props) {
 				</div>
 			</div>
 		</div>
-		// <tr>
-		//     <td>{props.number}</td>
-		//     <td>{props.time}</td>
-		//     <td>{props.login_date_time}</td>
-		//     <td>{props.IPAddress}</td>
-		// </tr>
 	);
 }
 

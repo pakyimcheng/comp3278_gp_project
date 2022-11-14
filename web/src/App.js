@@ -162,15 +162,6 @@ function App() {
 		<BrowserRouter>
 			<Navbar login={login} setLogin={setLogin} courseCode={courseCode} />
 			<div className="App">
-				{/* The user is currently logged in: {login ? "true" : "false"}
-				<br />
-				Email: {studentEmail}
-				<br />
-				SessionID: {sessionID}
-				<br />
-				Course Code = {courseCode}
-				<br />
-				studentID = {studentID} */}
 				<Routes>
 					<Route
 						exact
