@@ -40,11 +40,89 @@ def sendEmail():
     recipient = request.get_json()["recipient"]
     name = request.get_json()["name"]
     courseCode = request.get_json()["courseCode"]
+
     courseInfo = request.get_json()["courseInfo"]
+    if(courseInfo["summary.teacher_message"]):
+        courseTeacherMessage = courseInfo["summary.teacher_message"]
+    else:
+        courseTeacherMessage = "N/A"
+
     teachingTeam = request.get_json()["teachingTeam"]
+    teachingString = ""
+    teachingTeam=teachingTeam["array"]
+    for i in range(len(teachingTeam)):
+        tempString = "Name:\n"
+        tempString+=(teachingTeam[i]["name"]+"\n")
+        tempString+="Email:\n"
+        tempString+=(teachingTeam[i]["email"]+"\n")
+        tempString+="Office Address:\n"
+        tempString+=(teachingTeam[i]["office_address"])if(teachingTeam[i]["office_address"]) else "NONE\n"
+        tempString+="\nOffice Hour:\n"
+        tempString+=(teachingTeam[i]["office_hour"]+"\n")if(teachingTeam[i]["office_hour"]) else "NONE\n"
+        tempString+="Teaching Type:\n"
+        tempString+=(teachingTeam[i]["type"])
+        teachingString+=(tempString+"\n\n")
+
     assignment = request.get_json()["assignment"]
+    asmString = ""
+    assignment=assignment["array"]
+    for i in range(len(assignment)):
+        tempString = "Name:\n"
+        tempString+=(assignment[i]["name"]+"\n")
+        tempString+="Link:\n"
+        tempString+=(assignment[i]["link"]+"\n")
+        tempString+="Deadline:\n"
+        tempString+=(assignment[i]["deadline"]+"\n")
+        tempString+="Weighting:\n"
+        tempString+=str(assignment[i]["weighting"])
+        asmString+=(tempString+"\n\n")
+
     lecture = request.get_json()["lecture"]
+    lectureString = ""
+    lecture=lecture["array"]
+    for i in range(len(lecture)):
+        tempString = "Class Address:\n"
+        tempString+=(lecture[i]["class_address"]+"\n")
+        tempString+="Start Time:\n"
+        tempString+=(lecture[i]["start_time"]+"\n")
+        tempString+="End Time:\n"
+        tempString+=(lecture[i]["end_time"]+"\n")
+        tempString+="Note:\n"
+        for key in lecture[i]["note"]:
+            tempString+=("From Class: "+ key +"\n")
+            tempString+=("Link: "+ lecture[i]["note"][key] +"\n")
+        tempString+="Zoom Link:\n"
+        if(lecture[i]["zoom_link"]):
+            tempString+=(lecture[i]["zoom_link"]+"\n")
+        else:
+            tempString+=("Not available\n")
+        lectureString+=(tempString+"\n\n")
+
     tutorial = request.get_json()["tutorial"]
+    tutorialString = ""
+    tutorial=tutorial["array"]
+    for i in range(len(tutorial)):
+        tempString = "Class Address:\n"
+        tempString+=(lecture[i]["class_address"]+"\n")
+        tempString+="Start Time:\n"
+        tempString+=(lecture[i]["start_time"]+"\n")
+        tempString+="End Time:\n"
+        tempString+=(lecture[i]["end_time"]+"\n")
+        tempString+="Note:\n"
+        for key in lecture[i]["note"]:
+            tempString+=("From Class: "+ key +"\n")
+            tempString+=("Download Link: "+ lecture[i]["note"][key] +"\n")
+        tempString+="Zoom Link:\n"
+        if(lecture[i]["zoom_link"]):
+            tempString+=(lecture[i]["zoom_link"]+"\n")
+        else:
+            tempString+=("Not available\n")
+        tutorialString+=(tempString+"\n\n")
+
+    courseMaterial = "Other Course Material:\n"
+    for key in courseInfo["other_course_materials"]:
+        courseMaterial +=("Material Name: "+key+"\n"+"Download Link: "+courseInfo["other_course_materials"][key]+"\n")
+
     msg = Message(
         "ICMS: " + courseCode + " Course Infomation",
         sender="2022ICMS@gmail.com",
@@ -54,11 +132,14 @@ def sendEmail():
         "template.html",
         name=name,
         courseCode=courseCode,
-        courseInfo=courseInfo,
-        teachingTeam=teachingTeam,
-        assignment=assignment,
-        lecture=lecture,
-        tutorial=tutorial,
+        courseName=courseInfo["course_name"],
+        courseSummary=courseInfo["summary.course_info"].replace("\\n\r", "").replace("\n\r", ""),
+        courseTeacherMessage=courseTeacherMessage.replace("\\n\r", "").replace("\n\r", ""),
+        teachingTeam=teachingString,
+        assignment=asmString,
+        lecture=lectureString,
+        tutorial=tutorialString,
+        otherCourseMaterials=courseMaterial,
     )
     mail.send(msg)
     return "Sent"
