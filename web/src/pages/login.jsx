@@ -442,7 +442,9 @@ const Login = ({
 										textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 									}}
 								>
-									Facial Authentication{"\n"}
+									Facial Authentication{"\n"}<br></br>
+									{String(verify) === "true" && result !== "NULL" ? "Detecting...": null}
+									{result === "NULL" ? <><br />Cannot Detect! Please Try Again</> : null}
 								</span>
 							</div>
 							<video
