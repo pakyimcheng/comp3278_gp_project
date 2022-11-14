@@ -341,11 +341,21 @@ function Class({ ...props }) {
 									{courseInfo && courseInfo["other_course_materials"] ? (
 										Object.keys(courseInfo["other_course_materials"]).map(
 											(key) => (
-												<div style={{ fontSize: "18px" }}>
-													{key}: <br />
-													<a href={courseInfo["other_course_materials"][key]}>
-														{courseInfo["other_course_materials"][key]}
-													</a>
+												<div
+													style={{
+														backgroundColor: "lightgreen",
+														borderRadius: "12px",
+														padding: "12px",
+														fontSize: "20px",
+														wordBreak: "break-all",
+													}}
+												>
+													<div style={{ fontSize: "18px" }}>
+														<b>{key}:</b> <br />
+														<a href={courseInfo["other_course_materials"][key]}>
+															{courseInfo["other_course_materials"][key]}
+														</a>
+													</div>
 												</div>
 											)
 										)
