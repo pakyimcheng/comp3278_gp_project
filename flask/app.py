@@ -871,7 +871,9 @@ def get_weekly_timetable():
             }
 
             time_diff = r[2] - start
-            if (time_diff.days > 0) and (time_diff.days < 1):
+            # print("start time:", r[2], "; end time:", r[3])
+            # print("time_diff = ", time_diff)
+            if (time_diff.days >= 0) and (time_diff.days < 1):
                 events["monday"].append(temp)
             elif time_diff.days < 2:
                 events["tuesday"].append(temp)
@@ -898,7 +900,9 @@ def get_weekly_timetable():
             }
 
             time_diff = r[2] - start
-            if (time_diff.days > 0) and (time_diff.days < 1):
+            # print("start time:", r[2], "; end time:", r[3])
+            # print("time_diff = ", time_diff)
+            if (time_diff.days >= 0) and (time_diff.days < 1):
                 events["monday"].append(temp)
             elif time_diff.days < 2:
                 events["tuesday"].append(temp)
