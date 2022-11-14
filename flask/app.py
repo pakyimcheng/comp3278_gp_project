@@ -465,8 +465,8 @@ def get_course_info():
             "courseID": r[0],
             "course_code": r[1],
             "course_name": r[2],
-            "summary.course_info": r[3],
-            "summary.teacher_message": r[4],
+            "summary.course_info": r[3].replace("\\n\r", "\n").replace("\n\r", ""),
+            "summary.teacher_message": r[4].replace("\\n\r", "\n").replace("\n\r", ""),
             "other_course_materials": json.loads(r[5]) if r[5] else None,
         }
 
