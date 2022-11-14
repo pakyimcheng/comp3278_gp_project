@@ -119,7 +119,7 @@ def sendEmail():
             tempString+=("Not available\n")
         tutorialString+=(tempString+"\n\n")
 
-    courseMaterial = "Other Course Material:\n"
+    courseMaterial = ""
     for key in courseInfo["other_course_materials"]:
         courseMaterial +=("Material Name: "+key+"\n"+"Download Link: "+courseInfo["other_course_materials"][key]+"\n")
 
