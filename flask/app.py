@@ -23,7 +23,7 @@ CORS(app)
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USERNAME"] = "2022ICMS@gmail.com"
-app.config["MAIL_PASSWORD"] = "myfuqlykyimdnrqr"
+app.config["MAIL_PASSWORD"] = "ugpziayetcewtvto"
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 
@@ -87,10 +87,15 @@ def sendEmail():
         tempString+=(lecture[i]["start_time"]+"\n")
         tempString+="End Time:\n"
         tempString+=(lecture[i]["end_time"]+"\n")
+
         tempString+="Note:\n"
-        for key in lecture[i]["note"]:
-            tempString+=("From Class: "+ key +"\n")
-            tempString+=("Link: "+ lecture[i]["note"][key] +"\n")
+        if (lecture[i]["note"]):
+            for key in lecture[i]["note"]:
+                tempString+=("From Class: "+ key +"\n")
+                tempString+=("Link: "+ lecture[i]["note"][key] +"\n")
+        else:
+            tempString+=("Not available\n")
+
         tempString+="Zoom Link:\n"
         if(lecture[i]["zoom_link"]):
             tempString+=(lecture[i]["zoom_link"]+"\n")
@@ -103,18 +108,23 @@ def sendEmail():
     tutorial=tutorial["array"]
     for i in range(len(tutorial)):
         tempString = "Class Address:\n"
-        tempString+=(lecture[i]["class_address"]+"\n")
+        tempString+=(tutorial[i]["class_address"]+"\n")
         tempString+="Start Time:\n"
-        tempString+=(lecture[i]["start_time"]+"\n")
+        tempString+=(tutorial[i]["start_time"]+"\n")
         tempString+="End Time:\n"
-        tempString+=(lecture[i]["end_time"]+"\n")
+        tempString+=(tutorial[i]["end_time"]+"\n")
+
         tempString+="Note:\n"
-        for key in lecture[i]["note"]:
-            tempString+=("From Class: "+ key +"\n")
-            tempString+=("Download Link: "+ lecture[i]["note"][key] +"\n")
+        if (tutorial[i]["note"]):
+            for key in tutorial[i]["note"]:
+                tempString+=("From Class: "+ key +"\n")
+                tempString+=("Download Link: "+ tutorial[i]["note"][key] +"\n")
+        else:
+            tempString+=("Not available\n")
+
         tempString+="Zoom Link:\n"
-        if(lecture[i]["zoom_link"]):
-            tempString+=(lecture[i]["zoom_link"]+"\n")
+        if(tutorial[i]["zoom_link"]):
+            tempString+=(tutorial[i]["zoom_link"]+"\n")
         else:
             tempString+=("Not available\n")
         tutorialString+=(tempString+"\n\n")
