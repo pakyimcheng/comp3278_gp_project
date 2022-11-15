@@ -547,9 +547,9 @@ function Class({ ...props }) {
 													) : (
 														<>
 															No Zoom Link
-															<br />
 														</>
 													)}
+													<br /> 
 													<b>Notes:</b>{" "}
 													{t && t.note && t.note.length > 0 && t.note !== []
 														? Object.keys(t.note).map((key) => (
