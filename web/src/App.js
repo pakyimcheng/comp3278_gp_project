@@ -29,6 +29,16 @@ function App() {
 
 	const [notification, setNotification] = useState([]);
 
+	useEffect(() => {}, []);
+
+	useEffect(() => {
+		if (login) {
+			document.title = `ICMS: ${name}`;
+		} else {
+			document.title = "ICMS";
+		}
+	}, [login]);
+
 	let interval = null;
 	let intervalTutor = null;
 	let intervalLecture = null;
