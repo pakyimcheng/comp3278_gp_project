@@ -58,8 +58,6 @@
     MYSQL_PORT='PORT_NUMBER'
     ```
 
-
-
 8. Launch XAMPP. Go to phpMyAdmin.
     On the top launch bar, click 'User accounts'. 
     Search for the column with 'User name' = 'root' and 'Host name' = 'localhost'. 
@@ -68,7 +66,7 @@
 
     Then save the _.env_ file.
 
-9. Create a database named 'project'. Import the .sql file in discord to 'project' database.
+9. Create a database named 'project' (all lowercase). Import the .sql file in discord to 'project' database  in phpMyAdmin.
 
 ## MYSQL setup
 
@@ -98,7 +96,7 @@ Assume XAMPP is installed in your computer.
 
     Then save the _.env_ file.
 
-4. Create a database namely 'project'. Import the .sql file in discord to 'project' database.
+4. Create a database namely 'project'(all lowercase). Import the .sql file in discord to 'project' database in phpMyAdmin.
 
 
 
@@ -145,10 +143,11 @@ python app.py
 4. Navigating to the Application
 ```
 Open a Web Browser and go to http://localhost:3000/
-Login using Facial Recognition or email and Password
+* When you do `npm start`, the app may open the tab for you automically
+Login using Facial Recognition or Email and Password
 ```
 
-4. Using the Application  
+5. Use the Application  
 If you have a Lecture/Tutorial in the next 60 minutes, you will see a notification at the  left side of the Home Page and you can naviagte to the "Upcoming Course" Page and see the course Info.    
 Else, you can always go to the "TimeTable" Page to view your personal timetable in the current week.
 To view all your login records, head to the Records Page, you will find all your login records there, including login ID, IP Address and Login Duration.
